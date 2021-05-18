@@ -2,9 +2,7 @@ package Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-//*******************************
-//Testing Github
-//*******************************
+
 @Entity
 public class Booking {
     @Id
