@@ -16,22 +16,22 @@ public class MotorHomeService {
     MotorHomeRepo motorHomeRepo;
 
     public void addMotorHome(MotorHome m) {
-        motorhomeRepo.addMotorhome(m);
+        motorHomeRepo.addMotorHome(m);
     }
 
     public void updateMotorHome(MotorHome m) {
-        motorhomeRepo.updateMotorhome(m);
+        motorHomeRepo.updateMotorHome(m);
     }
 
     public void deleteMotorHome(int id) {
-        motorhomeRepo.deleteMotorhome(id);
+        motorHomeRepo.deleteMotorHome(id);
     }
 
     public List<MotorHome> fetchAll() {
-        return motorhomeRepo.fetchAll();
+        return motorHomeRepo.fetchAll();
     }
 
     public MotorHome fetchById(int id) {
-        return motorhome.fetchById(id);
+        return motorHomeRepo.fetchById(id);
     }
 }
