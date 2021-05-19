@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th = #http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Admin</title>
+    <style>
+        #menu{
+            width: auto;
+            margin-top:100px;
+            margin-left:auto;
+            margin-right:auto;
+            text-align: center;
+
+        }
+        .button1{
+            border: black solid 1px;
+            width: 250px;
+            height: 95px;
+            font-weight: bold;
+            font-size:50px;
+            margin:0 15px;
+            border-radius: 10px;
+
+        }
+        a{
+            text-decoration: none;
+            display: inline-block;
+            background: #5a5a5a;
+            color:#000000;
+            padding:30px 0 0 0;
+        }
+        a:hover{
+            background: ghostwhite;
+        }
+
+    </style>
 </head>
-<body>
+<body style="background-color: darkgrey;">
+<h1 style="text-align:center; font-size:50px;">Nordic Motorhome</h1>
+<h2 style="text-align:center; font-size:30px;">Choose your category</h2>
+<div id="menu">
+    <a href = "/renters" class = "button1">Renters</a>
+    <a href = "/motorhomes" class = "button1">Motorhomes</a>
+    <a href ="/bookings" class = "button1">Bookings</a>
+    <a href ="/staffs" class = "button1">Staff</a>
+</div>
 
 </body>
 </html>
