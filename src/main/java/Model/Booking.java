@@ -11,6 +11,8 @@ public class Booking {
     private int motorhome_ID;
     private int start_km;
     private String pickup_date;
+    private String return_date;
+    private String pickup_location;
     private String dropoff_location;
     private String extras;
 
@@ -23,6 +25,8 @@ public class Booking {
         this.motorhome_ID = motorhome_ID;
         this.start_km = start_km;
         this.pickup_date = pickup_date;
+        this.return_date = return_date;
+        this.pickup_location = pickup_location;
         this.dropoff_location = dropoff_location;
         this.extras = extras;
     }
@@ -43,6 +47,12 @@ public class Booking {
 
     public String getPickup_date() { return pickup_date; }
     public void setPickup_date(String pickup_date) { this.pickup_date = pickup_date; }
+
+    public String getReturn_date() { return return_date; }
+    public void setReturn_date(String return_date) { this.return_date = return_date; }
+
+    public String getPickup_location() { return pickup_location; }
+    public void setPickup_location(String pickup_location) { this.pickup_location = pickup_location; }
 
     public String getDropoff_location() { return dropoff_location; }
     public void setDropoff_location(String dropoff_location) { this.dropoff_location = dropoff_location; }
