@@ -1,9 +1,8 @@
-package Service;
+package com.example.nordicmotorhome.Service;
 
-import Model.Booking;
-import Repository.BookingRepo;
+import com.example.nordicmotorhome.Model.Booking;
+import com.example.nordicmotorhome.Repository.BookingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

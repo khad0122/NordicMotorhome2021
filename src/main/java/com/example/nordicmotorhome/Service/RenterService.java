@@ -1,11 +1,8 @@
-package Service;
+package com.example.nordicmotorhome.Service;
 
-import Model.Renter;
-import Repository.RenterRepo;
+import com.example.nordicmotorhome.Model.Renter;
+import com.example.nordicmotorhome.Repository.RenterRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
