@@ -1,4 +1,4 @@
-package Model;
+package com.example.nordicmotorhome.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,7 +19,8 @@ public class Booking {
     //constructors
 
     public Booking() { }
-    public Booking(int booking_ID, int renter_ID, int motorhome_ID, int start_km, String pickup_date, String dropoff_location, String extras) {
+
+    public Booking(int booking_ID, int renter_ID, int motorhome_ID, int start_km, String pickup_date, String return_date, String pickup_location, String dropoff_location, String extras) {
         this.booking_ID = booking_ID;
         this.renter_ID = renter_ID;
         this.motorhome_ID = motorhome_ID;
@@ -30,7 +31,6 @@ public class Booking {
         this.dropoff_location = dropoff_location;
         this.extras = extras;
     }
-
     //Getters & Setters
 
     public int getBooking_ID() { return booking_ID; }

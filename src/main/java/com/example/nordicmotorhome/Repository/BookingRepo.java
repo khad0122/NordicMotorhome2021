@@ -1,6 +1,6 @@
-package Repository;
+package com.example.nordicmotorhome.Repository;
 
-import Model.Booking;
+import com.example.nordicmotorhome.Model.Booking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

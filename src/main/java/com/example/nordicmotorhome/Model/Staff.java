@@ -1,4 +1,4 @@
-package Model;
+package com.example.nordicmotorhome.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
