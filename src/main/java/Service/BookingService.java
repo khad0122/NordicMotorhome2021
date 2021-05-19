@@ -16,21 +16,17 @@ public class BookingService {
     public void addContract(Booking booking) {
         bookingRepo.addContract(booking);
     }
-
     public void updateContract(Booking c) {
         BookingRepo bookingRepoo;
         bookingRepo.updateContract(c);
     }
-
     public void deleteContract(int id) {
         bookingRepo.deleteContract(id);
     }
-
     public List<Booking> fetchAll() {
         return bookingRepo.fetchAll();
     }
-
-    public Booking fetchById() {
+    public Booking fetchById(int id) {
         return bookingRepo.fetchById(id);
     }
 }

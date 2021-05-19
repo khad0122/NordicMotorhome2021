@@ -2,7 +2,9 @@ package Repository;
 
 import Model.Booking;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,9 +26,18 @@ public class BookingRepo {
         String sql = "DELETE FROM contract WHERE contractID = ?";
         template.update(sql,id);
     }
-    //public List<Booking> fetchAll(){
-    // }
+    public List<Booking> fetchAll(){
+        String sql = "SELECT * FROM booking";//May be set as joined select booking - invoice
+        RowMapper<Booking> list = new BeanPropertyRowMapper<>(Booking.class);
 
-    //public Booking fetchById(){
-    // }
+        return template.query(sql,list);
+    }
+
+
+    public Booking fetchById(int id){
+        String sql = "SELECT * FROM Booking WHERE booking_ID = ?";
+        RowMapper<Booking> list = new BeanPropertyRowMapper<>(Booking.class);
+
+        return template.queryForObject(sql,list,id);
+    }
 }
