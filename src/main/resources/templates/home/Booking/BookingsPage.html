@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookings</title>
+    <link rel = "stylesheet" href="../../../static/style.css" th:href="@{/styles.css}">
+</head>
+<body>
+
+  <h1>Bookings</h1>
+
+
+
+    <div class = "hero">
+        <div class = "container">
+            <a class = "btn" href = "#">Add Booking</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>BookingID</th>
+                        <th>RenterID</th>
+                        <th>MotorhomeID</th>
+                        <th>Pick-up Date</th>
+                        <th>Return Date</th>
+                        <th>Pick-up Location</th>
+                        <th>Drop-off Location</th>
+                        <th>Extras</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each = "Booking: ${bookings}">
+                        <td th:text = "${Booking.getBooking_ID()}"></td>
+                        <td th:text = "${Booking.getRenter_ID()}"></td>
+                        <td th:text = "${Booking.getMotorhome_ID()}"></td>
+                        <td th:text = "${Booking.getPickup_date()}"></td>
+                        <td th:text = "${Booking.getReturn_date()}"></td>
+                        <td th:text = "${Booking.getPickup_location()}"></td>
+                        <td th:text = "${Booking.getDropoff_location()}"></td>
+                        <td th:text = "${Booking.getExtras()}"></td>
+                        <td>
+                            <a class = "btn side-btn" href = "/addBooking">Update</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

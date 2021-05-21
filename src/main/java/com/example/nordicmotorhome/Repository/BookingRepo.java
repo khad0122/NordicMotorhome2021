@@ -27,7 +27,10 @@ public class BookingRepo {
         template.update(sql,id);
     }
     public List<Booking> fetchAll(){
-        String sql = "SELECT * FROM booking";//May be set as joined select booking - invoice
+        String sql = "SELECT  renter.first_name, renter.last_name, model,brand, booking.* from booking\n" +
+                "left join renter on booking.renter_ID = renter.renter_ID\n" +
+                "left join motorhome on booking.motorhome_ID = motorhome.motorhome_ID;\n" +
+                ";";//May be set as joined select booking - invoice
         RowMapper<Booking> list = new BeanPropertyRowMapper<>(Booking.class);
 
         return template.query(sql,list);

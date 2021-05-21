@@ -15,10 +15,7 @@ public class BookingService {
     public void addContract(Booking booking) {
         bookingRepo.addContract(booking);
     }
-    public void updateContract(Booking c) {
-        BookingRepo bookingRepoo;
-        bookingRepo.updateContract(c);
-    }
+    public void updateContract(Booking c) { bookingRepo.updateContract(c); }
     public void deleteContract(int id) {
         bookingRepo.deleteContract(id);
     }
