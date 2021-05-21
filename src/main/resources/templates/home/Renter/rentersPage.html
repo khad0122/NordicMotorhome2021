@@ -32,17 +32,17 @@
           </tr>
           </thead>
           <tbody>
-          <tr th:each = "Renter: ${renters}">
-            <td th:text = "${Renter.getRenter_ID()}"></td>
-            <td th:text = "${Renter.getFirst_name()}"></td>
-            <td th:text = "${Renter.getLast_name()}"></td>
-            <td th:text = "${Renter.getMobile_number()}"></td>
-            <td th:text = "${Renter.getEmail()}"></td>
-            <td th:text = "${Renter.getAddress_Street()}"></td>
-            <td th:text = "${Renter.getAddress_Zip()}"></td>
-            <td th:text = "${Renter.getAddress_City()}"></td>
-            <td th:text = "${Renter.getDLN()}"></td>
-            <td th:text = "${Renter.getDriversince_Date()}"></td>
+            <tr th:each = "Renter: ${renters}">
+              <td th:text = "${Renter.renter_ID}"></td>
+              <td th:text = "${Renter.first_name}"></td>
+              <td th:text = "${Renter.last_name}"></td>
+              <td th:text = "${Renter.mobile_number}"></td>
+              <td th:text = "${Renter.email}"></td>
+              <td th:text = "${Renter.address_street}"></td>
+              <td th:text = "${Renter.address_zip}"></td>
+              <td th:text = "${Renter.address_city}"></td>
+              <td th:text = "${Renter.DLN}"></td>
+              <td th:text = "${Renter.driversince_date}"></td>
             <td>
               <div class = "table-btn">
                 <!--<a class = "side-btn" th:href = "@{}">Update</a>

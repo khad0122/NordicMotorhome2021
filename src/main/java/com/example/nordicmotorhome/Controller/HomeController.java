@@ -39,12 +39,12 @@ public class HomeController {
 
     @GetMapping("/addBooking")
     public String addBookingPage(){
-        return "home/Booking/addBookingFunction";
+        return "home/Booking/addBooking";
     }
 
     @GetMapping("/updateBooking")
     public String updateBookingPage(){
-        return "home/Booking/updateBookingFunction";
+        return "home/Booking/updateBooking";
     }
 
     /*******************************    Renter     *******************************/
@@ -54,17 +54,17 @@ public class HomeController {
 
         model.addAttribute("renters",list);
 
-        return "home/Renter/RentersPage";
+        return "home/Renter/rentersPage";
     }
 
     @GetMapping("/addRenter")
     public String addRenterPage(){
-        return "home/Renter/addRenterFunction";
+        return "home/Renter/addRenter";
     }
 
     @GetMapping("/updateRenter")
     public String updateRenterPage(){
-        return "home/Renter/updateRenterFunction";
+        return "home/Renter/updateRenter";
     }
 
     /*******************************    Motorhome     *******************************/
