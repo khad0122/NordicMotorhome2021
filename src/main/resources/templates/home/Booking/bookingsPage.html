@@ -8,9 +8,9 @@
 <body>
 
   <h1>Bookings</h1>
-    <div class = "hero">
+    <div class = "main">
         <div class = "container">
-            <a class = "btn" href = "#">Add Booking</a>
+            <a class = "btn" href = "/addBooking">Add Booking</a>
             <table>
                 <thead>
                     <tr>
@@ -36,7 +36,7 @@
                         <td th:text = "${Booking.getDropoff_location()}"></td>
                         <td th:text = "${Booking.getExtras()}"></td>
                         <td>
-                            <a class = "btn side-btn" href = "/addBooking">Update</a>
+                            <a class = "btn side-btn" href = "/updateBooking">Update</a>
                         </td>
                     </tr>
                 </tbody>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 
@@ -32,16 +33,30 @@ public class HomeController {
     @GetMapping("/bookings")
     public String bookingPage(Model model){
         ArrayList<Booking> list =(ArrayList<Booking>) bookingService.fetchAll();
-
         model.addAttribute("bookings",list);
-
         return "home/Booking/bookingsPage";
     }
 
     @GetMapping("/addBooking")
-    public String addBookingPage(){
+    public String addBookingPage(Model model){
+        ArrayList<Renter> renterList = (ArrayList<Renter>) renterService.fetchAll();
+
+        model.addAttribute("renter",renterList);
+
+
+
         return "home/Booking/addBooking";
+
     }
+
+    @GetMapping("/pickRenter/{renter_ID}")
+    public String pickRenter(@PathVariable("renter_ID") int renterID, Model model){
+        ArrayList<MotorHome> motorList = (ArrayList<MotorHome>) motorHomeService.fetchAll();
+        model.addAttribute("motors",motorList);
+        return "home/Booking/addBookingAssignMotorhome";
+    }
+
+
 
     @GetMapping("/updateBooking")
     public String updateBookingPage(){

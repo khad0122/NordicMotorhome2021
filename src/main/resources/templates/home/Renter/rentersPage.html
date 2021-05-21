@@ -2,30 +2,30 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Renters</title>
     <link rel = "stylesheet" th:href = "@{/styles.css}">
 </head>
 <body>
 
     <h1>Renters</h1>
-      <div class = "hero">
-        <div class = "container">
-        <a class = "btn" id = "add-btn"  th:href = "@{'/addRenter/'}">Add</a>
+    <div class = "main">
+      <div class = "container">
+          <a class = "btn" id = "add-btn"  th:href = "@{'/addRenter/'}">Add</a>
         <table>
           <thead>
-          <tr>
-            <th>Renter ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Mobile Number</th>
-            <th>Email</th>
-            <th>Address Street</th>
-            <th>Address Zip</th>
-            <th>Address City</th>
-            <th>DLN</th>
-            <th>Driver Since Date</th>
-            <th></th>
-          </tr>
+            <tr>
+              <th>Renter ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Mobile Number</th>
+              <th>Email</th>
+              <th>Address Street</th>
+              <th>Address Zip</th>
+              <th>Address City</th>
+              <th>DLN</th>
+              <th>Driver Since Date</th>
+              <th></th>
+            </tr>
           </thead>
           <tbody>
             <tr th:each = "Renter: ${renters}">
@@ -48,8 +48,8 @@
           </tr>
           </tbody>
         </table>
-        </div>
       </div>
+    </div>
 
 </body>
 </html>

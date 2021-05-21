@@ -3,8 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Booking</title>
+    <link rel = "stylesheet" th:href = "@{/styles.css}">
 </head>
 <body>
+
+    <div class ="main">
+        <div class = "container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Renter ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Mobile Number</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each = "Renter: ${renter}" ></td>
+                        <td th:text = "${Renter.renter_ID}"></td>
+                        <td th:text = "${Renter.getFirst_name}"></td>
+                        <td th:text = "${Renter.getLast_name}"></td>
+                        <td th:text = "${Renter.getMobile_number}"></td>
+                        <td th:text = "${Renter.getEmail()}"></td>
+                        <td><a class = "btn" th:href = "@{'/pickRenter/'+${Renter.renter_ID}}">Pick Renter</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </body>
 </html>
