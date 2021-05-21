@@ -17,21 +17,15 @@ import static org.thymeleaf.util.StringUtils.substring;
 @Controller
 public class HomeController {
     @Autowired
+    BookingService bookingService;
+    @Autowired
     RenterService renterService;
     @Autowired
     MotorHomeService motorHomeService;
-    @Autowired
-    BookingService bookingService;
 
     /*******************************    Homepage     *******************************/
     @GetMapping("/")
     public String index(){return "home/index";}
-
-
-    @GetMapping("/renters")
-    public String rentersPage(){
-        return "home/Renter/renters";
-    }
 
     /*******************************    Booking     *******************************/
     @GetMapping("/bookings")
@@ -40,7 +34,7 @@ public class HomeController {
 
         model.addAttribute("bookings",list);
 
-        return "home/Booking/BookingsPage";
+        return "home/Booking/bookingsPage";
     }
 
     @GetMapping("/addBooking")
