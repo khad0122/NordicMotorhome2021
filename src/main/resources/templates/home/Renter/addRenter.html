@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Renter</title>
+        <link rel="stylesheet" href="../../../static.css" th:href="@{/style.css}">
+</head>
+<body>
+<div id="menu2">
+    <a href = "/renters" class = "button2">Renters</a>
+    <a href = "/motorhomes" class = "button2">Motorhomes</a>
+    <a href ="/bookings" class = "button2">Bookings</a>
+</div>
+
+<div class = "hero">
+    <div class = "update">
+        <table>
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mobil Number</th>
+                <th>Email</th>
+                <th>Address Street</th>
+                <th>Address Zip</th>
+                <th>Address City</th>
+                <th>DLN</th>
+                <th>Driver Since Date</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <form th:action = "@{/add/}" method = "post">
+                <tr>
+                    <td><input type = "text" name = "first_name" required> </td>
+                    <td><input type = "text" name = "last_name" required></td>
+                    <td><input type = "text" name = "mobil_number" required></td>
+                    <td><input type = "email" name = "email" required></td>
+                    <td><input type = "text" name = "address_street" required> </td>
+                    <td><input type = "text" name = "address_zip" required></td>
+                    <td><input type = "text" name = "address_city" required></td>
+                    <td><input type = "text" name = "DLN" required></td>
+                    <td><input type = "text" name = "driver_since" required></td>
+                </tr>
+                <input class = "btn" id = "add-btn" type = "submit" value = "Add">
+            </form>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
