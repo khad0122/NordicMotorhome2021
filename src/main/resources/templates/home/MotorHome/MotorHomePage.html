@@ -6,12 +6,8 @@
     <link rel = "stylesheet" href="../../../static/style.css" th:href="@{/styles.css}">
 </head>
 <body>
-    <div id="menu2">
-        <a href = "/renters" class = "button2">Renters</a>
-        <a href = "/motorhomes" class = "button2">Motorhomes</a>
-        <a href ="/bookings" class = "button2">Bookings</a>
-    </div>
 
+<h1>Motorhomes</h1>
     <div class = "hero">
         <div class = "container">
             <a class = "btn" href = "#">Add Motorhome</a>
@@ -27,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each = "MotorHome: ${MotorHomes}">
+                <tr th:each = "MotorHome: ${motorhomes}">
                     <td th:text = "${MotorHome.getMotorhome_ID()}"></td>
                     <td th:text = "${MotorHome.getModel()}"></td>
                     <td th:text = "${MotorHome.getBrand()}"></td>
