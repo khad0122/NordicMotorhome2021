@@ -7,6 +7,7 @@
 body{
     background: red;
 }
+
 /*  Buttons  */
 a{
     text-decoration: none;
@@ -19,18 +20,15 @@ a{
     padding:7px 10px;
     border-radius: 3px;
 }
+
 .side-btn{
     padding:5px 7px;
     margin:5px 2px;
 }
+
 .btn:hover{
     background: rgba(252, 249, 249, 0.79);
 }
-
-
-
-
-
 
 .hero{
     width:80%;
@@ -64,5 +62,3 @@ td{
     background: rgba(252, 249, 249, 0.79);
     height:45px;
 }
-
-
