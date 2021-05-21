@@ -1,6 +1,7 @@
 package com.example.nordicmotorhome.Controller;
 
 import com.example.nordicmotorhome.Model.Booking;
+import com.example.nordicmotorhome.Model.MotorHome;
 import com.example.nordicmotorhome.Model.Renter;
 import com.example.nordicmotorhome.Service.BookingService;
 import com.example.nordicmotorhome.Service.MotorHomeService;
@@ -68,4 +69,23 @@ public class HomeController {
     }
 
     /*******************************    Motorhome     *******************************/
+    @GetMapping("/motorhomes")
+    public String MotorHomePage(Model model){
+        ArrayList<MotorHome> list =(ArrayList<MotorHome>) motorHomeService.fetchAll();
+
+        model.addAttribute("MotorHomes",list);
+
+        return "home/MotorHome/MotorHomePage";
+    }
+
+    @GetMapping("/addMotorHome")
+    public String addMotorHomePage(){
+        return "home/MotorHome/addMotorHome";
+    }
+
+    @GetMapping("/updateMotorHome")
+    public String updateMotorHomePage(){
+        return "home/MotorHome/updateMotorHome";
+    }
+
 }
