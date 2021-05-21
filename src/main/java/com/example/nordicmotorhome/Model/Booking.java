@@ -17,7 +17,7 @@ public class Booking {
     private String pickup_location;
     private String dropoff_location;
     private String extras;
-    private int season;
+    private int season_ID;
     private String first_name;
     private String last_name;
     private String model;
@@ -38,7 +38,7 @@ public class Booking {
         this.pickup_location = pickup_location;
         this.dropoff_location = dropoff_location;
         this.extras = extras;
-        this.season = season;
+        this.season_ID = season;
     }
     //Getters & Setters
 
@@ -51,7 +51,7 @@ public class Booking {
     public String getPickup_location() { return pickup_location; }
     public String getDropoff_location() { return dropoff_location; }
     public String getExtras() { return extras; }
-    public int getSeason(){return season;}
+    public int getSeason(){return season_ID;}
     public String getName(){return first_name+" "+last_name;}
 
 
@@ -64,9 +64,7 @@ public class Booking {
     public void setPickup_location(String pickup_location) { this.pickup_location = pickup_location; }
     public void setDropoff_location(String dropoff_location) { this.dropoff_location = dropoff_location; }
     public void setExtras(String extras) { this.extras = extras; }
-    public void setSeason(int num){
-
-    }
+    public void setSeason_ID(int num){ this.season_ID = num; }
     public void setFirst_name(String name){first_name=name;}
     public void setLast_name(String name){last_name=name;}
     public void setModel(String model){this.model = model;}
@@ -77,6 +75,6 @@ public class Booking {
     }
 
     public String toString(){
-        return "BookingID "+booking_ID+" - RenterID "+renter_ID+" - MotorhomeID "+motorhome_ID+" - Pickup-date "+pickup_date+" - return-date "+return_date+" - pickup-location "+pickup_location+" - dropoff-location "+dropoff_location+" - extra "+extras+" - Season "+season;
+        return "BookingID "+booking_ID+" - RenterID "+renter_ID+" - MotorhomeID "+motorhome_ID+" - Pickup-date "+pickup_date+" - return-date "+return_date+" - pickup-location "+pickup_location+" - dropoff-location "+dropoff_location+" - extra "+extras+" - Season "+season_ID;
     }
 }

@@ -1,0 +1,9 @@
+
+
+/*  Pricing page    */
+.container div {
+    width:80%;
+    height:300px;
+    border:1px solid #000000;
+    margin:25px auto;
+}

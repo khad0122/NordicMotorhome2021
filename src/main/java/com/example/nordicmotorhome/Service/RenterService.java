@@ -31,4 +31,5 @@ public class RenterService {
     public Renter fetchById(int id) {
         return renterRepo.fetchById(id);
     }
+    public int renterCount(){return renterRepo.renterCount();}
 }

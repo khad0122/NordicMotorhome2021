@@ -31,4 +31,5 @@ public class MotorHomeService {
     public MotorHome fetchById(int id) {
         return motorHomeRepo.fetchById(id);
     }
+    public int motorhomeCount(){return motorHomeRepo.motorhomeCount();}
 }

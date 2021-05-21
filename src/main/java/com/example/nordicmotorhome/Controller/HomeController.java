@@ -3,9 +3,7 @@ package com.example.nordicmotorhome.Controller;
 import com.example.nordicmotorhome.Model.Booking;
 import com.example.nordicmotorhome.Model.MotorHome;
 import com.example.nordicmotorhome.Model.Renter;
-import com.example.nordicmotorhome.Service.BookingService;
-import com.example.nordicmotorhome.Service.MotorHomeService;
-import com.example.nordicmotorhome.Service.RenterService;
+import com.example.nordicmotorhome.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +22,8 @@ public class HomeController {
     RenterService renterService;
     @Autowired
     MotorHomeService motorHomeService;
+    @Autowired
+    AdminService adminService;
 
     /*******************************    Homepage     *******************************/
     @GetMapping("/")
@@ -34,9 +34,9 @@ public class HomeController {
     public String bookingPage(Model model){
         ArrayList<Booking> list =(ArrayList<Booking>) bookingService.fetchAll();
         model.addAttribute("bookings",list);
+
         return "home/Booking/bookingsPage";
     }
-
     @GetMapping("/addBooking")
     public String addBookingPage(Model model){
         ArrayList<Renter> renterList = (ArrayList<Renter>) renterService.fetchAll();
@@ -56,7 +56,6 @@ public class HomeController {
         model.addAttribute("motors",motorList);
         return "home/Booking/addBookingAssignMotorhome";
     }
-
 
 
     @GetMapping("/updateBooking")
@@ -102,6 +101,73 @@ public class HomeController {
     @GetMapping("/updateMotorHome")
     public String updateMotorHomePage(){
         return "home/MotorHome/updateMotorHome";
+    }
+
+
+
+    /*******************************    Owner   ************************************/
+
+    @GetMapping("/owner")
+    public String ownerPage(Model model){
+        model.addAttribute("renterCount",renterService.renterCount());
+        model.addAttribute("motorCount",motorHomeService.motorhomeCount());
+        model.addAttribute("bookingCount",bookingService.bookingCount());
+        model.addAttribute("staffCount",adminService.staffCount());
+        model.addAttribute("seasonName", adminService.getSeasonName());
+        String percent = adminService.getPrice_percent()+" %";
+        model.addAttribute("pricePercent",percent);
+
+        return "home/Admin/ownerPage";
+    }
+    @GetMapping("/adminRenter")
+    public String adminRenter(Model model){
+        ArrayList<Renter> list = (ArrayList<Renter>) renterService.fetchAll();
+        model.addAttribute("renters",list);
+
+        return "home/Admin/rentersView";
+    }
+    @GetMapping("/adminBooking")
+    public String adminBooking(Model model){
+        ArrayList<Booking> list = (ArrayList<Booking>) bookingService.fetchAll();
+        model.addAttribute("bookings",list);
+        return "home/Admin/Booking/bookingsView";
+    }
+    @GetMapping("/adminAddBooking")
+    public String adminAddBooking(Model model){
+        ArrayList<Renter> renterList = (ArrayList<Renter>) renterService.fetchAll();
+        ArrayList<Booking> bookList = (ArrayList<Booking>) bookingService.fetchAll();
+
+        for(Booking b : bookList){
+            renterList.removeIf(r -> r.getRenter_ID() == b.getRenter_ID());
+        }
+
+
+        model.addAttribute("renters",renterList);
+        return "home/Admin/Booking/adminAddBooking";
+    }
+    @GetMapping("/adminAssignMotor/{renter_ID}")
+    public String adminAssignMotor(@PathVariable("renter_ID") int renterID,Model model){
+        ArrayList<MotorHome> list = (ArrayList<MotorHome>) motorHomeService.fetchAll();
+        ArrayList<Booking> bookingList = (ArrayList<Booking>) bookingService.fetchAll();
+
+        for(Booking b: bookingList){
+            list.removeIf(c -> c.getMotorhome_ID() == b.getMotorhome_ID());
+        }
+        if(!list.isEmpty()){
+            model.addAttribute("motors",list);
+            model.addAttribute("assignedRenter",renterService.fetchById(renterID));
+            return "home/Admin/Booking/adminAssignBooking";
+        }
+        else return "home/Admin/emptyCarList";
+
+    }
+
+    @GetMapping("/adminPricing")
+    public String adminPricing(Model model){
+
+
+
+        return "home/Admin/pricingView";
     }
 
 }

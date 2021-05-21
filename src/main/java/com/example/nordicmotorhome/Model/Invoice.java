@@ -13,6 +13,7 @@ public class Invoice{
     private double fee;
     private double price;
 
+
     //constructors
     public Invoice() { }
     public Invoice(int invoice_ID, int booking_ID, String season, int extra_km, double fee, double price) {
@@ -42,5 +43,6 @@ public class Invoice{
 
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
+
 }
 

@@ -6,9 +6,11 @@
     <link rel = "stylesheet" th:href = "@{/styles.css}">
 </head>
 <body>
+
     <div class = "main">
+        <a class = "btn" href = "/addBooking">Return</a>
         <div class ="container">
-            <p>Assign Motorhome to <strong th:text = "${assignedRenter.getName()}"/> </p>
+            <p>Assign Motorhome to <strong th:text = "${assignedRenter.getName()}"></strong> </p>
             <table>
                 <thead>
                     <tr>

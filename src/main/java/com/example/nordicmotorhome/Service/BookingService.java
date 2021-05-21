@@ -25,4 +25,5 @@ public class BookingService {
     public Booking fetchById(int id) {
         return bookingRepo.fetchById(id);
     }
+    public int bookingCount(){return bookingRepo.bookingCount();}
 }

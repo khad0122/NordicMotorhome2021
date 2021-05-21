@@ -8,6 +8,7 @@
 <body>
 
     <div class ="main">
+        <a class = "btn" href = "/bookings">Return</a>
         <div class = "container">
             <table>
                 <thead>
@@ -21,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each = "Renter: ${renter}" ></td>
+                    <tr th:each = "Renter: ${renter}" >
                         <td th:text = "${Renter.renter_ID}"></td>
                         <td th:text = "${Renter.getFirst_name}"></td>
                         <td th:text = "${Renter.getLast_name}"></td>

@@ -64,4 +64,8 @@ public class Renter {
 
     public String getDriversince_date() { return driversince_date; }
     public void setDriversince_date(String driversince_date) { this.driversince_date = driversince_date; }
+
+    public String toString(){
+        return "firstName "+first_name+" - DriverSince "+driversince_date;
+    }
 }

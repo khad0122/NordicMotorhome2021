@@ -34,7 +34,10 @@ public class MotorHomeRepo {
     public MotorHome fetchById(int id){
         String sql = "SELECT * FROM motorhome WHERE motorhome_ID = ?";
         RowMapper<MotorHome> list = new BeanPropertyRowMapper<>(MotorHome.class);
-        MotorHome motorHome = template.queryForObject(sql,list,id);
-        return motorHome;
+        return template.queryForObject(sql,list,id);
+    }
+    public int motorhomeCount(){
+        String sql = "SELECT count(*) FROM motorhome";
+        return template.queryForObject(sql, Integer.class);
     }
 }

@@ -1,3 +1,5 @@
+
+/*   General      */
 *{
     margin:0;
     padding:0;
@@ -8,58 +10,129 @@ body{
     background: rgba(226,226,226,0.49);
 }
 
-/*  Buttons  */
-a{
-    text-decoration: none;
-    color:#000000;
-}
-
+/*  Buttons & links  */
+a {text-decoration: none;color: #000000;}
 .btn{
     border:1px solid #000000;
     background: #ffffff;
     padding:7px 10px;
     border-radius: 3px;
 }
+.btn:hover{
+    background: rgba(252, 249, 249, 0.79);
+}
 
+.table-btn{
+    display: flex;
+}
+.table-btn a {
+    margin:0 2px;
+    padding:5px 7px;
+}
 .side-btn{
     padding:5px 7px;
     margin:5px 2px;
 }
 
-.btn:hover{
-    background: rgba(252, 249, 249, 0.79);
-}
 
+
+
+/*  General Layout  */
 .main{
     width:80%;
     margin: 100px auto;
-    padding:15px 0;
-
 }
 .container{
     background: #ffffff;
-    height:500px;
-    margin:25px 0;
-    padding:25px;
+    padding:25px 25px;
     border-radius: 10px;
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
 }
-
+/*     general Table   */
 table{
     width:100%;
     border-collapse: collapse;
     margin:25px 0;
 }
 th{
-    padding:10px 0;
+    padding:10px 2px;
     background: cadetblue;
     border:1px solid #000000;
 }
-
 td{
     border:1px dotted #000000;
     text-align: center;
     padding:7px 5px;
     background: rgba(252, 249, 249, 0.79);
     height:45px;
+}
+
+/*  Owner Front page hero section   */
+.info-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding:0 25px;
+    column-gap: 50px;
+}
+.info {
+    font-size: 20px;
+    margin:75px 0;
+}
+.info div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 25px;
+    border-bottom:1px solid #000000;
+    padding-bottom:5px;
+}
+.info div strong{
+    text-align: center;
+}
+
+/*  Menu Bar    */
+.menu-btn{
+    color:#000000;
+    font-size: 20px;
+}
+#return-btn:hover{
+    color:#fff;
+    border:none;
+}
+.menu-bar div a:hover, .front a:hover{
+    color:#fff;
+    border-bottom:3px solid #fff;
+}
+.menu-bar  {
+    border-radius: 5px;
+    background: cadetblue;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    height:75px;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.menu-bar div a , .front a{
+    margin:0 -2px;
+    padding:5px 7px;
+    display: inline-block;
+    width:100px;
+}
+.menu-bar div:nth-child(2) a, .front a{
+    border-right:1px solid #000000;
+}
+.menu-bar div:nth-child(2) a:first-child, .front a:first-child{
+    border-left:1px solid #000000;
+}
+#main-page{
+    color:#ffffff;
+    border-bottom:3px solid #ffffff;
+}
+.front{
+    justify-content:center;
+    margin:0;
+}
+.front a {
+    width:150px;
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking</title>
+    <link rel = "stylesheet" th:href = "@{/styles.css}">
+</head>
+<body>
+
+        <div class = "main">
+            <div class = "menu-bar">
+                <div>
+                    <a id = "return-btn" class = "menu-btn" href = "/owner">Return</a>
+                </div>
+                <div>
+                    <a class = "menu-btn" href = "#">Staff</a>
+                    <a class = "menu-btn" href = "#">Cars</a>
+                    <a class = "menu-btn" href = "/adminRenter">Renters</a>
+                    <a id = "main-page" class = "menu-btn" href = "#">Bookings</a>
+                    <a class = "menu-btn" href = "/adminPricing">Pricing</a>
+                </div>
+            </div>
+            <div class = "container">
+                <p>Assign Motorhome to <strong th:text = "${assignedRenter.getName()}"></strong> </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Motorhome ID</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Type</th>
+                            <th>Size</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each = "Motor: ${motors}" >
+                            <td th:text = "${Motor.motorhome_ID}" ></td>
+                            <td th:text = "${Motor.brand}" ></td>
+                            <td th:text = "${Motor.model}" ></td>
+                            <td th:text = "${Motor.type}" ></td>
+                            <td th:text = "${Motor.size}" ></td>
+                            <td><a class = "btn" href = "#">Pick Motorhome</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+</body>
+</html>
