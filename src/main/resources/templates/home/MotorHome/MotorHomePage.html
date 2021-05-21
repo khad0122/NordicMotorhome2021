@@ -11,5 +11,35 @@
         <a href = "/motorhomes" class = "button2">Motorhomes</a>
         <a href ="/bookings" class = "button2">Bookings</a>
     </div>
+
+    <div class = "hero">
+        <div class = "container">
+            <a class = "btn" href = "#">Add Motorhome</a>
+            <table>
+                <thead>
+                <tr>
+                    <th>MotorHome ID</th>
+                    <th>Model</th>
+                    <th>Brand</th>
+                    <th>Type</th>
+                    <th>Size</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each = "MotorHome: ${MotorHomes}">
+                    <td th:text = "${MotorHome.getMotorhome_ID()}"></td>
+                    <td th:text = "${MotorHome.getModel()}"></td>
+                    <td th:text = "${MotorHome.getBrand()}"></td>
+                    <td th:text = "${MotorHome.getType()}"></td>
+                    <td th:text = "${MotorHome.getSize()}"></td>
+                    <td>
+                        <a class = "btn side-btn" href = "/addMotorHome">Update</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
