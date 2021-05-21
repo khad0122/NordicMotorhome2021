@@ -52,6 +52,7 @@ public class HomeController {
     @GetMapping("/pickRenter/{renter_ID}")
     public String pickRenter(@PathVariable("renter_ID") int renterID, Model model){
         ArrayList<MotorHome> motorList = (ArrayList<MotorHome>) motorHomeService.fetchAll();
+        model.addAttribute("assignedRenter",renterService.fetchById(renterID));
         model.addAttribute("motors",motorList);
         return "home/Booking/addBookingAssignMotorhome";
     }

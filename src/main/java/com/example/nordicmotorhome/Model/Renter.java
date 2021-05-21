@@ -42,6 +42,8 @@ public class Renter {
     public String getLast_name() { return last_name; }
     public void setLast_name(String last_name) { this.last_name = last_name; }
 
+    public String getName(){return first_name+" "+last_name;}
+
     public int getMobile_number() { return mobile_number; }
     public void setMobile_number(int mobile_number) { this.mobile_number = mobile_number; }
 
