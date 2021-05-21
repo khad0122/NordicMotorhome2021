@@ -19,20 +19,20 @@ public class MotorHomeRepo {
         template.update(sql,m.getModel(),m.getBrand(),m.getType(),m.getSize());
     }
     public void updateMotorHome(MotorHome m){
-        String sql = "UPDATE cars SET model = ?, brand = ?, type = ?, size = ? WHERE motorhomeID = ?";
+        String sql = "UPDATE motorhome SET model = ?, brand = ?, type = ?, size = ? WHERE motorhome_ID = ?";
         template.update(sql, m.getModel(),m.getBrand(),m.getType(),m.getSize(), m.getMotorhome_ID());
     }
     public void deleteMotorHome(int id){
-        String sql = "DELETE FROM cars WHERE motorhomeID = ?";
+        String sql = "DELETE FROM motorhome WHERE motorhome_ID = ?";
         template.update(sql,id);
     }
     public List<MotorHome> fetchAll(){
-        String sql = "SELECT * FROM motorhomes";
+        String sql = "SELECT * FROM motorhome";
         RowMapper<MotorHome> list = new BeanPropertyRowMapper<>(MotorHome.class);
         return template.query(sql,list);
     }
     public MotorHome fetchById(int id){
-        String sql = "SELECT * FROM motorhomes WHERE motorhomesID = ?";
+        String sql = "SELECT * FROM motorhome WHERE motorhome_ID = ?";
         RowMapper<MotorHome> list = new BeanPropertyRowMapper<>(MotorHome.class);
         MotorHome motorHome = template.queryForObject(sql,list,id);
         return motorHome;

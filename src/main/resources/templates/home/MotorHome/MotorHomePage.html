@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel = "stylesheet" href="../../../static/style.css" th:href="@{/styles.css}">
+    <link rel = "stylesheet"  th:href="@{/styles.css}">
 </head>
 <body>
 
@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each = "MotorHome: ${motorhomes}">
+                <tr th:each = "MotorHome: ${MotorHomes}">
                     <td th:text = "${MotorHome.getMotorhome_ID()}"></td>
                     <td th:text = "${MotorHome.getModel()}"></td>
                     <td th:text = "${MotorHome.getBrand()}"></td>
