@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Renters</title>
-    <link rel = "stylesheet" th:href = "@{/styles.css}">
+  <meta charset="UTF-8">
+  <title>Renters</title>
+  <link rel = "stylesheet"  th:href="@{/styles.css}">
 </head>
 <body>
 
     <h1>Renters</h1>
     <div class = "main">
+      <a id="return-btn" class = "btn" href = "/">Return</a>
       <div class = "container">
           <a class = "btn" id = "add-btn"  th:href = "@{'/addRenter/'}">Add</a>
-        <table>
+          <table>
           <thead>
             <tr>
               <th>Renter ID</th>

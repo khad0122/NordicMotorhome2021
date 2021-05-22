@@ -16,6 +16,8 @@ public class Renter {
     private String address_city;
     private int DLN;
     private String driversince_date;
+    private boolean booked;
+    private String status = booked ? "Booked" : "Not Booked";
 
     //constructors
     public Renter(){}
@@ -64,6 +66,8 @@ public class Renter {
 
     public String getDriversince_date() { return driversince_date; }
     public void setDriversince_date(String driversince_date) { this.driversince_date = driversince_date; }
+
+    public void setBookStatus(boolean bol){booked = bol;}
 
     public String toString(){
         return "firstName "+first_name+" - DriverSince "+driversince_date;

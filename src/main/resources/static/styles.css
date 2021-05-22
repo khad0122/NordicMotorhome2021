@@ -74,6 +74,32 @@ td{
     height:45px;
 }
 
+/*  Update  Input Fields    */
+
+.update td input{
+    display: block;
+    width:100%;
+    height:100%;
+    border:none;
+    padding-left:10px;
+}
+.update td input:focus{
+    outline:none;
+}
+.update td {
+    padding:0;
+}
+
+
+
+
+
+
+
+
+
+
+
 /*  Owner Front page hero section   */
 .info-container{
     display: grid;
