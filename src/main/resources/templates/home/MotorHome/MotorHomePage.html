@@ -9,14 +9,15 @@
 
 <h1>Motorhomes</h1>
     <div class = "main">
+        <a id="return-btn" class = "btn" href = "/">Return</a>
         <div class = "container">
             <a class = "btn" href = "#">Add Motorhome</a>
             <table>
                 <thead>
                 <tr>
                     <th>MotorHome ID</th>
-                    <th>Model</th>
                     <th>Brand</th>
+                    <th>Model</th>
                     <th>Type</th>
                     <th>Size</th>
                     <th></th>
@@ -25,8 +26,8 @@
                 <tbody>
                 <tr th:each = "MotorHome: ${MotorHomes}">
                     <td th:text = "${MotorHome.getMotorhome_ID()}"></td>
-                    <td th:text = "${MotorHome.getModel()}"></td>
                     <td th:text = "${MotorHome.getBrand()}"></td>
+                    <td th:text = "${MotorHome.getModel()}"></td>
                     <td th:text = "${MotorHome.getType()}"></td>
                     <td th:text = "${MotorHome.getSize()}"></td>
                     <td>

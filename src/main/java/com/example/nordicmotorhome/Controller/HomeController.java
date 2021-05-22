@@ -40,6 +40,12 @@ public class HomeController {
     @GetMapping("/addBooking")
     public String addBookingPage(Model model){
         ArrayList<Renter> renterList = (ArrayList<Renter>) renterService.fetchAll();
+        ArrayList<Booking> bookingList = (ArrayList<Booking>) bookingService.fetchAll();
+
+        for(Booking b : bookingList){
+            renterList.removeIf(r -> r.getRenter_ID() == b.getRenter_ID());
+        }
+
 
         model.addAttribute("renter",renterList);
 
@@ -48,13 +54,26 @@ public class HomeController {
         return "home/Booking/addBooking";
 
     }
-
     @GetMapping("/pickRenter/{renter_ID}")
     public String pickRenter(@PathVariable("renter_ID") int renterID, Model model){
         ArrayList<MotorHome> motorList = (ArrayList<MotorHome>) motorHomeService.fetchAll();
+        ArrayList<Booking> bookingList = (ArrayList<Booking>) bookingService.fetchAll();
+
+        for(Booking b : bookingList){
+            motorList.removeIf(m -> m.getMotorhome_ID() == b.getMotorhome_ID());
+        }
+
         model.addAttribute("assignedRenter",renterService.fetchById(renterID));
         model.addAttribute("motors",motorList);
         return "home/Booking/addBookingAssignMotorhome";
+    }
+
+    @GetMapping("/addBookingConfirm/{renter_ID}/{motorhome_ID}")
+    public String confirmBooking(@PathVariable("renter_ID") int renterID, @PathVariable("motorhome_ID") int motorID, Model model){
+        model.addAttribute("assignedRenter", renterService.fetchById(renterID));
+        model.addAttribute("assignedMotor",motorHomeService.fetchById(motorID));
+
+        return "home/Booking/confirmBooking";
     }
 
 

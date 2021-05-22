@@ -10,6 +10,13 @@ body{
     background: rgba(226,226,226,0.49);
 }
 
+
+h1{
+    text-align: center;
+    margin-top:50px;
+    font-size: 46px;
+}
+
 /*  Buttons & links  */
 a {text-decoration: none;color: #000000;}
 .btn{
@@ -94,7 +101,15 @@ td{
     color:#000000;
     font-size: 20px;
 }
+#return-btn{
+    position:absolute;
+    top:150px;
+}
 #return-btn:hover{
+    color:#000000;
+
+}
+#return-admin:hover{
     color:#fff;
     border:none;
 }
