@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Booking</title>
+    <link rel = "stylesheet" th:href = "@{/styles.css}">
+</head>
+<body>
+    <h1>Booking Details</h1>
+        <div class = "main">
+            <a class = "btn" id = "return-btn" th:href = "@{'/pickRenter/' +${assignedRenter.renter_ID}}">return</a>
+            <div class = "container">
+                <div class = "detail">
+                    <div id = "personal-info">
+                        <p>Renter ID</p><span th:text = "${assignedRenter.renter_ID}"></span>
+                        <p>First Name</p><span th:text = "${assignedRenter.first_name}"></span>
+                        <p>Last Name</p><span th:text = "${assignedRenter.last_name}"></span>
+                        <p>Mobile</p><span th:text = "${assignedRenter.mobile_number}"></span>
+                        <p>Email</p><span th:text = "${assignedRenter.email}"></span>
+                        <p>DLN</p><span th:text = "${assignedRenter.DLN}"></span>
+                        <p>Driver Since Date</p><span th:text = "${assignedRenter.driversince_date}"></span>
+                    </div>
+                    <div id = "motor-info">
+                    <p>Motorhome ID</p><span th:text = "${assignedMotor.motorhome_ID}" ></span>
+                    <p>Brand</p><span th:text = "${assignedMotor.brand}" ></span>
+                    <p>Model</p><span th:text = "${assignedMotor.model}" ></span>
+                    <p>Type</p><span th:text = "${assignedMotor.type}" ></span>
+                    <p>Size</p><span th:text = "${assignedMotor.size}" ></span>
+                </div>
+                </div>
+                    <div class = "form">
+                        <form th:action = "@{/confirmBookingDetails/{renter_ID}/{motorhome_ID} (renter_ID = ${assignedRenter.renter_ID}, motorhome_ID = ${assignedMotor.motorhome_ID}) }" method = "post">
+                            <div>
+                                <label for = "pickup_date">Pick-up Date </label>
+                                    <input type = "date" name = "pickup_date" min = "2021-05-22" id = "pickup_date" required>
+
+                                <label for = "return_date">Return Date</label>
+                                    <input type = "date" name = "return_date" min = "2021-05-22" id = "return_date" required>
+                            </div>
+                            <div>
+                                <label for = "pickup_location">Pick-up Location</label>
+                                    <input type = "text" name = "pickup_location" id = pickup_location required>
+
+                                <label for = "dropff_location">Drop-off Location</label>
+                                    <input type = "text" name = "dropoff_location" id = dropff_location required>
+                            </div>
+                            <div>
+                                <label for = "extras">Extra Equipment</label>
+                                    <input type = "text" name = "extras" id = "extras" required>
+                            </div>
+                            <div id = "confirm-footer">
+                                <input id = "confirm-btn" class = "btn" type = "submit" value = "Confirm">
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+</body>
+</html>

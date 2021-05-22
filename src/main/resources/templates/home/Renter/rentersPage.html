@@ -13,7 +13,7 @@
       <div class = "container">
           <a class = "btn" id = "add-btn"  th:href = "@{'/addRenter/'}">Add</a>
           <table>
-          <thead>
+            <thead>
             <tr>
               <th>Renter ID</th>
               <th>First Name</th>
@@ -28,7 +28,7 @@
               <th></th>
             </tr>
           </thead>
-          <tbody>
+            <tbody>
             <tr th:each = "Renter: ${renters}">
               <td th:text = "${Renter.getRenter_ID()}"></td>
               <td th:text = "${Renter.getFirst_name()}"></td>

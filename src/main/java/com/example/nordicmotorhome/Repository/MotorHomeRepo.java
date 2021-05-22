@@ -15,12 +15,12 @@ public class MotorHomeRepo {
     JdbcTemplate template;
 
     public void addMotorHome(MotorHome m){
-        String sql = "INSERT INTO motorhome(model,brand,type,size) values(?,?,?,?)";
-        template.update(sql,m.getModel(),m.getBrand(),m.getType(),m.getSize());
+        String sql = "INSERT INTO motorhome(model,brand,km,type,size) values(?,?,?,?,?)";
+        template.update(sql,m.getModel(),m.getBrand(),m.getKm(),m.getType(),m.getSize());
     }
     public void updateMotorHome(MotorHome m){
-        String sql = "UPDATE motorhome SET model = ?, brand = ?, type = ?, size = ? WHERE motorhome_ID = ?";
-        template.update(sql, m.getModel(),m.getBrand(),m.getType(),m.getSize(), m.getMotorhome_ID());
+        String sql = "UPDATE motorhome SET model = ?, brand = ?, km = ?, type = ?, size = ? WHERE motorhome_ID = ?";
+        template.update(sql, m.getModel(),m.getBrand(),m.getKm(),m.getType(),m.getSize(), m.getMotorhome_ID());
     }
     public void deleteMotorHome(int id){
         String sql = "DELETE FROM motorhome WHERE motorhome_ID = ?";

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 
@@ -27,7 +29,7 @@ public class HomeController {
 
     /*******************************    Homepage     *******************************/
     @GetMapping("/")
-    public String index(){return "home/index";}
+    public String index(){ return "home/index"; }
 
     /*******************************    Booking     *******************************/
     @GetMapping("/bookings")
@@ -73,8 +75,20 @@ public class HomeController {
         model.addAttribute("assignedRenter", renterService.fetchById(renterID));
         model.addAttribute("assignedMotor",motorHomeService.fetchById(motorID));
 
+        return "home/Booking/bookingDetails";
+    }
+
+    @PostMapping("/confirmBookingDetails/{renter_ID}/{motorhome_ID}")
+    public String confirmBookingDetails(@PathVariable("renter_ID") int renterID, @PathVariable("motorhome_ID") int motorID, @ModelAttribute Booking booking, Model model){
+
+
+        model.addAttribute("assignedRenter",renterService.fetchById(renterID));
+        model.addAttribute("assignedMotor", motorHomeService.fetchById(motorID));
+        System.out.println(adminService.getSeasonID(booking.getPickup_date()));
+
         return "home/Booking/confirmBooking";
     }
+
 
 
     @GetMapping("/updateBooking")

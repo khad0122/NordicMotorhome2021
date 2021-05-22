@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Confirm Booking</title>
+    <title>Confirm</title>
     <link rel = "stylesheet" th:href = "@{/styles.css}">
 </head>
 <body>
+
     <h1>Confirm Booking</h1>
-        <div class = "main">
-            <a class = "btn" id = "return-btn" th:href = "@{'/pickRenter/' +${assignedRenter.renter_ID}}">return</a>
-            <div class = "container">
-                <div id = "personal-info">
-                    <p></p>
-                </div>
-                <div id = "motor-info"></div>
-            </div>
+    <div class = "main">
+        <a class = "btn" id = "return-btn" th:href = "@{/addBookingConfirm/{renter_ID}/{motorhome_ID} (renter_ID = ${assignedRenter.renter_ID}, motorhome_ID = ${assignedMotor.motorhome_ID})}">return</a>
+        <div class ="container">
+
         </div>
+    </div>
+
 </body>
 </html>

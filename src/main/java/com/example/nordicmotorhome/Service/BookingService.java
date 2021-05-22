@@ -12,12 +12,12 @@ public class BookingService {
     @Autowired
     BookingRepo bookingRepo;
 
-    public void addContract(Booking booking) {
-        bookingRepo.addContract(booking);
+    public void addBooking(Booking booking) {
+        bookingRepo.addBooking(booking);
     }
-    public void updateContract(Booking c) { bookingRepo.updateContract(c); }
-    public void deleteContract(int id) {
-        bookingRepo.deleteContract(id);
+    public void updateBooking(Booking c) { bookingRepo.updateBooking(c); }
+    public void deleteBooking(int id) {
+        bookingRepo.deleteBooking(id);
     }
     public List<Booking> fetchAll() {
         return bookingRepo.fetchAll();

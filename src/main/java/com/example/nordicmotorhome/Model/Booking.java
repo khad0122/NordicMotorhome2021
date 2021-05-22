@@ -28,7 +28,7 @@ public class Booking {
 
     public Booking() { }
 
-    public Booking( int renter_ID, int motorhome_ID, int start_km, String pickup_date, String return_date, String pickup_location, String dropoff_location, String extras,int season) {
+    public Booking( int renter_ID, int motorhome_ID, int start_km, String pickup_date, String return_date, String pickup_location, String dropoff_location, String extras) {
 
         this.renter_ID = renter_ID;
         this.motorhome_ID = motorhome_ID;
@@ -38,7 +38,6 @@ public class Booking {
         this.pickup_location = pickup_location;
         this.dropoff_location = dropoff_location;
         this.extras = extras;
-        this.season_ID = season;
     }
     //Getters & Setters
 

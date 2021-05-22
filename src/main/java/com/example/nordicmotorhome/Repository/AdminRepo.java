@@ -45,6 +45,14 @@ public class AdminRepo {
         String sql = "SELECT season_name FROM season WHERE season_from < MONTH(CURDATE()) AND season_to > MONTH(CURDATE())";
         return template.queryForObject(sql,String.class);
     }
+    public int getSeasonID(String from){
+
+        String sql = "SELECT season_ID FROM season WHERE season_from <= MONTH(?) AND season_to >= MONTH(?)";
+
+
+        return template.queryForObject(sql,Integer.class,from,from);
+
+    }
     public int getprice_percent(){
         String sql = "SELECT price_percent FROM season WHERE season_from < MONTH(CURDATE()) AND season_to > MONTH(CURDATE())";
         return template.queryForObject(sql,Integer.class);

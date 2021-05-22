@@ -33,4 +33,5 @@ public class AdminService {
     }
     public String getSeasonName(){return adminRepo.getSeasonName();}
     public int getPrice_percent(){return adminRepo.getprice_percent();}
+    public int getSeasonID(String from){return adminRepo.getSeasonID(from);}
 }

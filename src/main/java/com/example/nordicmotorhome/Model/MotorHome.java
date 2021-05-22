@@ -10,6 +10,7 @@ public class MotorHome {
     private int motorhome_ID;
     private String model;
     private String brand;
+    private int km;
     private String type;
     private String size;
 
@@ -38,4 +39,12 @@ public class MotorHome {
 
     public String getSize() {return size; }
     public void setSize(String size) { this.size = size; }
+
+    public int getKm() {
+        return km;
+    }
+
+    public void setKm(int km) {
+        this.km = km;
+    }
 }

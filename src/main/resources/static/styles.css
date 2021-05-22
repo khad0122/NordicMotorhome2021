@@ -1,9 +1,12 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Playfair+Display&display=swap');
+
 /*   General      */
 *{
     margin:0;
     padding:0;
     box-sizing: border-box;
+
 }
 
 body{
@@ -83,20 +86,70 @@ td{
     border:none;
     padding-left:10px;
 }
-.update td input:focus{
+ input:focus{
     outline:none;
 }
 .update td {
     padding:0;
 }
 
+/*    Confirm Booking  */
+.detail{
+    background: rgba(225,225,225,0.65);
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 25px;
+    margin:0 25px;
+    padding:25px 25px;
+}
+ #personal-info, #motor-info {
+     display: grid;
+     grid-gap: 15px;
+     grid-template-columns: 45%  50%;
+     font-size: 22px;
+     font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.detail p, .detail span {
+    border-bottom:1px dotted #000000;
+    margin-bottom: 5px;
+    height:35px;
+
+}
+.detail span{font-weight: bold;text-align: center; background: #fff; border:none;}
+#motor-info{height:60%;}
+.form{
+    margin:50px 25px;
+
+    background: rgba(225,225,225,0.65);
+    padding:25px 25px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 22px;
+
+}
+.form div{
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 1fr 1fr;
+    margin:15px 0;
+}
+
+.form label{
+    border-bottom:1px dotted #000000;
+}
+.form input{
+    padding-left:15px;
+}
+#confirm-btn{
+    position:relative;
+    left:184%;
+    width:100px;
+}
+#confirm-footer{
+    margin:25px 0;
 
 
-
-
-
-
-
+}
 
 
 
