@@ -87,7 +87,10 @@ public class HomeController {
                                         @ModelAttribute Booking booking, Model model){
 
 
+
+        //Add Invoice Here? //
         booking.setStart_km(motorHomeService.fetchById(motorID).getKm());
+
         bookingService.addBooking(booking);
 
         return "redirect:/bookings";
@@ -139,6 +142,24 @@ public class HomeController {
         }
 
        return "home/Booking/emptyInvoice";
+    }
+
+    @GetMapping("/generateInvoice{booking_ID}")
+    public String generateInvoice(@PathVariable("booking_ID") int booking_ID, Model model){
+
+        Booking booking = bookingService.fetchById(booking_ID);
+        //price
+        Admin admin = adminService.fetchPrice();
+        int ex = admin.getExtraPrice()*booking.getExtras();
+        int ol = booking.getKmToPickup()+booking.getKmToDropoff();
+        Invoice invoice = new Invoice(booking_ID,adminService.getPrice_percent(booking.getPickup_date()),ex,ol);
+
+
+
+        //define season percent for booking
+
+
+        return "redirect:/invoice/{booking_ID}";
     }
 
     /*******************************    Renter     *******************************/

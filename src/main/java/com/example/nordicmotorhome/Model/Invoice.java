@@ -1,7 +1,5 @@
 package com.example.nordicmotorhome.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 
 public class Invoice{
@@ -19,13 +17,11 @@ public class Invoice{
 
     //constructors
     public Invoice() {fuelCheck=false; }
-    public Invoice(int booking_ID, int season, int extra_km, double fee, double price) {
-        this.invoice_ID = invoice_ID;
+    public Invoice(int booking_ID, int season, int extra, int outsideLocationKm) {
         this.booking_ID = booking_ID;
         this.season_percent = season;
-        this.extra_km = extra_km;
-        this.fee = fee;
-        this.price = price;
+        this.extra = extra;
+        this.outsideLocationKm = outsideLocationKm;
         fuelCheck = false;
     }
 
