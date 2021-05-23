@@ -21,24 +21,44 @@
             </div>
         </div>
         <div class = "container">
-            <div>Season
+            <div><br>
+                <a class = "btn" href = "#">Add</a>
                 <table>
                     <thead>
                         <tr>
-
                             <th>Season Name</th>
-                            <th>Season Period From</th>
-                            <th>Season Period To</th>
+                            <th>Season Period From Month</th>
+                            <th>Season Period To Month</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
+                        <tr th:each = "Season: ${season}">
+                            <td th:text = "${Season.getSeason_name()}"></td>
+                            <td th:text = "${Season.getSeason_from()}"></td>
+                            <td th:text = "${Season.getSeason_to()}"></td>
+                            <td>
+                                <a class ="btn"  href = "#">Update</a>
+                                <a class ="btn"  href = "#">Delete</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div>BasePrice & Extra Price</div>
+            <div class = "pricing">
+                <form th:action = "@{/savePricing}">
+                    <div><label>Base Price</label><input th:value = "${price.basePrice}" name = "basePrice"></div>
+                    <div><label>Price pr Extra Item</label><input th:value = "${price.extraPrice}" name = "extraPrice"></div>
+                    <div><label>Fuel Fee</label><input th:value = "${price.fuelFee}" name = "fuelFee"></div>
+                    <div><label>Km Fee</label><input th:value = "${price.kmFee}" name = "kmFee"></div>
+                    <div><label>Collect Fee</label><input th:value = "${price.collectFee}" name = "collectFee"></div>
+
+                    <div>
+                        <input type = "submit" value = "Save">
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </body>

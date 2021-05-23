@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <link rel = "stylesheet"  th:href = "@{/styles.css}">
+</head>
+<body>
+<h1>Invoice</h1>
+    <div class = "main">
+        <a class ="btn" id = return-btn href = "/bookings">Return</a>
+        <div class = "container">
+                <div class ="invoice-page">
+                    <label>Total Price</label><span class = "invoice-info"><span th:text = "${invoice.price}"></span>€</span>
+                    <label>Fee</label><span class = "invoice-info"><span th:text = "${invoice.getFee()}"></span>€</span>
+                    <label>Seasonal Percentage</label><span class = "invoice-info"><span th:text = "${invoice.getSeason_percent()}"></span> %</span>
+                    <label>Extra (<span th:text = "${booking.getExtras()}"></span>)</label><span class = "invoice-info"><span th:text = "${invoice.getExtra()}"></span>€</span>
+                </div>
+        </div>
+    </div>
+</body>
+</html>

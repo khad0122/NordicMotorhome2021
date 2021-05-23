@@ -1,20 +1,20 @@
 package com.example.nordicmotorhome.Controller;
 
+import com.example.nordicmotorhome.Admin;
 import com.example.nordicmotorhome.Model.Booking;
+import com.example.nordicmotorhome.Model.Invoice;
 import com.example.nordicmotorhome.Model.MotorHome;
 import com.example.nordicmotorhome.Model.Renter;
+import com.example.nordicmotorhome.Repository.InvoiceRepo;
 import com.example.nordicmotorhome.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import static org.thymeleaf.util.StringUtils.substring;
 
 @Controller
 public class HomeController {
@@ -26,6 +26,9 @@ public class HomeController {
     MotorHomeService motorHomeService;
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    InvoiceRepo invoiceRepo;
 
     /*******************************    Homepage     *******************************/
     @GetMapping("/")
@@ -48,7 +51,9 @@ public class HomeController {
             renterList.removeIf(r -> r.getRenter_ID() == b.getRenter_ID());
         }
 
-
+        if(renterList.isEmpty()){
+            return "home/Booking/allBooked";
+        }
         model.addAttribute("renter",renterList);
 
 
@@ -69,7 +74,6 @@ public class HomeController {
         model.addAttribute("motors",motorList);
         return "home/Booking/addBookingAssignMotorhome";
     }
-
     @GetMapping("/addBookingConfirm/{renter_ID}/{motorhome_ID}")
     public String confirmBooking(@PathVariable("renter_ID") int renterID, @PathVariable("motorhome_ID") int motorID, Model model){
         model.addAttribute("assignedRenter", renterService.fetchById(renterID));
@@ -77,23 +81,64 @@ public class HomeController {
 
         return "home/Booking/bookingDetails";
     }
-
     @PostMapping("/confirmBookingDetails/{renter_ID}/{motorhome_ID}")
-    public String confirmBookingDetails(@PathVariable("renter_ID") int renterID, @PathVariable("motorhome_ID") int motorID, @ModelAttribute Booking booking, Model model){
+    public String confirmBookingDetails(@PathVariable("renter_ID") int renterID,
+                                        @PathVariable("motorhome_ID") int motorID,
+                                        @ModelAttribute Booking booking, Model model){
 
 
-        model.addAttribute("assignedRenter",renterService.fetchById(renterID));
-        model.addAttribute("assignedMotor", motorHomeService.fetchById(motorID));
-        System.out.println(adminService.getSeasonID(booking.getPickup_date()));
+        booking.setStart_km(motorHomeService.fetchById(motorID).getKm());
+        bookingService.addBooking(booking);
 
-        return "home/Booking/confirmBooking";
+        return "redirect:/bookings";
     }
 
 
+    @GetMapping("/updateBooking/{booking_ID}")
+    public String updateBookingPage(@PathVariable("booking_ID") int bookingID,Model model){
 
-    @GetMapping("/updateBooking")
-    public String updateBookingPage(){
+        model.addAttribute("booking",bookingService.fetchById(bookingID));
         return "home/Booking/updateBooking";
+    }
+    @PostMapping("/saveUpdate")
+    public String saveUpdate(@ModelAttribute Booking booking){
+        System.out.println(booking);
+        bookingService.updateBooking(booking);
+
+        return "redirect:/bookings";
+    }
+    @GetMapping("/deleteBooking{booking_ID}")
+    public String deleteBooking(@PathVariable("booking_ID") int bookingID){
+
+        bookingService.deleteBooking(bookingID);
+
+        return "redirect:/adminBooking";
+    }
+
+
+    /*******************************    Invoice     ********************************/
+    @GetMapping("/invoice/{booking_ID}")
+    public String invoice(@PathVariable("booking_ID") int bookingID, Model model){
+
+        Booking booking = bookingService.fetchById(bookingID);;
+        Invoice invoice = invoiceRepo.fetchByID(bookingID);
+        model.addAttribute("booking",booking);
+
+        if(invoice != null) {
+            Admin admin = adminService.fetchPrice();
+            invoice.setExtra(booking.getExtras());
+            invoice.setSeason_percent(adminService.getPrice_percent(booking.getPickup_date()));
+            invoice.setOutsideLocationKm(booking.getTotalKm());
+            invoice.setExtra(booking.getExtras()*admin.getExtraPrice());
+            invoice.updatePrice();
+
+            model.addAttribute("invoice",invoice);
+            model.addAttribute("admin",adminService.fetchPrice());
+
+            return "home/Booking/invoice";
+        }
+
+       return "home/Booking/emptyInvoice";
     }
 
     /*******************************    Renter     *******************************/
@@ -105,16 +150,10 @@ public class HomeController {
 
         return "home/Renter/rentersPage";
     }
-
     @GetMapping("/addRenter")
-    public String addRenterPage(){
-        return "home/Renter/addRenter";
-    }
-
+    public String addRenterPage(){ return "home/Renter/addRenter"; }
     @GetMapping("/updateRenter")
-    public String updateRenterPage(){
-        return "home/Renter/updateRenter";
-    }
+    public String updateRenterPage(){ return "home/Renter/updateRenter"; }
 
     /*******************************    Motorhome     *******************************/
     @GetMapping("/motorhomes")
@@ -125,16 +164,10 @@ public class HomeController {
 
         return "home/MotorHome/MotorHomePage";
     }
-
     @GetMapping("/addMotorHome")
-    public String addMotorHomePage(){
-        return "home/MotorHome/addMotorHome";
-    }
-
+    public String addMotorHomePage(){ return "home/MotorHome/addMotorHome"; }
     @GetMapping("/updateMotorHome")
-    public String updateMotorHomePage(){
-        return "home/MotorHome/updateMotorHome";
-    }
+    public String updateMotorHomePage(){ return "home/MotorHome/updateMotorHome"; }
 
 
 
@@ -147,7 +180,8 @@ public class HomeController {
         model.addAttribute("bookingCount",bookingService.bookingCount());
         model.addAttribute("staffCount",adminService.staffCount());
         model.addAttribute("seasonName", adminService.getSeasonName());
-        String percent = adminService.getPrice_percent()+" %";
+        model.addAttribute("price",adminService.fetchPrice());
+        String percent = adminService.getCurrentPricePercent()+" %";
         model.addAttribute("pricePercent",percent);
 
         return "home/Admin/ownerPage";
@@ -194,13 +228,24 @@ public class HomeController {
         else return "home/Admin/emptyCarList";
 
     }
-
     @GetMapping("/adminPricing")
     public String adminPricing(Model model){
-
-
+        ArrayList<Admin> seasonList = (ArrayList<Admin>) adminService.fetchSeasons();
+        model.addAttribute("price",adminService.fetchPrice());
+        model.addAttribute("season",seasonList);
 
         return "home/Admin/pricingView";
+    }
+    @GetMapping("/savePricing")
+    public String savePricing(@ModelAttribute Admin admin){
+        System.out.println(admin.getBasePrice());
+        System.out.println(admin.getExtraPrice());
+        System.out.println(admin.getCollectFee());
+        System.out.println(admin.getFuelFee());
+        System.out.println(admin.getKmFee());
+
+        //update DB
+        return "redirect: /";
     }
 
 }

@@ -30,6 +30,7 @@ a {text-decoration: none;color: #000000;}
 }
 .btn:hover{
     background: rgba(252, 249, 249, 0.79);
+    cursor:pointer;
 }
 
 .table-btn{
@@ -99,8 +100,8 @@ td{
     display: grid;
     grid-template-columns: 50% 50%;
     grid-gap: 25px;
-    margin:0 25px;
-    padding:25px 25px;
+    margin:50px 25px;
+    padding:75px 50px 50px 50px;
 }
  #personal-info, #motor-info {
      display: grid;
@@ -114,35 +115,51 @@ td{
     border-bottom:1px dotted #000000;
     margin-bottom: 5px;
     height:35px;
+    letter-spacing: 1px;
 
 }
-.detail span{font-weight: bold;text-align: center; background: #fff; border:none;}
+.detail span{font-weight: bold;text-align: center; background: #fff; border:1px solid #a0a0a0;  box-shadow: 0 2px 2px rgba(0,0,0,0.1);}
 #motor-info{height:60%;}
 .form{
-    margin:50px 25px;
-
+    margin:0 25px 50px 25px;
+    letter-spacing: 1px;
     background: rgba(225,225,225,0.65);
-    padding:25px 25px;
+    padding:75px 50px 50px 50px;
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 22px;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    border:1px solid #c7c7c7;
 
 }
 .form div{
     display: grid;
     grid-gap: 15px;
     grid-template-columns: 1fr 1fr;
-    margin:15px 0;
+    margin:15px 0 0 0;
 }
 
+.location input{
+    display: block;
+    width:150%;
+    height: 35px;
+    font-size: 18px;
+}
+.location input:nth-child(2){
+    width:50%;
+    margin-left:120px;
+
+}
 .form label{
     border-bottom:1px dotted #000000;
 }
 .form input{
     padding-left:15px;
+    font-size: 20px;
 }
 #confirm-btn{
     position:relative;
     left:184%;
+    margin-top:25px;
     width:100px;
 }
 #confirm-footer{
@@ -229,4 +246,40 @@ td{
 }
 .front a {
     width:150px;
+}
+
+
+
+/*  Invoice */
+
+.invoice-page{
+    background: rgba(225,225,225,0.65);
+    border:1px solid red;
+    width:80%;
+    margin:5px auto;
+    padding:50px;
+    display: grid;
+    grid-template-columns: 60% 35%;
+    grid-column-gap: 5%;
+    grid-row-gap: 5px;
+    align-items: center;
+
+}
+.invoice-page label{
+    border-bottom:1px dotted #000000;
+    padding:10px 0;
+
+}
+
+.invoice-info{
+    background: white;
+    padding:10px 10px;
+    text-align: center;
+    border:1px solid #8b8b8b;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+
+}
+.invoice-info, .invoice-page label{
+    height:35px;
+
 }

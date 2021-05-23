@@ -1,5 +1,6 @@
 package com.example.nordicmotorhome.Service;
 
+import com.example.nordicmotorhome.Admin;
 import com.example.nordicmotorhome.Model.Staff;
 import com.example.nordicmotorhome.Repository.AdminRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,13 @@ public class AdminService {
         return adminRepo.staffCount();
     }
     public String getSeasonName(){return adminRepo.getSeasonName();}
-    public int getPrice_percent(){return adminRepo.getprice_percent();}
+    public int getPrice_percent(String from){return adminRepo.getPrice_percent(from);}
+    public int getCurrentPricePercent(){
+        return adminRepo.getCurrentPricePercent();
+    }
     public int getSeasonID(String from){return adminRepo.getSeasonID(from);}
+
+    public List<Admin> fetchSeasons(){return adminRepo.fetchSeasons();}
+    public Admin fetchPrice(){return adminRepo.fetchPrice();}
+
 }

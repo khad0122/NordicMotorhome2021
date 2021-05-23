@@ -26,6 +26,7 @@
                     <p>Model</p><span th:text = "${assignedMotor.model}" ></span>
                     <p>Type</p><span th:text = "${assignedMotor.type}" ></span>
                     <p>Size</p><span th:text = "${assignedMotor.size}" ></span>
+                    <p>km</p><span th:text = "${assignedMotor.km}"></span>
                 </div>
                 </div>
                     <div class = "form">
@@ -39,14 +40,20 @@
                             </div>
                             <div>
                                 <label for = "pickup_location">Pick-up Location</label>
-                                    <input type = "text" name = "pickup_location" id = pickup_location required>
+                                <div class = "location">
+                                    <input type = "text" name = "pickup_location" id = pickup_location placeholder = "location" required>
+                                    <input type = "text" name = "kmToPickup" placeholder = "Km" required>
+                                </div>
 
                                 <label for = "dropff_location">Drop-off Location</label>
-                                    <input type = "text" name = "dropoff_location" id = dropff_location required>
+                                <div class = "location">
+                                    <input type = "text" name = "dropoff_location" id = dropff_location placeholder="Location" required>
+                                    <input type = "text" name = "kmToDropoff" placeholder = "Km" required>
+                                </div>
                             </div>
                             <div>
                                 <label for = "extras">Extra Equipment</label>
-                                    <input type = "text" name = "extras" id = "extras" required>
+                                   <input type = "text" name = "extras" id = "extras" required>
                             </div>
                             <div id = "confirm-footer">
                                 <input id = "confirm-btn" class = "btn" type = "submit" value = "Confirm">

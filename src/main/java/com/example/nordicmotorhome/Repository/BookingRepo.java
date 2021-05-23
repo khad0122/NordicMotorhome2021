@@ -15,15 +15,15 @@ public class BookingRepo {
     JdbcTemplate template;
 
     public void addBooking(Booking booking){
-        String sql = "INSERT INTO `booking` (`renterID`,`motorhomeID`,`startKM`,`pickup_date`,`return_date`,`pickup_location`,`dropoff_location`,`extras`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        template.update(sql, booking.getRenter_ID(),booking.getMotorhome_ID(),booking.getStart_km(),booking.getPickup_date(),booking.getReturn_date(),booking.getPickup_location(), booking.getDropoff_location(),booking.getExtras());
+        String sql = "INSERT INTO booking (renter_ID,motorhome_ID,start_kM,pickup_date,return_date,pickup_location,kmToPickup,dropoff_location,kmToDropoff,extras) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+        template.update(sql, booking.getRenter_ID(),booking.getMotorhome_ID(),booking.getStart_km(),booking.getPickup_date(),booking.getReturn_date(),booking.getPickup_location(),booking.getKmToPickup(), booking.getDropoff_location(),booking.getKmToDropoff(),booking.getExtras());
     }
-    public void updateBooking(Booking c){
-        String sql = "UPDATE contract SET pickupDate = ?, returnDate = ?, startKM = ? WHERE contractID = ?";
-        template.update(sql, c.getPickup_date(),c.getReturn_date(),c.getStart_km());
+    public void updateBooking(Booking b){
+        String sql = "UPDATE booking SET pickup_date = ?, return_date = ?, pickup_location = ?, kmToPickup = ?, dropoff_location = ?, kmToDropoff = ?, extras = ? WHERE booking_ID = ?;";
+        template.update(sql, b.getPickup_date(),b.getReturn_date(),b.getPickup_location(),b.getKmToPickup(),b.getDropoff_location(),b.getKmToDropoff(),b.getExtras(),b.getBooking_ID());
     }
     public void deleteBooking(int id){
-        String sql = "DELETE FROM contract WHERE contractID = ?";
+        String sql = "DELETE FROM booking WHERE booking_ID = ?";
         template.update(sql,id);
     }
     public List<Booking> fetchAll(){
@@ -39,13 +39,23 @@ public class BookingRepo {
 
 
     public Booking fetchById(int id){
-        String sql = "SELECT * FROM Booking WHERE booking_ID = ?";
+        String sql = "SELECT * FROM booking WHERE booking_ID = ?";
         RowMapper<Booking> list = new BeanPropertyRowMapper<>(Booking.class);
 
+        return template.queryForObject(sql,list,id);
+    }
+    public Booking fetchByRenterID(int id ){
+        String sql = "SELECT * FROM booking WHERE renter_ID = ?";
+        RowMapper<Booking> list = new BeanPropertyRowMapper<>(Booking.class);
         return template.queryForObject(sql,list,id);
     }
     public int bookingCount(){
         String sql = "SELECT count(*) FROM booking";
         return template.queryForObject(sql,Integer.class);
     }
+
+
+    //Invoice
+
+
 }

@@ -2,9 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Update Booking</title>
+    <link rel = "stylesheet" th:href = "@{/styles.css}">
 </head>
 <body>
+    <h1>Update Booking</h1>
+        <div class = "main">
+            <a id="return-btn" class = "btn" href = "/bookings">Return</a>
+            <div class = "container update">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Motorhome ID</th>
+                            <th>Pick-up Date</th>
+                            <th>Return Date</th>
+                            <th>Pick-up Location</th>
+                            <th>Km to Pick-up</th>
+                            <th>Drop-off Location</th>
+                            <th>Km to Drop-off</th>
+                            <th>Extra</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <form th:action = "@{/saveUpdate}" method = "post">
+                        <tr>
+                            <td><input type = "text" th:value = "${booking.booking_ID}" name = "booking_ID" readonly></td>
+                            <td><input type = "text" th:value = "${booking.motorhome_ID}" name = "motorhome_ID" readonly></td>
+                            <td><input type = "date" th:value = "${booking.pickup_date}" name = "pickup_date"></td>
+                            <td><input type = "date" th:value = "${booking.return_date}" name = "return_date"></td>
+                            <td><input type = "text" th:value = "${booking.pickup_location}" name = "pickup_location" ></td>
+                            <td><input type = "text" th:value = "${booking.kmToPickup}" name = "kmToPickup" ></td>
+                            <td><input type = "text" th:value = "${booking.dropoff_location}" name = "dropoff_location" ></td>
+                            <td><input type = "text" th:value = "${booking.kmToDropoff}" name = "kmToDropoff" ></td>
+                            <td><input type = "text" th:value = "${booking.extras}" name = "extras" ></td>
+
+                        </tr>
+                        <input type = "submit" class = "btn" value ="Save">
+                    </form>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
 
 </body>
 </html>

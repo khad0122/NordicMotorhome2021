@@ -47,8 +47,8 @@
                   <td th:text = "${Booking.getDropoff_location()}"></td>
                   <td th:text = "${Booking.getExtras()}"></td>
                   <td>
-                    <a class = "btn side-btn" href = "/updateBooking">Update</a>
-                    <a class = "btn side-btn" href = "/">Delete</a>
+                    <a class = "btn side-btn" th:href = "@{/'updateBooking'+${Booking.booking_ID}}">Update</a>
+                    <a class = "btn side-btn" th:href = "@{'/deleteBooking'+${Booking.booking_ID}}">Delete</a>
                   </td>
                 </tr>
                 </tbody>

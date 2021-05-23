@@ -23,6 +23,7 @@
                         <th>Pick-up Location</th>
                         <th>Drop-off Location</th>
                         <th>Extras</th>
+                        <th>Start Km</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -36,8 +37,11 @@
                         <td th:text = "${Booking.getPickup_location()}"></td>
                         <td th:text = "${Booking.getDropoff_location()}"></td>
                         <td th:text = "${Booking.getExtras()}"></td>
+                        <td th:text = "${Booking.getStart_km()}"></td>
                         <td>
-                            <a class = "btn side-btn" href = "/updateBooking">Update</a>
+                            <a class = "btn side-btn" th:href = "@{'/updateBooking/' +${Booking.getBooking_ID()}}">Update</a>
+                            <a class = "btn side-btn" th:href = "@{'/invoice/' +${Booking.getBooking_ID()}}">Invoice</a>
+
                         </td>
                     </tr>
                 </tbody>

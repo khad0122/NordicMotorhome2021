@@ -10,23 +10,21 @@
 <h1>Motorhomes</h1>
 <div class ="main">
     <a id="return-btn" class = "btn" href = "/motorhomes">Return</a>
-    <div class = "container">
+    <div class = "container update">
         <table>
             <thead>
             <tr>
-                <th>MotorHome ID</th>
                 <th>Brand</th>
                 <th>Model</th>
                 <th>Km</th>
                 <th>Type</th>
                 <th>Size</th>
-                <th></th>
+
             </tr>
             </thead>
             <tbody>
             <form th:action = "@{/add/}" method = "post">
                 <tr>
-                    <td><input type = "text" name = "motorhome_ID" required> </td>
                     <td><input type = "text" name = "model" required></td>
                     <td><input type = "text" name = "brand" required></td>
                     <td><input type = "text" name = "km" required></td>

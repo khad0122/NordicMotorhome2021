@@ -1,5 +1,6 @@
 package com.example.nordicmotorhome.Repository;
 
+import com.example.nordicmotorhome.Admin;
 import com.example.nordicmotorhome.Model.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -46,18 +47,41 @@ public class AdminRepo {
         return template.queryForObject(sql,String.class);
     }
     public int getSeasonID(String from){
-
         String sql = "SELECT season_ID FROM season WHERE season_from <= MONTH(?) AND season_to >= MONTH(?)";
-
-
         return template.queryForObject(sql,Integer.class,from,from);
+    }//season id might be removed
 
+    //get season percent from specific season
+    public int getSeason_percent(int id){
+        String sql = "SELECT price_percent FROM season WHERE season_ID = ?";
+        return template.queryForObject(sql,Integer.class,id);
     }
-    public int getprice_percent(){
+
+    //get season percent from specific date
+    public int getPrice_percent(String from){
+        String sql = "SELECT price_percent FROM season WHERE season_from < MONTH(?) AND season_to > MONTH(?)";
+        return template.queryForObject(sql,Integer.class,from,from);
+    }
+
+    //get Current season percent
+    public int getCurrentPricePercent(){
         String sql = "SELECT price_percent FROM season WHERE season_from < MONTH(CURDATE()) AND season_to > MONTH(CURDATE())";
         return template.queryForObject(sql,Integer.class);
     }
 
+    //get All season, for update and delete
+    public List<Admin> fetchSeasons(){
+        String sql = "SELECT * FROM season";
+        RowMapper<Admin> list = new BeanPropertyRowMapper<>(Admin.class);
+        return template.query(sql,list);
+    }
+
+    //Pricing
+    public Admin fetchPrice(){
+        String sql = "SELECT * FROM price";
+        RowMapper<Admin> list = new BeanPropertyRowMapper<>(Admin.class);
+        return template.queryForObject(sql,list);
+    }
 
 
 }
