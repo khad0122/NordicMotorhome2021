@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add Motorhome</title>
+    <link rel = "stylesheet"  th:href="@{/styles.css}">
+
 </head>
 <body>
+<h1>Motorhomes</h1>
+<div class ="main">
+    <a id="return-btn" class = "btn" href = "/motorhomes">Return</a>
+    <div class = "container">
+        <table>
+            <thead>
+            <tr>
+                <th>MotorHome ID</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Km</th>
+                <th>Type</th>
+                <th>Size</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <form th:action = "@{/add/}" method = "post">
+                <tr>
+                    <td><input type = "text" name = "motorhome_ID" required> </td>
+                    <td><input type = "text" name = "model" required></td>
+                    <td><input type = "text" name = "brand" required></td>
+                    <td><input type = "text" name = "km" required></td>
+                    <td><input type = "text" name = "type" required> </td>
+                    <td><input type = "text" name = "size" required></td>
+
+                </tr>
+                <input class = "btn" id = "add-btn" type = "submit" value = "Add">
+            </form>
+
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

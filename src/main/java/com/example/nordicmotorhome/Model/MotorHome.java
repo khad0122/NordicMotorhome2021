@@ -16,10 +16,12 @@ public class MotorHome {
 
     //constructors
     public MotorHome() { }
-    public MotorHome(int motorhome_ID, String model, String brand, String type, String size) {
+
+    public MotorHome(int motorhome_ID, String model, String brand, int km, String type, String size) {
         this.motorhome_ID = motorhome_ID;
         this.model = model;
         this.brand = brand;
+        this.km = km;
         this.type = type;
         this.size = size;
     }
