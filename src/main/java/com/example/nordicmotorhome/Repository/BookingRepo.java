@@ -15,17 +15,19 @@ public class BookingRepo {
     JdbcTemplate template;
 
     public void addBooking(Booking booking){
-        String sql = "INSERT INTO booking (renter_ID,motorhome_ID,start_kM,pickup_date,return_date,pickup_location,kmToPickup,dropoff_location,kmToDropoff,extras) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
-        template.update(sql, booking.getRenter_ID(),booking.getMotorhome_ID(),booking.getStart_km(),booking.getPickup_date(),booking.getReturn_date(),booking.getPickup_location(),booking.getKmToPickup(), booking.getDropoff_location(),booking.getKmToDropoff(),booking.getExtras());
+        String sql = "INSERT INTO booking (renter_ID,motorhome_ID,start_kM,pickup_date,return_date,pickup_location,kmToPickup,dropoff_location,kmToDropoff,extras,daysTotal) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
+        template.update(sql, booking.getRenter_ID(),booking.getMotorhome_ID(),booking.getStart_km(),booking.getPickup_date(),booking.getReturn_date(),booking.getPickup_location(),booking.getKmToPickup(), booking.getDropoff_location(),booking.getKmToDropoff(),booking.getExtras(),booking.getDaysTotal());
     }
     public void updateBooking(Booking b){
-        String sql = "UPDATE booking SET pickup_date = ?, return_date = ?, pickup_location = ?, kmToPickup = ?, dropoff_location = ?, kmToDropoff = ?, extras = ? WHERE booking_ID = ?;";
-        template.update(sql, b.getPickup_date(),b.getReturn_date(),b.getPickup_location(),b.getKmToPickup(),b.getDropoff_location(),b.getKmToDropoff(),b.getExtras(),b.getBooking_ID());
+        String sql = "UPDATE booking SET pickup_date = ?, return_date = ?, pickup_location = ?, kmToPickup = ?, dropoff_location = ?, kmToDropoff = ?, extras = ?, daysTotal = ? WHERE booking_ID = ?;";
+        template.update(sql, b.getPickup_date(),b.getReturn_date(),b.getPickup_location(),b.getKmToPickup(),b.getDropoff_location(),b.getKmToDropoff(),b.getExtras(),b.getDaysTotal(),b.getBooking_ID());
     }
     public void deleteBooking(int id){
         String sql = "DELETE FROM booking WHERE booking_ID = ?";
         template.update(sql,id);
     }
+
+
     public List<Booking> fetchAll(){
         String sql = "SELECT     season_ID, booking.* from booking\n" +
                 "left join renter on booking.renter_ID = renter.renter_ID\n" +
@@ -36,8 +38,6 @@ public class BookingRepo {
 
         return template.query(sql,list);
     }
-
-
     public Booking fetchById(int id){
         String sql = "SELECT * FROM booking WHERE booking_ID = ?";
         RowMapper<Booking> list = new BeanPropertyRowMapper<>(Booking.class);
@@ -49,9 +49,15 @@ public class BookingRepo {
         RowMapper<Booking> list = new BeanPropertyRowMapper<>(Booking.class);
         return template.queryForObject(sql,list,id);
     }
+
+
     public int bookingCount(){
         String sql = "SELECT count(*) FROM booking";
         return template.queryForObject(sql,Integer.class);
+    }
+    public int getDaysTotal(String from, String to){
+        String sql = "SELECT DATEDIFF(?,?)";
+        return template.queryForObject(sql,Integer.class,to,from);
     }
 
 

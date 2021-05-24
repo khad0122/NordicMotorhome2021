@@ -96,12 +96,16 @@ public class HomeController {
         //Add Invoice Here? //
         //defines startKM an stores in booking object
         booking.setStart_km(motorHomeService.fetchById(motorID).getKm());
+
+        //Sets total Of Days
+        booking.setDaysTotal(bookingService.getTotalDays(booking.getPickup_date(),booking.getReturn_date()));
+        System.out.println(booking.getDaysTotal());
         //Booking instance is added to DB
         bookingService.addBooking(booking);
         //booking Object is updated with a bookingID
 
         booking = null;
-       booking = bookingService.fetchByRenterID(renterID);
+        booking = bookingService.fetchByRenterID(renterID);
        System.out.println(booking);
 
         //Invoice Section
@@ -136,6 +140,7 @@ public class HomeController {
     @PostMapping("/saveUpdate")
     public String saveUpdate(@ModelAttribute Booking booking){
         System.out.println(booking);
+        booking.setDaysTotal(bookingService.getTotalDays(booking.getPickup_date(),booking.getReturn_date()));
         bookingService.updateBooking(booking);
 
         return "redirect:/bookings";
@@ -160,6 +165,7 @@ public class HomeController {
         if(invoice != null) {
             invoice.updateInvoice(adminService.getPrice_percent(booking.getPickup_date()),adminService.fetchPrice(), booking);
             invoiceService.updateInvoice(invoice);
+            model.addAttribute("renter",renterService.fetchById(booking.getRenter_ID()));
             model.addAttribute("invoice",invoice);
 
             return "home/Booking/invoice";

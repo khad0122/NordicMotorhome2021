@@ -3,6 +3,9 @@ package com.example.nordicmotorhome.Model;
 
 import com.example.nordicmotorhome.Admin;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 
 public class Invoice{
 
@@ -17,7 +20,7 @@ public class Invoice{
     //Amount * extraPrice. is set outside class
     private int extra;
     //sum of Distance to pickup, and drop off, if not 0
-    private int outsideLocationKm;
+    private double outsideKmFee;
 
     //Fee is combined of multiple fees, outsideKMFee, extraKmFee, FuelFee
     private double fee;
@@ -74,8 +77,8 @@ public class Invoice{
     public int getSeason_percent() { return season_percent; }
     public void setSeason_percent(int season_percent) { this.season_percent = season_percent; }
 
-    public int getOutsideLocationKm() { return outsideLocationKm; }
-    public void setOutsideLocationKm(int remoteLocationKm) { this.outsideLocationKm = remoteLocationKm; }
+    public double getOutsideKmFee() { return outsideKmFee; }
+    public void setOutsideKmFee(double outsideKmFee) { this.outsideKmFee = outsideKmFee; }
 
     public int getExtra() { return extra; }
     public void setExtra(int extra) { this.extra = extra; }
@@ -85,7 +88,8 @@ public class Invoice{
 
     //methods Calculator
     public void updateInvoice(int seasonP,Admin admin, Booking booking){
-
+        DecimalFormat deci = new DecimalFormat("##.##");
+        fee = 0;
         price = admin.getBasePrice();
 
         season_percent = seasonP;
@@ -95,22 +99,33 @@ public class Invoice{
             price = price + (price * ((double) season_percent / 100));
         }
 
-        extra = booking.getExtras() * admin.getExtraPrice();
-        price += extra;
+        //multiplying number of days with price per day
+        price = (price * booking.getDaysTotal());
+
+        if(booking.getExtras() != 0) {
+            extra = booking.getExtras() * admin.getExtraPrice();
+            fee = extra;
+        }
+
+
 
         //OutsideKMFee
-        outsideLocationKm = booking.getTotalKm();
-        if(outsideLocationKm != 0){ price = price +(outsideLocationKm*admin.getCollectFee());}
+        if(booking.getTotalKm() != 0) {
+            outsideKmFee = booking.getTotalKm() * admin.getCollectFee();
+            outsideKmFee = Double.parseDouble(deci.format(outsideKmFee).replace(",","."));
+            fee += outsideKmFee;
+        }
+
 
 
         //FuelCheck And Extra KM
 
             if(fee == 0){
                 if(fuelCheck) {
-                    fee = admin.getFuelFee();
+                    fee += admin.getFuelFee();
                 }
                 if(extra_km != 0){
-                    fee = extra_km * admin.getKmFee();
+                    fee += extra_km * admin.getKmFee();
                 }
             }
             else {
@@ -118,13 +133,13 @@ public class Invoice{
                     fee += admin.getFuelFee();
                 }
                 if(extra_km != 0) {
-                    fee += extra_km * admin.getKmFee();
+                    fee += (extra_km * admin.getKmFee());
                 }
             }
+            price = Double.parseDouble(deci.format(price).replace(",","."));
+            fee = Double.parseDouble(deci.format(fee).replace(",","."));
 
-
-
-
+            price += fee;
     }
 
 }
