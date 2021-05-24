@@ -1,27 +1,50 @@
 package com.example.nordicmotorhome.Model;
 
 
+import com.example.nordicmotorhome.Admin;
+import com.example.nordicmotorhome.Service.AdminService;
+import com.example.nordicmotorhome.Service.BookingService;
 
 public class Invoice{
 
     private int invoice_ID;
+
+    //Referencing to a specific booking
     private int booking_ID;
+
+    //the seasonal percent for the booking
     private int season_percent;
+
+    //Amount * extraPrice. is set outside class
     private int extra;
+    //sum of Distance to pickup, and drop off, if not 0
     private int outsideLocationKm;
+
+    //Fee is combined of multiple fees, outsideKMFee, extraKmFee, FuelFee
     private double fee;
+
+    //Final Price, starts as the basePrice, then accumulated with all fees, and extra charges.
+    //if cancellation then, certain percentage of that accumulated price is final price
     private double price;
 
+
+    //A Check after rent, extraKm and fuelCheck By mechanic
+    //should be able to register it, then invoice is either updated or generated
     private int extra_km;
     private boolean fuelCheck;
 
     //constructors
     public Invoice() {fuelCheck=false; }
-    public Invoice(int booking_ID, int season, int extra, int outsideLocationKm) {
+    public Invoice(int booking_ID, int season, double price,int extra, double fee) {
         this.booking_ID = booking_ID;
         this.season_percent = season;
+        this.price = price;
         this.extra = extra;
-        this.outsideLocationKm = outsideLocationKm;
+        this.fee = fee;
+
+
+        //wil always start as 0 and false
+        extra_km = 0;
         fuelCheck = false;
     }
 
@@ -39,7 +62,12 @@ public class Invoice{
     public void setExtra_km(int extra_km) { this.extra_km = extra_km; }
 
     public double getFee() { return fee; }
-    public void setFee(double fee) { this.fee = fee; }
+    public void setFee(double fee) {
+        if(fee == 0) {
+            this.fee = fee;
+        }
+        else this.fee += fee;
+    }
 
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
@@ -59,16 +87,12 @@ public class Invoice{
     //methods Calculator
     public double updatePrice(){
 
-
+        //as long as it's not low season ie. 0%
         if(season_percent != 0){
             price =  price+(price *(((double)season_percent/100)));
-            System.out.println("Percent * Price: "+((double)(season_percent/100))*price);
-            System.out.println(price);
         }
-        if(outsideLocationKm != 0) {
-            fee = outsideLocationKm * 0.70;
-            price += fee;
-        }
+        //as long as pick-up and drop-off is outside Nordic Rental Office
+
         if(extra != 0) { price += extra; }
 
         //If fuel level below half
@@ -78,6 +102,50 @@ public class Invoice{
 
 
         return price;
+    }
+    public void updateInvoice(String from){
+        Admin admin = new AdminService().fetchPrice();
+        Booking booking = new BookingService().fetchById(booking_ID);
+
+        price = admin.getBasePrice();
+
+        int seasonPercent = new AdminService().getPrice_percent(from);
+
+        //Setting the seasonal percentage
+        if(seasonPercent != 0) {
+            price = price + (price * ((double) seasonPercent / 100));
+        }
+
+        extra = booking.getExtras();
+        price = price + (extra * admin.getExtraPrice());
+
+        //OutsideKMFee
+        outsideLocationKm = booking.getTotalKm();
+        if(outsideLocationKm != 0){ price = price +(outsideLocationKm*admin.getCollectFee());}
+
+
+
+
+        //FuelCheck And Extra KM
+
+
+
+            if(fee == 0){
+                if(fuelCheck) {
+                    fee = admin.getFuelFee();
+                }
+                if(extra_km != 0){
+                    fee = extra_km * admin.getKmFee();
+                }
+            }
+            else {
+                fee += admin.getFuelFee();
+                fee += extra_km * admin.getKmFee();
+            }
+
+
+
+
     }
 
 }

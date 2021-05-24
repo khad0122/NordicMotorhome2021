@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 @Controller
@@ -28,11 +30,14 @@ public class HomeController {
     AdminService adminService;
 
     @Autowired
-    InvoiceRepo invoiceRepo;
+    InvoiceService invoiceService;
 
     /*******************************    Homepage     *******************************/
     @GetMapping("/")
-    public String index(){ return "home/index"; }
+    public String index(){
+
+        return "home/index";
+    }
 
     /*******************************    Booking     *******************************/
     @GetMapping("/bookings")
@@ -87,11 +92,36 @@ public class HomeController {
                                         @ModelAttribute Booking booking, Model model){
 
 
-
+        Admin admin = adminService.fetchPrice();
         //Add Invoice Here? //
+        //defines startKM an stores in booking object
         booking.setStart_km(motorHomeService.fetchById(motorID).getKm());
-
+        //Booking instance is added to DB
         bookingService.addBooking(booking);
+        //booking Object is updated with a bookingID
+
+        booking = null;
+       booking = bookingService.fetchByRenterID(renterID);
+       System.out.println(booking);
+
+        //Invoice Section
+
+        //General Fields that always needs to be done before invoice,to make sure all prices are updated
+        //Extra Equipments, Price pr equimpent is stored in Admin Object * amount of extra items in booking
+        int extra = admin.getExtraPrice()*booking.getExtras();
+
+        //Set BasePrice from Admin Object
+        double price = admin.getBasePrice();
+
+        //For outside pickup & dropoff, a fee for each km to distination
+        double outsideKmFee = booking.getTotalKm()*admin.getCollectFee();
+
+        int season_percent = adminService.getPrice_percent(booking.getPickup_date());
+
+        Invoice invoice = new Invoice(booking.getBooking_ID(),season_percent,price,extra,outsideKmFee);
+        invoiceService.addInvoice(invoice);
+
+
 
         return "redirect:/bookings";
     }
@@ -124,17 +154,10 @@ public class HomeController {
     public String invoice(@PathVariable("booking_ID") int bookingID, Model model){
 
         Booking booking = bookingService.fetchById(bookingID);;
-        Invoice invoice = invoiceRepo.fetchByID(bookingID);
+        Invoice invoice = invoiceService.fetchByID(bookingID);
         model.addAttribute("booking",booking);
 
         if(invoice != null) {
-            Admin admin = adminService.fetchPrice();
-            invoice.setExtra(booking.getExtras());
-            invoice.setSeason_percent(adminService.getPrice_percent(booking.getPickup_date()));
-            invoice.setOutsideLocationKm(booking.getTotalKm());
-            invoice.setExtra(booking.getExtras()*admin.getExtraPrice());
-            invoice.updatePrice();
-
             model.addAttribute("invoice",invoice);
             model.addAttribute("admin",adminService.fetchPrice());
 
@@ -152,7 +175,6 @@ public class HomeController {
         Admin admin = adminService.fetchPrice();
         int ex = admin.getExtraPrice()*booking.getExtras();
         int ol = booking.getKmToPickup()+booking.getKmToDropoff();
-        Invoice invoice = new Invoice(booking_ID,adminService.getPrice_percent(booking.getPickup_date()),ex,ol);
 
 
 

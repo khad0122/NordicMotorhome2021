@@ -33,6 +33,12 @@ public class InvoiceRepo {
             return template.queryForObject(sql, list, id);
         }return null;
     }
+
+
+    public void addInvoice(Invoice invoice){
+        String sql = "INSERT INTO invoice(booking_ID,season_percent,extra_km,fee,price) VALUES(?,?,?,?,?)";
+        template.update(sql,invoice.getBooking_ID(),invoice.getSeason_percent(),invoice.getExtra_km(),invoice.getFee(),invoice.getPrice());
+    }
 }
 
 

@@ -17,12 +17,13 @@ public class Booking {
     private String pickup_date;
     private String return_date;
 
+    //PickupLocation And Distance to the Location: 0 if Nordic Rental Office
     private String pickup_location;
     private int kmToPickup;
     private String dropoff_location;
     private int kmToDropoff;
 
-    private int extras;
+    private int extras; //Amount of Extras ie. 1 item, 2 items, ...
 
 
     //constructors

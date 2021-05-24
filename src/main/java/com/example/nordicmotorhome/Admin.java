@@ -8,6 +8,7 @@ public class Admin {
     private double basePrice;
     private int extraPrice;
 
+    //********************************************** May Be Deleted
     //  Seasonal Price
     private int season_percent;
     private String season_name;
@@ -19,7 +20,7 @@ public class Admin {
     private int toDay;
     private int fromDay;
     private int minimumPrice;
-
+    //***********************************************
     //fees
     private double fuelFee;
     private double kmFee;
