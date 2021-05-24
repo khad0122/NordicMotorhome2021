@@ -19,12 +19,13 @@ public class BookingService {
     public void deleteBooking(int id) {
         bookingRepo.deleteBooking(id);
     }
+
     public List<Booking> fetchAll() {
         return bookingRepo.fetchAll();
     }
-    public Booking fetchById(int id) {
-        return bookingRepo.fetchById(id);
-    }
+    public Booking fetchById(int id) { return bookingRepo.fetchById(id); }
     public Booking fetchByRenterID(int id){return bookingRepo.fetchByRenterID(id);}
+
     public int bookingCount(){return bookingRepo.bookingCount();}
+    public int getTotalDays(String from, String to){return bookingRepo.getDaysTotal(from,to);}
 }

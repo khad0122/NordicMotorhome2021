@@ -6,12 +6,13 @@
     <link rel = "stylesheet"  th:href="@{/styles.css}">
 </head>
 <body>
-
-  <h1>Bookings</h1>
+<h1>Nordic Motorhome</h1>
+  <h2>Bookings</h2>
     <div class = "main">
         <a id="return-btn" class = "btn" href = "/">Return</a>
         <div class = "container">
             <a class = "btn" href = "/addBooking">Add Booking</a>
+            <a class = "btn" href = "/allInvoices">All Invoices</a>
             <table>
                 <thead>
                     <tr>
@@ -24,6 +25,7 @@
                         <th>Drop-off Location</th>
                         <th>Extras</th>
                         <th>Start Km</th>
+                        <th>Total Days</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -38,9 +40,11 @@
                         <td th:text = "${Booking.getDropoff_location()}"></td>
                         <td th:text = "${Booking.getExtras()}"></td>
                         <td th:text = "${Booking.getStart_km()}"></td>
+                        <td th:text = "${Booking.getDaysTotal()}"></td>
                         <td>
                             <a class = "btn side-btn" th:href = "@{'/updateBooking/' +${Booking.getBooking_ID()}}">Update</a>
                             <a class = "btn side-btn" th:href = "@{'/invoice/' +${Booking.getBooking_ID()}}">Invoice</a>
+                            <a class = "btn side-btn" th:href = "@{'/invoice/' +${Booking.getBooking_ID()}}">Cancel</a>
 
                         </td>
                     </tr>
