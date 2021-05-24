@@ -28,7 +28,6 @@ public class HomeController {
     MotorHomeService motorHomeService;
     @Autowired
     AdminService adminService;
-
     @Autowired
     InvoiceService invoiceService;
 
@@ -126,7 +125,6 @@ public class HomeController {
         return "redirect:/bookings";
     }
 
-
     @GetMapping("/updateBooking/{booking_ID}")
     public String updateBookingPage(@PathVariable("booking_ID") int bookingID,Model model){
 
@@ -147,7 +145,6 @@ public class HomeController {
 
         return "redirect:/adminBooking";
     }
-
 
     /*******************************    Invoice     ********************************/
     @GetMapping("/invoice/{booking_ID}")
@@ -196,10 +193,24 @@ public class HomeController {
     }
     @GetMapping("/addRenter")
     public String addRenterPage(){ return "home/Renter/addRenter"; }
+    @PostMapping("/add/")
+    public String addRenterPage(@ModelAttribute Renter r){
+        renterService.addRenter(r);
+        return "redirect:/";
+    }
+
     @GetMapping("/updateRenter/{renter_ID}")
     public String updateRenterPage(@PathVariable("renter_ID") int renterID, Model model){
+
         model.addAttribute("renter",renterService.fetchById(renterID));
+
         return "home/Renter/updateRenter";
+    }
+
+    @GetMapping("/deleteRenter/{renterID}")
+    public String deleteRenterPage(@PathVariable("renterID") int id, Model model){
+        renterService.deleteRenter(id);
+        return "redirect:/renters";
     }
 
     /*******************************    Motorhome     *******************************/
@@ -215,8 +226,6 @@ public class HomeController {
     public String addMotorHomePage(){ return "home/MotorHome/addMotorHome"; }
     @GetMapping("/updateMotorHome")
     public String updateMotorHomePage(){ return "home/MotorHome/updateMotorHome"; }
-
-
 
     /*******************************    Owner   ************************************/
 

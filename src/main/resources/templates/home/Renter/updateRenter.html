@@ -32,15 +32,15 @@
                 <form action = "/updateRenter/" method = "post">
                     <tr>
                         <td><input name = "renterID" th:value = "${renter.renter_ID}" readonly></td>
-                        <td><input name = "first_name" th:value = "${}"></td>
-                        <td><input name = "last_name" th:value = "${}"></td>
-                        <td><input name = "mobile_number" th:value = "${}"></td>
-                        <td><input name = "email" th:value = "${}"></td>
-                        <td><input name = "address_street" th:value = "${}"></td>
-                        <td><input name = "address_zip" th:value = "${}"></td>
-                        <td><input name = "address_city" th:value = "${}"></td>
-                        <td><input name = "DLN" th:value = "${}"></td>
-                        <td><input name = "driver_since_date" th:value = "${}"></td>
+                        <td><input name = "first_name" th:value = "${renter.first_name}"></td>
+                        <td><input name = "last_name" th:value = "${renter.last_name}"></td>
+                        <td><input name = "mobile_number" th:value = "${renter.mobile_number}"></td>
+                        <td><input name = "email" th:value = "${renter.email}"></td>
+                        <td><input name = "address_street" th:value = "${renter.address_street}"></td>
+                        <td><input name = "address_zip" th:value = "${renter.address_zip}"></td>
+                        <td><input name = "address_city" th:value = "${renter.address_city}"></td>
+                        <td><input name = "DLN" th:value = "${renter.DLN}"></td>
+                        <td><input name = "driver_since_date" th:value = "${renter.driversince_date}"></td>
                     </tr>
                         <input class = "btn side-btn" type = "submit" name = "submit" value = "Save">
                 </form>
