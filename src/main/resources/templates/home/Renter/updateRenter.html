@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit</title>
+    <link rel = "stylesheet"  th:href="@{/styles.css}">
+
 </head>
 <body>
+
+<h1>Edit Renter</h1>
+<div class = "main">
+    <a id="return-btn" class = "btn" href = "/">Return</a>
+    <div class = "container">
+<div class = "hero">
+    <div class = "update renter">
+        <table>
+            <thead>
+            <tr>
+                <th>Renter ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mobile Number</th>
+                <th>Email</th>
+                <th>Address Street</th>
+                <th>Address Zip</th>
+                <th>Address City</th>
+                <th>DLN</th>
+                <th>Driver Since Date</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <form action = "/updateRenter/" method = "post">
+                <tr>
+                    <td><input name = "renterID" th:value = "${}" readonly></td>
+                    <td><input name = "first_name" th:value = "${}"></td>
+                    <td><input name = "last_name" th:value = "${}"></td>
+                    <td><input name = "mobile_number" th:value = "${}"></td>
+                    <td><input name = "email" th:value = "${}"></td>
+                    <td><input name = "address_street" th:value = "${}"></td>
+                    <td><input name = "address_zip" th:value = "${}"></td>
+                    <td><input name = "address_city" th:value = "${}"></td>
+                    <td><input name = "DLN" th:value = "${}"></td>
+                    <td><input name = "driver_since_date" th:value = "${}"></td>
+                </tr>
+                <input class = "btn" id = "save-btn" type = "submit" name = "submit" value = "Save">
+            </form>
+            </tbody>
+
+        </table>
+    </div>
+</div>
 
 </body>
 </html>
