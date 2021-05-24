@@ -21,11 +21,6 @@ public class InvoiceRepo {
         RowMapper<Invoice> list = new BeanPropertyRowMapper<>(Invoice.class);
         return template.query(sql, list);
     }
-    public int getCount(int id){
-        String sql = "SELECT count(*) FROM invoice WHERE booking_id = ?";
-        return template.queryForObject(sql,Integer.class,id);
-    }
-
     public Invoice fetchByID(int id) {
         String sql = "SELECT * FROM invoice WHERE booking_ID = ?";
         RowMapper<Invoice> list = new BeanPropertyRowMapper<>(Invoice.class);
@@ -34,10 +29,19 @@ public class InvoiceRepo {
         }return null;
     }
 
+    public int getCount(int id){
+        String sql = "SELECT count(*) FROM invoice WHERE booking_id = ?";
+        return template.queryForObject(sql,Integer.class,id);
+    }
+
 
     public void addInvoice(Invoice invoice){
         String sql = "INSERT INTO invoice(booking_ID,season_percent,extra_km,fee,price) VALUES(?,?,?,?,?)";
         template.update(sql,invoice.getBooking_ID(),invoice.getSeason_percent(),invoice.getExtra_km(),invoice.getFee(),invoice.getPrice());
+    }
+    public void updateInvoice(Invoice i) {
+        String sql = "UPDATE invoice SET season_percent = ?, extra_km = ?, fee = ?, price = ? WHERE invoice_ID = ?";
+        template.update(sql,i.getSeason_percent(),i.getExtra_km(),i.getFee(),i.getPrice(),i.getInvoice_ID());
     }
 }
 

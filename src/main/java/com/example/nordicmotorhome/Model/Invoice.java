@@ -2,6 +2,7 @@ package com.example.nordicmotorhome.Model;
 
 
 import com.example.nordicmotorhome.Admin;
+import com.example.nordicmotorhome.Repository.AdminRepo;
 import com.example.nordicmotorhome.Service.AdminService;
 import com.example.nordicmotorhome.Service.BookingService;
 
@@ -103,32 +104,28 @@ public class Invoice{
 
         return price;
     }
-    public void updateInvoice(String from){
-        Admin admin = new AdminService().fetchPrice();
-        Booking booking = new BookingService().fetchById(booking_ID);
+    public void updateInvoice(int seasonP,Admin admin, Booking booking){
+
+
 
         price = admin.getBasePrice();
 
-        int seasonPercent = new AdminService().getPrice_percent(from);
+        season_percent = seasonP;
 
         //Setting the seasonal percentage
-        if(seasonPercent != 0) {
-            price = price + (price * ((double) seasonPercent / 100));
+        if(season_percent != 0) {
+            price = price + (price * ((double) season_percent / 100));
         }
 
-        extra = booking.getExtras();
-        price = price + (extra * admin.getExtraPrice());
+        extra = booking.getExtras() * admin.getExtraPrice();
+        price += extra;
 
         //OutsideKMFee
         outsideLocationKm = booking.getTotalKm();
         if(outsideLocationKm != 0){ price = price +(outsideLocationKm*admin.getCollectFee());}
 
 
-
-
         //FuelCheck And Extra KM
-
-
 
             if(fee == 0){
                 if(fuelCheck) {

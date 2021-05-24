@@ -15,9 +15,12 @@ public class InvoiceService {
     InvoiceRepo invoiceRepo;
 
     public List<Invoice> fetchAll(){ return invoiceRepo.fetchAll(); }
+    public Invoice fetchByID(int id) {return invoiceRepo.fetchByID(id); }
+
     public int getCount(int id){ return invoiceRepo.getCount(id); }
 
-    public Invoice fetchByID(int id) {return invoiceRepo.fetchByID(id); }
-    public void addInvoice(Invoice invoice){ invoiceRepo.addInvoice(invoice); }
+
+    public void addInvoice(Invoice invoice){ invoiceRepo.addInvoice(invoice);}
+    public void updateInvoice(Invoice i) { invoiceRepo.updateInvoice(i); }
 
 }

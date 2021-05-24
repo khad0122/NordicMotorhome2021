@@ -158,8 +158,9 @@ public class HomeController {
         model.addAttribute("booking",booking);
 
         if(invoice != null) {
+            invoice.updateInvoice(adminService.getPrice_percent(booking.getPickup_date()),adminService.fetchPrice(), booking);
+            invoiceService.updateInvoice(invoice);
             model.addAttribute("invoice",invoice);
-            model.addAttribute("admin",adminService.fetchPrice());
 
             return "home/Booking/invoice";
         }
