@@ -196,8 +196,11 @@ public class HomeController {
     }
     @GetMapping("/addRenter")
     public String addRenterPage(){ return "home/Renter/addRenter"; }
-    @GetMapping("/updateRenter")
-    public String updateRenterPage(){ return "home/Renter/updateRenter"; }
+    @GetMapping("/updateRenter/{renter_ID}")
+    public String updateRenterPage(@PathVariable("renter_ID") int renterID, Model model){
+        model.addAttribute("renter",renterService.fetchById(renterID));
+        return "home/Renter/updateRenter";
+    }
 
     /*******************************    Motorhome     *******************************/
     @GetMapping("/motorhomes")

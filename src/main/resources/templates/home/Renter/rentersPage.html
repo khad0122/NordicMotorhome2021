@@ -42,8 +42,8 @@
               <td th:text = "${Renter.getDriversince_date()}"></td>
             <td>
               <div class = "table-btn">
-                <!--<a class = "side-btn" th:href = "@{}">Update</a>
-                <a class = "side-btn" th:href = "@{}">Delete</a>-->
+                <a class = "btn side-btn" th:href = "@{'/updateRenter/'+${Renter.getRenter_ID()}}">Update</a>
+                <a class = "btn side-btn" href = "#">Delete</a>
               </div>
             </td>
           </tr>

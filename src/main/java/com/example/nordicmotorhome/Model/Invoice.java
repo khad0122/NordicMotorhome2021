@@ -2,9 +2,7 @@ package com.example.nordicmotorhome.Model;
 
 
 import com.example.nordicmotorhome.Admin;
-import com.example.nordicmotorhome.Repository.AdminRepo;
-import com.example.nordicmotorhome.Service.AdminService;
-import com.example.nordicmotorhome.Service.BookingService;
+
 
 public class Invoice{
 
@@ -86,27 +84,7 @@ public class Invoice{
     public void setFuelCheck(boolean fuelCheck) { this.fuelCheck = fuelCheck; }
 
     //methods Calculator
-    public double updatePrice(){
-
-        //as long as it's not low season ie. 0%
-        if(season_percent != 0){
-            price =  price+(price *(((double)season_percent/100)));
-        }
-        //as long as pick-up and drop-off is outside Nordic Rental Office
-
-        if(extra != 0) { price += extra; }
-
-        //If fuel level below half
-        if(fuelCheck){
-            price += 70;
-        }
-
-
-        return price;
-    }
     public void updateInvoice(int seasonP,Admin admin, Booking booking){
-
-
 
         price = admin.getBasePrice();
 
@@ -136,8 +114,12 @@ public class Invoice{
                 }
             }
             else {
-                fee += admin.getFuelFee();
-                fee += extra_km * admin.getKmFee();
+                if(fuelCheck) {
+                    fee += admin.getFuelFee();
+                }
+                if(extra_km != 0) {
+                    fee += extra_km * admin.getKmFee();
+                }
             }
 
 

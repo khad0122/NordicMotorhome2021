@@ -21,6 +21,7 @@ public class Admin {
     private int fromDay;
     private int minimumPrice;
     //***********************************************
+
     //fees
     private double fuelFee;
     private double kmFee;

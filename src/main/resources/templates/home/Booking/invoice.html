@@ -14,7 +14,8 @@
                     <label>Total Price</label><span class = "invoice-info"><span th:text = "${invoice.price}"></span>€</span>
                     <label>Fee</label><span class = "invoice-info"><span th:text = "${invoice.getFee()}"></span>€</span>
                     <label>Seasonal Percentage</label><span class = "invoice-info"><span th:text = "${invoice.getSeason_percent()}"></span> %</span>
-                    <label>Extra (<span th:text = "${booking.getExtras()}"></span>)</label><span class = "invoice-info"><span th:text = "${invoice.getExtra()}"></span>€</span>
+                    <label>Extra Equipment (<span th:text = "${booking.getExtras()}"></span>)</label><span class = "invoice-info"><span th:text = "${invoice.getExtra()}"></span>€</span>
+                    <label>Extra Km</label><span class = "invoice-info"><span th:text = "${invoice.getExtra_km()}"></span></span>
                 </div>
         </div>
     </div>

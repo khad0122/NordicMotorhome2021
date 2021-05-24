@@ -269,6 +269,7 @@ td{
     border-bottom:1px dotted #000000;
     padding:10px 0;
 
+
 }
 
 .invoice-info{
@@ -281,5 +282,5 @@ td{
 }
 .invoice-info, .invoice-page label{
     height:35px;
-
+    font-size: 18px ;
 }
