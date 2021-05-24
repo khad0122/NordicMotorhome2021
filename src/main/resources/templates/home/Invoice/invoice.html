@@ -6,11 +6,13 @@
     <link rel = "stylesheet"  th:href = "@{/styles.css}">
 </head>
 <body>
-<h1>Invoice</h1>
+    <h1>Nordic Motorhome</h1>
+    <h2>Invoice</h2>
+
     <div class = "main">
         <a class ="btn" id = return-btn href = "/bookings">Return</a>
         <div class = "container">
-            <h2>Nordic Motorhome</h2>
+
             <div class ="invoice-page personal-details">
                 <div >
                     <label>Renter ID</label><span class = "invoice-info" th:text = "${renter.renter_ID}"></span>

@@ -34,6 +34,12 @@ public class Invoice{
     //should be able to register it, then invoice is either updated or generated
     private int extra_km;
     private boolean fuelCheck;
+    private double  fuelFee;
+
+
+    //Status check, approval by bookkeeper
+    private boolean checkStatus;
+    private String status  = checkStatus ? "Approved" : "Not Approved";
 
     //constructors
     public Invoice() {fuelCheck=false; }
@@ -51,40 +57,37 @@ public class Invoice{
     }
 
     //Getters & Setters
+
+
     public int getInvoice_ID() { return invoice_ID; }
-    public void setInvoice_ID(int invoice_ID) { this.invoice_ID = invoice_ID; }
-
     public int getBooking_ID() { return booking_ID; }
-    public void setBooking_ID(int booking_ID) { this.booking_ID = booking_ID; }
-
-    public int getSeason() { return season_percent; }
-    public void setSeason(int season) { this.season_percent = season; }
-
-    public int getExtra_km() { return extra_km; }
-    public void setExtra_km(int extra_km) { this.extra_km = extra_km; }
-
-    public double getFee() { return fee; }
-    public void setFee(double fee) {
-        if(fee == 0) {
-            this.fee = fee;
-        }
-        else this.fee += fee;
-    }
-
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
-
     public int getSeason_percent() { return season_percent; }
-    public void setSeason_percent(int season_percent) { this.season_percent = season_percent; }
-
-    public double getOutsideKmFee() { return outsideKmFee; }
-    public void setOutsideKmFee(double outsideKmFee) { this.outsideKmFee = outsideKmFee; }
-
     public int getExtra() { return extra; }
+    public double getOutsideKmFee() { return outsideKmFee; }
+    public double getFee() { return fee; }
+    public double getPrice() { return price; }
+    public int getExtra_km() { return extra_km; }
+    public double getFuelFee() { return fuelFee; }
+    public boolean isCheckStatus() { return checkStatus; }
+    public String getStatus() { return status; }
+
+
+    public void setInvoice_ID(int invoice_ID) { this.invoice_ID = invoice_ID; }
+    public void setBooking_ID(int booking_ID) { this.booking_ID = booking_ID; }
+    public void setSeason_percent(int season_percent) { this.season_percent = season_percent; }
     public void setExtra(int extra) { this.extra = extra; }
+    public void setOutsideKmFee(double outsideKmFee) { this.outsideKmFee = outsideKmFee; }
+    public void setFee(double fee) { this.fee = fee; }
+    public void setPrice(double price) { this.price = price; }
+    public void setExtra_km(int extra_km) { this.extra_km = extra_km; }
+    public void setFuelFee(double fuelFee) { this.fuelFee = fuelFee; }
+    public void setCheckStatus(boolean checkStatus) { this.checkStatus = checkStatus; }
+    public void setStatus(String status) { this.status = status; }
 
     public boolean isFuelCheck() { return fuelCheck; }
     public void setFuelCheck(boolean fuelCheck) { this.fuelCheck = fuelCheck; }
+
+
 
     //methods Calculator
     public void updateInvoice(int seasonP,Admin admin, Booking booking){
@@ -122,7 +125,8 @@ public class Invoice{
 
             if(fee == 0){
                 if(fuelCheck) {
-                    fee += admin.getFuelFee();
+                    fuelFee = admin.getFuelFee();
+                    fee += fuelFee;
                 }
                 if(extra_km != 0){
                     fee += extra_km * admin.getKmFee();
@@ -130,7 +134,8 @@ public class Invoice{
             }
             else {
                 if(fuelCheck) {
-                    fee += admin.getFuelFee();
+                    fuelFee = admin.getFuelFee();
+                    fee += fuelFee;
                 }
                 if(extra_km != 0) {
                     fee += (extra_km * admin.getKmFee());
