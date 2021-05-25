@@ -210,7 +210,7 @@ public class HomeController {
     @GetMapping("/deleteRenter/{renterID}")
     public String deleteRenterPage(@PathVariable("renterID") int id, Model model){
         renterService.deleteRenter(id);
-        return "redirect:/renters";
+        return "redirect:/";
     }
 
     /*******************************    Motorhome     *******************************/
