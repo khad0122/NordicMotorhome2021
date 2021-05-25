@@ -234,8 +234,16 @@ public class HomeController {
     }
     @GetMapping("/addMotorHome")
     public String addMotorHomePage(){ return "home/MotorHome/addMotorHome"; }
+
+    @PostMapping("/addm")
+    public String addm(@ModelAttribute MotorHome m) {
+        MotorHomeService.addMotorHome(m);
+        return "redirect:/motorhomes";
+    }
+
     @GetMapping("/updateMotorHome")
     public String updateMotorHomePage(){ return "home/MotorHome/updateMotorHome"; }
+
 
     /*******************************    Owner   ************************************/
 
