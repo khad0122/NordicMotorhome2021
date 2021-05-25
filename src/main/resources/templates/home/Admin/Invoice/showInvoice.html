@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Invoice</title>
-    <link rel = "stylesheet"  th:href = "@{/styles.css}">
+  <link rel = "stylesheet" th:href = "@{/styles.css}">
 </head>
 <body>
-    <h1>Nordic Motorhome</h1>
-    <h2>Invoice</h2>
-
-    <div class = "main">
-        <a class ="btn" id = return-btn href = "/bookings">Return</a>
+      <h1>Nordic Motorhome</h1>
+      <div class = "main">
+        <div class = "menu-bar">
+          <div>
+            <a id = "return-admin" class = "menu-btn" href = "/adminInvoice">Return</a>
+          </div>
+          <div>
+            <a class = "menu-btn" href = "/adminBooking" >Bookings</a>
+            <a class = "menu-btn" href = "/adminInvoice" id = "main-page">Invoices</a>
+            <a class = "menu-btn" href = "/adminPricing">Pricing</a>
+          </div>
+        </div>
         <div class = "container invoice">
 
             <div class ="invoice-page personal-details">
@@ -36,20 +43,20 @@
                 </div>
             </div>
 
-                <div class ="invoice-page">
-                    <label>Invoice ID</label><span class = "invoice-info"><span th:text = "${invoice.invoice_ID}"></span></span>
-                    <label>Total Price</label><span class = "invoice-info"><span th:text = "${invoice.price}"></span>€</span>
-                    <label>Seasonal Percentage</label><span class = "invoice-info"><span th:text = "${invoice.getSeason_percent()}"></span> %</span>
+            <div class ="invoice-page">
+                <label>Invoice ID</label><span class = "invoice-info"><span th:text = "${invoice.invoice_ID}"></span></span>
+                <label>Total Price</label><span class = "invoice-info"><span th:text = "${invoice.price}"></span>€</span>
+                <label>Seasonal Percentage</label><span class = "invoice-info"><span th:text = "${invoice.getSeason_percent()}"></span> %</span>
 
-                    <label id = "empty"></label><span></span>
-                    <label>Fee</label><span class = "invoice-info"><span th:text = "${invoice.getFee()}"></span>€</span>
+                <label id = "empty"></label><span></span>
+                <label>Fee</label><span class = "invoice-info"><span th:text = "${invoice.getFee()}"></span>€</span>
 
-                    <label>Extra Equipment (<span th:text = "${booking.getExtras()}"></span>)</label><span class = "invoice-info"><span th:text = "${invoice.getExtra()}"></span>€</span>
-                    <label>Pick-up & Drop-off km</label><span class = "invoice-info"><span th:text = "${invoice.outsideKmFee}"></span>€</span>
-                    <label>Extra Km</label><span class = "invoice-info"><span th:text = "${invoice.getExtra_km()}"></span></span>
-                    <label>Fuel Check</label><span class = "invoice-info"><span th:text = "${invoice.isFuelCheck()}"></span></span>
-                </div>
+                <label>Extra Equipment (<span th:text = "${booking.getExtras()}"></span>)</label><span class = "invoice-info"><span th:text = "${invoice.getExtra()}"></span>€</span>
+                <label>Pick-up & Drop-off km</label><span class = "invoice-info"><span th:text = "${invoice.outsideKmFee}"></span>€</span>
+                <label>Extra Km</label><span class = "invoice-info"><span th:text = "${invoice.getExtra_km()}"></span></span>
+                <label>Fuel Check</label><span class = "invoice-info"><span th:text = "${invoice.isFuelCheck()}"></span></span>
+            </div>
         </div>
-    </div>
+      </div>
 </body>
 </html>

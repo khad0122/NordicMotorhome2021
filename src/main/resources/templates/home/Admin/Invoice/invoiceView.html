@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+  <link rel = "stylesheet" th:href = "@{/styles.css}">
+</head>
+<body>
+<h1>Nordic Motorhome</h1>
+    <div class = "main">
+      <div class = "menu-bar">
+        <div>
+          <a id = "return-admin" class = "menu-btn" href = "/admin">Return</a>
+        </div>
+        <div>
+          <a class = "menu-btn" href = "/adminBooking" >Bookings</a>
+          <a class = "menu-btn" href = "/adminInvoice" id = "main-page">Invoices</a>
+          <a class = "menu-btn" href = "/adminPricing">Pricing</a>
+        </div>
+      </div>
+      <div class = "container">
+        <table>
+          <thead>
+            <tr>
+              <th>Invoice ID</th>
+              <th>Booking ID</th>
+              <th>Total Price</th>
+              <th>Fee</th>
+              <th>Season Percentage</th>
+              <th>Extra km</th>
+              <th>Fuel Fee</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each = "Invoice: ${invoice}">
+              <td th:text = "${Invoice.getInvoice_ID()}"></td>
+              <td th:text = "${Invoice.getBooking_ID()}"></td>
+              <td th:text = "${Invoice.getPrice()}"></td>
+              <td th:text = "${Invoice.getFee()}"></td>
+              <td th:text = "${Invoice.getSeason_percent()}"></td>
+              <td th:text = "${Invoice.getExtra_km()}"></td>
+              <td th:text = "${Invoice.getFuelFee()}"></td>
+              <td>
+                <a class = "btn" th:href = "@{'/showInvoice/'+${Invoice.getBooking_ID()}}">Show</a>
+                <a class = "btn" th:href = "@{'/deleteInvoice/'+${Invoice.getInvoice_ID()}}">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+</body>
+</html>

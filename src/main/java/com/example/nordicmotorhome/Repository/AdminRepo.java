@@ -50,11 +50,11 @@ public class AdminRepo {
         String sql = "SELECT season_ID FROM season WHERE season_from <= MONTH(?) AND season_to >= MONTH(?)";
         return template.queryForObject(sql,Integer.class,from,from);
     }//season id might be removed
+    public Admin getSeasonsByName(String name){
+        String sql = "SELECT * FROM season WHERE season_name = ?";
+        RowMapper<Admin> list = new BeanPropertyRowMapper<>(Admin.class);
 
-    //get season percent from specific season
-    public int getSeason_percent(int id){
-        String sql = "SELECT price_percent FROM season WHERE season_ID = ?";
-        return template.queryForObject(sql,Integer.class,id);
+        return template.queryForObject(sql,list,name);
     }
 
     //get season percent from specific date
@@ -62,18 +62,33 @@ public class AdminRepo {
         String sql = "SELECT price_percent FROM season WHERE season_from <= MONTH(?) AND season_to >= MONTH(?)";
         return template.queryForObject(sql,Integer.class,from,from);
     }
-
     //get Current season percent
     public int getCurrentPricePercent(){
         String sql = "SELECT price_percent FROM season WHERE season_from <= MONTH(CURDATE()) AND season_to >= MONTH(CURDATE())";
         return template.queryForObject(sql,Integer.class);
     }
-
     //get All season, for update and delete
     public List<Admin> fetchSeasons(){
         String sql = "SELECT * FROM season";
         RowMapper<Admin> list = new BeanPropertyRowMapper<>(Admin.class);
         return template.query(sql,list);
+    }
+
+    public void updateSeason(Admin admin){
+        String sql = "UPDATE season SET season_name = ?, season_from = ?, season_to = ?,price_percent = ? WHERE season_ID = ?";
+        template.update(sql,admin.getSeason_name(),admin.getSeason_from(),admin.getSeason_to(),admin.getPrice_percent(),admin.getSeason_ID());
+    }
+
+
+    //Cancellation
+    public List<Admin> fetchCancellation(){
+        String sql = "SELECT * FROM cancellation";
+        RowMapper<Admin> list = new BeanPropertyRowMapper<>(Admin.class);
+        return template.query(sql,list);
+    }
+    public void updateCancellation(Admin a){
+        String sql = "UPDATE cancellation SET cancellation_percent = ?, toDay = ?, fromDay = ?, minPrice = ? WHERE cancellation_ID = ?";
+        template.update(sql,a.getCancellation_percent(),a.getToDay(),a.getFromDay(),a.getMinPrice(),a.getCancellation_ID());
     }
 
     //Pricing
@@ -82,6 +97,13 @@ public class AdminRepo {
         RowMapper<Admin> list = new BeanPropertyRowMapper<>(Admin.class);
         return template.queryForObject(sql,list);
     }
+    public void updatePrice(Admin admin){
+        String sql = "UPDATE price SET basePrice = ?, extraPrice = ?, fuelFee = ?, kmFee = ?, collectFee = ?";
+        template.update(sql,admin.getBasePrice(),admin.getExtraPrice(),admin.getFuelFee(),admin.getKmFee(),admin.getCollectFee());
+    }
+
+
+
 
 
 }

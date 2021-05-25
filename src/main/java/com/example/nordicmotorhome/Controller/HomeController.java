@@ -149,6 +149,7 @@ public class HomeController {
     //Not DOne
     @GetMapping("/cancelBooking{booking_ID}")
     public String cancelBooking(@PathVariable("booking_ID") int bookingID ){
+
         return "redirect:/";
     }
 
@@ -237,7 +238,7 @@ public class HomeController {
     @GetMapping("/updateMotorHome")
     public String updateMotorHomePage(){ return "home/MotorHome/updateMotorHome"; }
 
-    /*******************************    Owner   ************************************/
+    /*******************************    Admin   ************************************/
 
     @GetMapping("/admin")
     public String adminPage(Model model){
@@ -265,53 +266,71 @@ public class HomeController {
         model.addAttribute("bookings",list);
         return "home/Admin/Booking/bookingsView";
     }
-    @GetMapping("/adminAddBooking")
-    public String adminAddBooking(Model model){
-        ArrayList<Renter> renterList = (ArrayList<Renter>) renterService.fetchAll();
-        ArrayList<Booking> bookList = (ArrayList<Booking>) bookingService.fetchAll();
 
-        for(Booking b : bookList){
-            renterList.removeIf(r -> r.getRenter_ID() == b.getRenter_ID());
-        }
+    //Invoice
+    @GetMapping("/adminInvoice")
+    public String adminInvoice(Model model){
+        ArrayList<Invoice> list = (ArrayList<Invoice>) invoiceService.fetchAll();
+        model.addAttribute("invoice",list);
 
-
-        model.addAttribute("renters",renterList);
-        return "home/Admin/Booking/adminAddBooking";
+        return "home/Admin/Invoice/invoiceView";
     }
-    @GetMapping("/adminAssignMotor/{renter_ID}")
-    public String adminAssignMotor(@PathVariable("renter_ID") int renterID,Model model){
-        ArrayList<MotorHome> list = (ArrayList<MotorHome>) motorHomeService.fetchAll();
-        ArrayList<Booking> bookingList = (ArrayList<Booking>) bookingService.fetchAll();
+    @GetMapping("/showInvoice/{booking_ID}")
+    public String showInvoice(@PathVariable("booking_ID") int bookingID, Model model){
 
-        for(Booking b: bookingList){
-            list.removeIf(c -> c.getMotorhome_ID() == b.getMotorhome_ID());
-        }
-        if(!list.isEmpty()){
-            model.addAttribute("motors",list);
-            model.addAttribute("assignedRenter",renterService.fetchById(renterID));
-            return "home/Admin/Booking/adminAssignBooking";
-        }
-        else return "home/Admin/emptyCarList";
+        Booking booking = bookingService.fetchById(bookingID);;
+        Invoice invoice = invoiceService.fetchByID(bookingID);
 
+        model.addAttribute("invoice",invoice);
+        model.addAttribute("renter",renterService.fetchById(booking.getRenter_ID()));
+        model.addAttribute("booking",booking);
+
+        return "home/Admin/Invoice/showInvoice";
     }
+    @GetMapping("/deleteInvoice/{invoice_ID}")
+    public String deleteInvoice(@PathVariable("invoice_ID") int invoiceID){
+        invoiceService.deleteInvoice(invoiceID);
+
+        return "redirect:/adminInvoice";
+    }
+
+    //Pricing
     @GetMapping("/adminPricing")
     public String adminPricing(Model model){
         ArrayList<Admin> seasonList = (ArrayList<Admin>) adminService.fetchSeasons();
+        ArrayList<Admin> cancelList = (ArrayList<Admin>) adminService.fetchCancellation();
+
+        model.addAttribute("cancellation",cancelList);
         model.addAttribute("price",adminService.fetchPrice());
         model.addAttribute("season",seasonList);
 
-        return "home/Admin/pricingView";
+        return "home/Admin/Pricing/pricingView";
     }
     @GetMapping("/savePricing")
     public String savePricing(@ModelAttribute Admin admin){
-        System.out.println(admin.getBasePrice());
-        System.out.println(admin.getExtraPrice());
-        System.out.println(admin.getCollectFee());
-        System.out.println(admin.getFuelFee());
-        System.out.println(admin.getKmFee());
+            adminService.updatePrice(admin);
 
         //update DB
-        return "redirect: /";
+        return "redirect:/adminPricing";
     }
 
+    //Seasons
+    @GetMapping("/updateSeason{season_name}")
+    public String updateSeason(@PathVariable("season_name") String season_name, Model model){
+            model.addAttribute("season",adminService.getSeasonsByName(season_name));
+        return "home/Admin/Pricing/updateSeason";
+    }
+    @GetMapping("/saveSeason")
+    public String saveSeason(@ModelAttribute Admin admin){
+        adminService.updateSeason(admin);
+        return "redirect:/adminPricing";
+    }
+
+    //cancellation
+    @GetMapping("/saveCancellation/{cancellation_ID}")
+    public String saveCancellation(@PathVariable("cancellation_ID") int id, @ModelAttribute Admin admin){
+        System.out.println(admin.getCancellation_ID()+"\n"+admin.getMinPrice());
+        adminService.updateCancellation(admin);
+        return  "redirect:/adminPricing";
+    }
 }

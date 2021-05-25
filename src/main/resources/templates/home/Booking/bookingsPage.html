@@ -44,7 +44,7 @@
                             <td>
                                 <a class = "btn side-btn" th:href = "@{'/updateBooking/' +${Booking.getBooking_ID()}}">Update</a>
                                 <a class = "btn side-btn" th:href = "@{'/invoice/' +${Booking.getBooking_ID()}}">Invoice</a>
-                                <a class = "btn side-btn" th:href = "@{'/invoice/' +${Booking.getBooking_ID()}}">Cancel</a>
+                                <a class = "btn side-btn" th:href = "@{'/cancelBooking' +${Booking.getBooking_ID()}}">Cancel</a>
                             </td>
                         </tr>
                     </tbody>

@@ -22,5 +22,6 @@ public class InvoiceService {
 
     public void addInvoice(Invoice invoice){ invoiceRepo.addInvoice(invoice);}
     public void updateInvoice(Invoice i) { invoiceRepo.updateInvoice(i); }
+    public void deleteInvoice(int id){invoiceRepo.deleteInvoice(id);}
 
 }

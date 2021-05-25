@@ -43,6 +43,10 @@ public class InvoiceRepo {
         String sql = "UPDATE invoice SET season_percent = ?, extra_km = ?, fee = ?, price = ? WHERE invoice_ID = ?";
         template.update(sql,i.getSeason_percent(),i.getExtra_km(),i.getFee(),i.getPrice(),i.getInvoice_ID());
     }
+    public void deleteInvoice(int id){
+        String sql = "DELETE FROM invoice WHERE invoice_ID = ?";
+        template.update(sql,id);
+    }
 }
 
 

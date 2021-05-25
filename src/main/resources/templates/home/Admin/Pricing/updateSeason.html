@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Season</title>
+    <link rel = "stylesheet" th:href = "@{/styles.css}">
+    <link rel = "stylesheet" th:href = "@{/adminStyle.css}">
+</head>
+<body>
+<h1>Nordic Motorhome</h1>
+            <div class ="main">
+                <div class = "menu-bar">
+                    <div>
+                        <a id = "return-admin" class = "menu-btn" href = "/admin">Return</a>
+                    </div>
+                    <div>
+                        <a class = "menu-btn" href = "#">Staff</a>
+                        <a class = "menu-btn" href = "#">Cars</a>
+                        <a class = "menu-btn" href = "/adminRenter">Renters</a>
+                        <a class = "menu-btn" href = "/adminBooking">Bookings</a>
+                        <a id = "main-page" class = "menu-btn" href = "/adminPricing">Pricing</a>
+                    </div>
+                </div>
+                <div class = "container update">
+                    <div><br>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Season ID</th>
+                                <th>Season Name</th>
+                                <th>Season Period From Month</th>
+                                <th>Season Period To Month</th>
+                                <th>Seasonal Percentage</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <form action = "/saveSeason">
+                                    <td><input type = "text" name = "season_ID" th:value = "${season.getSeason_ID}"></input></td>
+                                    <td><input type = "text" name = "season_name" th:value = "${season.getSeason_name()}"></input></td>
+                                    <td><input type = "text" name = "season_from" th:value = "${season.getSeason_from()}"></input></td>
+                                    <td><input type = "text" name = "season_to" th:value = "${season.getSeason_to()}"></input></td>
+                                    <td><input type = "text" name = "price_percent" th:value = "${season.getPrice_percent()}"></input></td>
+                                    <input type = "submit" class = "btn" value = "Save">
+                                </form>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+</body>
+</html>

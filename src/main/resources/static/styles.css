@@ -208,7 +208,6 @@ td{
 }
 #return-btn:hover{
     color:#000000;
-
 }
 #return-admin:hover{
     color:#fff;
@@ -216,7 +215,7 @@ td{
 }
 .menu-bar div a:hover, .front a:hover{
     color:#fff;
-    border-bottom:3px solid #fff;
+    border-bottom:1px solid #fff;
 }
 .menu-bar  {
     border-radius: 5px;
@@ -233,7 +232,7 @@ td{
     margin:0 -2px;
     padding:5px 7px;
     display: inline-block;
-    width:100px;
+    width:150px;
 }
 .menu-bar div:nth-child(2) a, .front a{
     border-right:1px solid #000000;
@@ -241,9 +240,10 @@ td{
 .menu-bar div:nth-child(2) a:first-child, .front a:first-child{
     border-left:1px solid #000000;
 }
+
 #main-page{
     color:#ffffff;
-    border-bottom:3px solid #ffffff;
+    border-bottom:1px solid #ffffff;
 }
 .front{
     justify-content:center;
@@ -256,18 +256,24 @@ td{
 
 
 /*  Invoice */
-
+.invoice{
+    border:1px solid #c2c2c2;
+    padding:100px 0;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+}
 .invoice-page{
     background: rgba(225,225,225,0.65);
-    border:1px solid red;
     width:80%;
     margin:5px auto;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.2);
     padding:50px;
     display: grid;
     grid-template-columns: 60% 35%;
     grid-column-gap: 5%;
     grid-row-gap: 5px;
     align-items: center;
+    border:1px solid #000000;
+
 
 }
 .invoice-page label{
@@ -280,8 +286,6 @@ td{
     padding:8px 10px;
     text-align: center;
     border:1px solid #8b8b8b;
-    box-shadow: 0 2px 2px rgba(0,0,0,0.1);
-
 }
 .invoice-info, .invoice-page label {
     height: 35px;
@@ -289,8 +293,9 @@ td{
 }
 .personal-details{
     display: grid;
-    grid-template-columns: 50% 50%;
-
+    grid-template-columns: 47.5% 47.5%;
+    grid-gap:5%;
+    margin-bottom: 25px;
 }
 .personal-details div{
     display: grid;

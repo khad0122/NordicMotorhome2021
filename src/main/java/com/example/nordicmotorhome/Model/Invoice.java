@@ -141,10 +141,10 @@ public class Invoice{
                     fee += (extra_km * admin.getKmFee());
                 }
             }
-            price = Double.parseDouble(deci.format(price).replace(",","."));
-            fee = Double.parseDouble(deci.format(fee).replace(",","."));
 
             price += fee;
+
+        price = Double.parseDouble(deci.format(price).replace(",","."));
     }
 
 }

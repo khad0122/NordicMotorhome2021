@@ -4,6 +4,8 @@ import com.example.nordicmotorhome.Admin;
 import com.example.nordicmotorhome.Model.Staff;
 import com.example.nordicmotorhome.Repository.AdminRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,19 +17,10 @@ public class AdminService {
     public List<Staff> fetchAll(){
         return adminRepo.fetchAll();
     }
-    public Staff fetchByName(String fName, String lName){
-        return adminRepo.fetchByName(fName,lName);
-    }
 
-    public void addStaff(Staff staff){
-        adminRepo.addStaff(staff);
-    }
-    public void updateStaff(Staff staff){
-        adminRepo.updateStaff(staff);
-    }
-    public void deleteStaff(int id){
-        adminRepo.deleteStaff(id);
-    }
+    public Admin getSeasonsByName(String name){ return adminRepo.getSeasonsByName(name); }
+    public void updateSeason(Admin admin){adminRepo.updateSeason(admin);}
+
 
     public int staffCount(){
         return adminRepo.staffCount();
@@ -37,9 +30,11 @@ public class AdminService {
     public int getCurrentPricePercent(){
         return adminRepo.getCurrentPricePercent();
     }
-    public int getSeasonID(String from){return adminRepo.getSeasonID(from);}
 
     public List<Admin> fetchSeasons(){return adminRepo.fetchSeasons();}
-    public Admin fetchPrice(){return adminRepo.fetchPrice();}
+    public List<Admin> fetchCancellation(){return adminRepo.fetchCancellation();}
+    public void updateCancellation(Admin a){adminRepo.updateCancellation(a);}
 
+    public Admin fetchPrice(){return adminRepo.fetchPrice();}
+    public void updatePrice(Admin admin){ adminRepo.updatePrice(admin);}
 }
