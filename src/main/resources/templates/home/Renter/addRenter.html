@@ -7,46 +7,43 @@
 </head>
 <body>
 
-<h1>Add Renter</h1>
-<div class = "main">
-    <a id="return-btn" class = "btn" href = "/renter">Return</a>
-    <div class = "container">
-        <div class = "update"><!--Slettes hvis ikke bruges-->
-        <table>
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Mobil Number</th>
-                    <th>Email</th>
-                    <th>Street</th>
-                    <th>Zip</th>
-                    <th>City</th>
-                    <th>DLN</th>
-                    <th>Driver Since Date</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <form th:action = "@{/add/}" method = "post">
-                    <tr>
-                        <td><input type = "text" name = "first_name" required> </td>
-                        <td><input type = "text" name = "last_name" required></td>
-                        <td><input type = "text" name = "mobil_number" required></td>
-                        <td><input type = "email" name = "email" required></td>
-                        <td><input type = "text" name = "address_street" required> </td>
-                        <td><input type = "text" name = "address_zip" required></td>
-                        <td><input type = "text" name = "address_city" required></td>
-                        <td><input type = "text" name = "DLN" required></td>
-                        <td><input type = "text" name = "driversince_date" required></td>
-                    </tr>
-                <input class = "btn" id = "add-btn" type = "submit" value = "Add">
-            </form>
-            </tbody>
-        </table>
-    </div>
-    </div>
-</div>
+        <h1>Add Renter</h1>
+        <div class = "main">
+            <a id="return-btn" class = "btn" href = "/renter">Return</a>
+            <div class = "container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Mobil Number</th>
+                            <th>Email</th>
+                            <th>Street</th>
+                            <th>Zip</th>
+                            <th>City</th>
+                            <th>DLN</th>
+                            <th>Driver Since Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <form th:action = "@{/add/}" method = "post">
+                            <tr>
+                                <td><input type = "text" name = "first_name" required> </td>
+                                <td><input type = "text" name = "last_name" required></td>
+                                <td><input type = "text" name = "mobil_number" required></td>
+                                <td><input type = "email" name = "email" required></td>
+                                <td><input type = "text" name = "address_street" required> </td>
+                                <td><input type = "text" name = "address_zip" required></td>
+                                <td><input type = "text" name = "address_city" required></td>
+                                <td><input type = "text" name = "DLN" required></td>
+                                <td><input type = "date" name = "driversince_date" required></td>
+                            </tr>
+                        <input class = "btn" id = "add-btn" type = "submit" value = "Add">
+                    </form>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
 </body>
 </html>

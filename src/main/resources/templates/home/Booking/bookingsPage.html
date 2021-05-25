@@ -6,52 +6,51 @@
     <link rel = "stylesheet"  th:href="@{/styles.css}">
 </head>
 <body>
-<h1>Nordic Motorhome</h1>
-  <h2>Bookings</h2>
-    <div class = "main">
-        <a id="return-btn" class = "btn" href = "/">Return</a>
-        <div class = "container">
-            <a class = "btn" href = "/addBooking">Add Booking</a>
-            <a class = "btn" href = "/allInvoices">All Invoices</a>
-            <table>
-                <thead>
-                    <tr>
-                        <th>BookingID</th>
-                        <th>RenterID</th>
-                        <th>MotorhomeID</th>
-                        <th>Pick-up Date</th>
-                        <th>Return Date</th>
-                        <th>Pick-up Location</th>
-                        <th>Drop-off Location</th>
-                        <th>Extras</th>
-                        <th>Start Km</th>
-                        <th>Total Days</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each = "Booking: ${bookings}">
-                        <td th:text = "${Booking.getBooking_ID()}"></td>
-                        <td th:text = "${Booking.getRenter_ID()}"></td>
-                        <td th:text = "${Booking.getMotorhome_ID()}"></td>
-                        <td th:text = "${Booking.getPickup_date()}"></td>
-                        <td th:text = "${Booking.getReturn_date()}"></td>
-                        <td th:text = "${Booking.getPickup_location()}"></td>
-                        <td th:text = "${Booking.getDropoff_location()}"></td>
-                        <td th:text = "${Booking.getExtras()}"></td>
-                        <td th:text = "${Booking.getStart_km()}"></td>
-                        <td th:text = "${Booking.getDaysTotal()}"></td>
-                        <td>
-                            <a class = "btn side-btn" th:href = "@{'/updateBooking/' +${Booking.getBooking_ID()}}">Update</a>
-                            <a class = "btn side-btn" th:href = "@{'/invoice/' +${Booking.getBooking_ID()}}">Invoice</a>
-                            <a class = "btn side-btn" th:href = "@{'/invoice/' +${Booking.getBooking_ID()}}">Cancel</a>
-
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <h1>Nordic Motorhome</h1>
+        <h2>Bookings</h2>
+        <div class = "main">
+                <a id="return-btn" class = "btn" href = "/">Return</a>
+            <div class = "container">
+                <a class = "btn" href = "/addBooking">Add Booking</a>
+                <a class = "btn" href = "/allInvoices">All Invoices</a>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>BookingID</th>
+                            <th>RenterID</th>
+                            <th>MotorhomeID</th>
+                            <th>Pick-up Date</th>
+                            <th>Return Date</th>
+                            <th>Pick-up Location</th>
+                            <th>Drop-off Location</th>
+                            <th>Extras</th>
+                            <th>Start Km</th>
+                            <th>Total Days</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each = "Booking: ${bookings}">
+                            <td th:text = "${Booking.getBooking_ID()}"></td>
+                            <td th:text = "${Booking.getRenter_ID()}"></td>
+                            <td th:text = "${Booking.getMotorhome_ID()}"></td>
+                            <td th:text = "${Booking.getPickup_date()}"></td>
+                            <td th:text = "${Booking.getReturn_date()}"></td>
+                            <td th:text = "${Booking.getPickup_location()}"></td>
+                            <td th:text = "${Booking.getDropoff_location()}"></td>
+                            <td th:text = "${Booking.getExtras()}"></td>
+                            <td th:text = "${Booking.getStart_km()}"></td>
+                            <td th:text = "${Booking.getDaysTotal()}"></td>
+                            <td>
+                                <a class = "btn side-btn" th:href = "@{'/updateBooking/' +${Booking.getBooking_ID()}}">Update</a>
+                                <a class = "btn side-btn" th:href = "@{'/invoice/' +${Booking.getBooking_ID()}}">Invoice</a>
+                                <a class = "btn side-btn" th:href = "@{'/invoice/' +${Booking.getBooking_ID()}}">Cancel</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
 </body>
 </html>

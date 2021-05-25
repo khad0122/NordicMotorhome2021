@@ -30,13 +30,7 @@ public class Admin {
     //Repo
     private AdminRepo adminRepo;
 
-    public Admin(){
-        basePrice = 400;
-        extraPrice = 50;
-        fuelFee = 70;
-        kmFee = 1;
-        collectFee = 0.70;
-    }
+    public Admin(){ }
     public Admin(int basePrice, int extraPrice){
         this.basePrice = basePrice;
         this.extraPrice = extraPrice;

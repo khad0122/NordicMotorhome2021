@@ -35,7 +35,6 @@ public class RenterRepo {
     public Renter fetchById(int id){
         String sql = "SELECT * FROM renter WHERE renter_ID = ?";
         RowMapper<Renter> list = new BeanPropertyRowMapper<>(Renter.class);
-
             return template.queryForObject(sql,list,id);
     }
     public int renterCount(){
