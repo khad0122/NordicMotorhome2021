@@ -17,6 +17,8 @@ public class Booking {
     private String pickup_date;
     private String return_date;
 
+    private int daysTotal;
+
     //PickupLocation And Distance to the Location: 0 if Nordic Rental Office
     private String pickup_location;
     private int kmToPickup;
@@ -32,7 +34,7 @@ public class Booking {
 
     }
 
-    public Booking( int renter_ID, int motorhome_ID, int start_km, String pickup_date, String return_date, String pickup_location, String dropoff_location, int extras) {
+    public Booking( int renter_ID, int motorhome_ID, int start_km, String pickup_date, String return_date, String pickup_location, String dropoff_location, int extras, int daysTotal) {
 
         this.renter_ID = renter_ID;
         this.motorhome_ID = motorhome_ID;
@@ -42,6 +44,7 @@ public class Booking {
         this.pickup_location = pickup_location;
         this.dropoff_location = dropoff_location;
         this.extras = extras;
+        this.daysTotal = daysTotal;
     }
     //Getters & Setters
 
@@ -57,6 +60,7 @@ public class Booking {
     public int getKmToPickup() { return kmToPickup; }
     public int getKmToDropoff() { return kmToDropoff; }
     public int getTotalKm(){return kmToPickup+kmToDropoff;}
+    public int getDaysTotal(){return daysTotal;}
 
     public void setBooking_ID(int booking_ID) { this.booking_ID = booking_ID; }
     public void setRenter_ID(int renter_ID) { this.renter_ID = renter_ID; }
@@ -69,6 +73,7 @@ public class Booking {
     public void setExtras(int extras) { this.extras = extras; }
     public void setKmToPickup(int kmToPickup) { this.kmToPickup = kmToPickup; }
     public void setKmToDropoff(int kmToDropoff) { this.kmToDropoff = kmToDropoff; }
+    public void setDaysTotal(int days){daysTotal = days;}
 
 
 

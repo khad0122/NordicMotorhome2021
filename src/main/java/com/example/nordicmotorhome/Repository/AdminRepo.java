@@ -59,13 +59,13 @@ public class AdminRepo {
 
     //get season percent from specific date
     public int getPrice_percent(String from){
-        String sql = "SELECT price_percent FROM season WHERE season_from < MONTH(?) AND season_to > MONTH(?)";
+        String sql = "SELECT price_percent FROM season WHERE season_from <= MONTH(?) AND season_to >= MONTH(?)";
         return template.queryForObject(sql,Integer.class,from,from);
     }
 
     //get Current season percent
     public int getCurrentPricePercent(){
-        String sql = "SELECT price_percent FROM season WHERE season_from < MONTH(CURDATE()) AND season_to > MONTH(CURDATE())";
+        String sql = "SELECT price_percent FROM season WHERE season_from <= MONTH(CURDATE()) AND season_to >= MONTH(CURDATE())";
         return template.queryForObject(sql,Integer.class);
     }
 
