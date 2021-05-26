@@ -30,7 +30,7 @@
                     <label>Pick-up Date</label><span class = "invoice-info"><span th:text = "${booking.pickup_date}"></span></span>
                     <label>Return Date</label><span class = "invoice-info"><span th:text = "${booking.return_date}"></span></span>
                     <label>Extra Equipment</label><span class = "invoice-info"><span th:text = "${booking.extras}"></span></span>
-                    <label>Pick-up & Drop-off km</label><span class = "invoice-info"><span th:text = "${booking.getTotalKm()}"></span></span>
+                    <label>Collect km</label><span class = "invoice-info"><span th:text = "${booking.getTotalKm()}"></span></span>
                     <label>Days Renting</label><span class = "invoice-info" th:text = "${booking.getDaysTotal()}"></span>
 
                 </div>
@@ -45,7 +45,7 @@
                     <label>Fee</label><span class = "invoice-info"><span th:text = "${invoice.getFee()}"></span>€</span>
 
                     <label>Extra Equipment (<span th:text = "${booking.getExtras()}"></span>)</label><span class = "invoice-info"><span th:text = "${invoice.getExtra()}"></span>€</span>
-                    <label>Pick-up & Drop-off km</label><span class = "invoice-info"><span th:text = "${invoice.outsideKmFee}"></span>€</span>
+                    <label>Collect km </label><span class = "invoice-info"><span th:text = "${invoice.outsideKmFee}"></span>€</span>
                     <label>Extra Km</label><span class = "invoice-info"><span th:text = "${invoice.getExtra_km()}"></span></span>
                     <label>Fuel Check</label><span class = "invoice-info"><span th:text = "${invoice.isFuelCheck()}"></span></span>
                 </div>

@@ -27,6 +27,8 @@ public class Booking {
 
     private int extras; //Amount of Extras ie. 1 item, 2 items, ...
 
+    private String status;
+
 
     //constructors
 
@@ -61,6 +63,7 @@ public class Booking {
     public int getKmToDropoff() { return kmToDropoff; }
     public int getTotalKm(){return kmToPickup+kmToDropoff;}
     public int getDaysTotal(){return daysTotal;}
+    public String getStatus(){return status;}
 
     public void setBooking_ID(int booking_ID) { this.booking_ID = booking_ID; }
     public void setRenter_ID(int renter_ID) { this.renter_ID = renter_ID; }
@@ -74,7 +77,7 @@ public class Booking {
     public void setKmToPickup(int kmToPickup) { this.kmToPickup = kmToPickup; }
     public void setKmToDropoff(int kmToDropoff) { this.kmToDropoff = kmToDropoff; }
     public void setDaysTotal(int days){daysTotal = days;}
-
+    public void setStatus(String st){status = st;}
 
 
     public String toString(){

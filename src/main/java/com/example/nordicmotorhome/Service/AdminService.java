@@ -34,6 +34,7 @@ public class AdminService {
     public List<Admin> fetchSeasons(){return adminRepo.fetchSeasons();}
     public List<Admin> fetchCancellation(){return adminRepo.fetchCancellation();}
     public void updateCancellation(Admin a){adminRepo.updateCancellation(a);}
+    public int getCancellationPercent(int id){return adminRepo.getCancellationPercent(id);}
 
     public Admin fetchPrice(){return adminRepo.fetchPrice();}
     public void updatePrice(Admin admin){ adminRepo.updatePrice(admin);}

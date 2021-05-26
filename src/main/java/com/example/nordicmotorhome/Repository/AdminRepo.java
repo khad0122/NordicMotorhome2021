@@ -90,6 +90,13 @@ public class AdminRepo {
         String sql = "UPDATE cancellation SET cancellation_percent = ?, toDay = ?, fromDay = ?, minPrice = ? WHERE cancellation_ID = ?";
         template.update(sql,a.getCancellation_percent(),a.getToDay(),a.getFromDay(),a.getMinPrice(),a.getCancellation_ID());
     }
+    public int getCancellationPercent(int id){
+        String sql = "SELECT IFNULL((SELECT cancellation_percent FROM booking  " +
+                "join cancellation WHERE DATEDIFF(pickup_date,CURDATE()) >= cancellation.fromDay " +
+                "AND DATEDIFF(pickup_date, CURDATE()) <= cancellation.toDay AND booking_ID = ?), 0)";
+        return template.queryForObject(sql,Integer.class,id);
+
+    }
 
     //Pricing
     public Admin fetchPrice(){

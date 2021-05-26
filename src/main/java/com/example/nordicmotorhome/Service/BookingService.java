@@ -26,6 +26,9 @@ public class BookingService {
     public Booking fetchById(int id) { return bookingRepo.fetchById(id); }
     public Booking fetchByRenterID(int id){return bookingRepo.fetchByRenterID(id);}
 
+    public void cancelBooking(int id){bookingRepo.cancelBooking(id);}
+    public void setBookingStatus(){bookingRepo.setBookingStatus();}
+
     public int bookingCount(){return bookingRepo.bookingCount();}
     public int getTotalDays(String from, String to){return bookingRepo.getDaysTotal(from,to);}
 }

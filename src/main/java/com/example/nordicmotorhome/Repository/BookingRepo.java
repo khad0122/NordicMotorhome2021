@@ -50,6 +50,15 @@ public class BookingRepo {
         return template.queryForObject(sql,list,id);
     }
 
+    public void cancelBooking(int id){
+        String sql = "UPDATE booking SET pickup_location = 0, dropoff_location = 0, kmToPickup = 0, kmToDropoff = 0, extras = 0, status = 'canceled'  WHERE booking_ID = ?";
+        template.update(sql,id);
+    }
+    public void setBookingStatus(){
+        String sql = "update booking set status = if(status = 'canceled', 'canceled',(if(pickup_date > CURDATE(),'Pending','Active')))";
+        template.update(sql);
+    }
+
 
     public int bookingCount(){
         String sql = "SELECT count(*) FROM booking";

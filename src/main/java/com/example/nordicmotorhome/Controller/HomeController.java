@@ -31,7 +31,9 @@ public class HomeController {
 
     /*******************************    Homepage     *******************************/
     @GetMapping("/")
-    public String index(){ return "home/index"; }
+    public String index(){
+        return "home/index";
+    }
 
     /*******************************    Booking     *******************************/
     @GetMapping("/bookings")
@@ -46,16 +48,15 @@ public class HomeController {
         ArrayList<Renter> renterList = (ArrayList<Renter>) renterService.fetchAll();
         ArrayList<Booking> bookingList = (ArrayList<Booking>) bookingService.fetchAll();
 
+        //removing every booked renter from list
         for(Booking b : bookingList){
             renterList.removeIf(r -> r.getRenter_ID() == b.getRenter_ID());
         }
-
+        //if list is empty after removal
         if(renterList.isEmpty()){
             return "home/Booking/allBooked";
         }
         model.addAttribute("renter",renterList);
-
-
 
         return "home/Booking/addBooking";
 
@@ -65,6 +66,7 @@ public class HomeController {
         ArrayList<MotorHome> motorList = (ArrayList<MotorHome>) motorHomeService.fetchAll();
         ArrayList<Booking> bookingList = (ArrayList<Booking>) bookingService.fetchAll();
 
+        //removing booked motorhomes
         for(Booking b : bookingList){
             motorList.removeIf(m -> m.getMotorhome_ID() == b.getMotorhome_ID());
         }
@@ -87,20 +89,19 @@ public class HomeController {
 
 
         Admin admin = adminService.fetchPrice();
-        //Add Invoice Here? //
         //defines startKM an stores in booking object
         booking.setStart_km(motorHomeService.fetchById(motorID).getKm());
 
         //Sets total Of Days
         booking.setDaysTotal(bookingService.getTotalDays(booking.getPickup_date(),booking.getReturn_date()));
-        System.out.println(booking.getDaysTotal());
+
         //Booking instance is added to DB
         bookingService.addBooking(booking);
-        //booking Object is updated with a bookingID
+        bookingService.setBookingStatus();
 
-        booking = null;
+        //booking Object is updated with a bookingID
         booking = bookingService.fetchByRenterID(renterID);
-       System.out.println(booking);
+
 
         //Invoice Section
 
@@ -114,27 +115,31 @@ public class HomeController {
         //For outside pickup & dropoff, a fee for each km to distination
         double outsideKmFee = booking.getTotalKm()*admin.getCollectFee();
 
+        //seasonal percentage is defined with pickup_date
         int season_percent = adminService.getPrice_percent(booking.getPickup_date());
 
         Invoice invoice = new Invoice(booking.getBooking_ID(),season_percent,price,extra,outsideKmFee);
+        invoice.updateInvoice(season_percent,admin,booking);
         invoiceService.addInvoice(invoice);
-
-
-
         return "redirect:/bookings";
     }
     @GetMapping("/updateBooking/{booking_ID}")
     public String updateBookingPage(@PathVariable("booking_ID") int bookingID,Model model){
-
         model.addAttribute("booking",bookingService.fetchById(bookingID));
         return "home/Booking/updateBooking";
     }
     @PostMapping("/saveUpdate")
     public String saveUpdate(@ModelAttribute Booking booking){
         Admin admin = adminService.fetchPrice();
+
+        //updating daysTotal incase pickup and drop are changed
         booking.setDaysTotal(bookingService.getTotalDays(booking.getPickup_date(),booking.getReturn_date()));
+
+        //fetching the associated invoice via booking ID
         Invoice invoice = invoiceService.fetchByID(booking.getBooking_ID());
-        invoice.updateInvoice(adminService.getPrice_percent(booking.getPickup_date()),admin,booking);
+
+        //Invoice fields are updated with method updateInvoice()
+        invoice.updateInvoice(adminService.getPrice_percent(booking.getPickup_date()), admin, booking);
         invoiceService.updateInvoice(invoice);
         bookingService.updateBooking(booking);
 
@@ -142,17 +147,25 @@ public class HomeController {
     }
     @GetMapping("/deleteBooking{booking_ID}")
     public String deleteBooking(@PathVariable("booking_ID") int bookingID){
-
         bookingService.deleteBooking(bookingID);
-
         return "redirect:/adminBooking";
     }
 
     //Not DOne
     @GetMapping("/cancelBooking{booking_ID}")
     public String cancelBooking(@PathVariable("booking_ID") int bookingID ){
+        int cancelFee = adminService.getCancellationPercent(bookingID);
+        Invoice invoice = invoiceService.fetchByID(bookingID);
+        double price = invoice.bookingCancel();
 
-        return "redirect:/";
+        bookingService.cancelBooking(bookingID);
+        System.out.println(price+" - "+cancelFee+" %");
+
+        price = (price*((double)cancelFee/100));
+        invoice.setPrice(price);
+        invoiceService.updateInvoice(invoice);
+
+        return "redirect:/bookings";
     }
 
     /*******************************    Invoice     ********************************/
@@ -162,16 +175,16 @@ public class HomeController {
         Invoice invoice = invoiceService.fetchByID(bookingID);
         model.addAttribute("booking",booking);
 
-        if(invoice != null) {
-            invoice.updateInvoice(adminService.getPrice_percent(booking.getPickup_date()),adminService.fetchPrice(), booking);
+        if(!booking.getStatus().equals("canceled")) {
+            invoice.updateInvoice(adminService.getPrice_percent(booking.getPickup_date()), adminService.fetchPrice(), booking);
             invoiceService.updateInvoice(invoice);
-            model.addAttribute("renter",renterService.fetchById(booking.getRenter_ID()));
-            model.addAttribute("invoice",invoice);
-
-            return "home/Invoice/invoice";
         }
 
-       return "home/Invoice/emptyInvoice";
+        model.addAttribute("renter",renterService.fetchById(booking.getRenter_ID()));
+        model.addAttribute("invoice",invoice);
+
+
+        return "home/Invoice/invoice";
     }
     @GetMapping("/allInvoices")
     public String allInvoices(Model model){

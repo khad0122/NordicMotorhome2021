@@ -23,10 +23,10 @@
             <div class = "pricing ">
                 <form th:action = "@{/savePricing}">
                     <div><label>Base Price</label><input th:value = "${price.basePrice}" name = "basePrice"></div>
-                    <div><label>Price pr Extra Item</label><input th:value = "${price.extraPrice}" name = "extraPrice"></div>
+                    <div><label>Price per Extra Item</label><input th:value = "${price.extraPrice}" name = "extraPrice"></div>
                     <div><label>Fuel Fee</label><input th:value = "${price.fuelFee}" name = "fuelFee"></div>
                     <div><label>Km Fee</label><input th:value = "${price.kmFee}" name = "kmFee"></div>
-                    <div><label>Collect Fee</label><input th:value = "${price.collectFee}" name = "collectFee"></div>
+                    <div><label>Collect Fee per km</label><input th:value = "${price.collectFee}" name = "collectFee"></div>
                     <input class = "btn" type = "submit" value = "Save">
                 </form>
             </div>

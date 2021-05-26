@@ -102,6 +102,7 @@ public class Invoice{
             price = price + (price * ((double) season_percent / 100));
         }
 
+        /*          Fee         */
         //multiplying number of days with price per day
         price = (price * booking.getDaysTotal());
 
@@ -110,16 +111,12 @@ public class Invoice{
             fee = extra;
         }
 
-
-
         //OutsideKMFee
         if(booking.getTotalKm() != 0) {
             outsideKmFee = booking.getTotalKm() * admin.getCollectFee();
             outsideKmFee = Double.parseDouble(deci.format(outsideKmFee).replace(",","."));
             fee += outsideKmFee;
         }
-
-
 
         //FuelCheck And Extra KM
 
@@ -145,6 +142,14 @@ public class Invoice{
             price += fee;
 
         price = Double.parseDouble(deci.format(price).replace(",","."));
+    }
+
+    public double bookingCancel(){
+        price = price - fee;
+        fee = 0;
+        outsideKmFee = 0;
+        extra = 0;
+        return price;
     }
 
 }
