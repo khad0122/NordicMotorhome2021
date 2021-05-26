@@ -194,22 +194,14 @@ public class HomeController {
 
         return "home/Invoice/invoices";
     }
-    @GetMapping("/generateInvoice{booking_ID}")
-    public String generateInvoice(@PathVariable("booking_ID") int booking_ID, Model model){
+    @GetMapping("/updateInvoice")
+    public String updateInvoice(@RequestParam("extra_km") String km){
+        System.out.println(km);
 
-        Booking booking = bookingService.fetchById(booking_ID);
-        //price
-        Admin admin = adminService.fetchPrice();
-        int ex = admin.getExtraPrice()*booking.getExtras();
-        int ol = booking.getKmToPickup()+booking.getKmToDropoff();
-
-
-
-        //define season percent for booking
-
-
-        return "redirect:/invoice/{booking_ID}";
+        return "redirect:/bookings";
     }
+
+
     /*******************************    Renter     *******************************/
     @GetMapping("/renter")
     public String renterPage(Model model){
