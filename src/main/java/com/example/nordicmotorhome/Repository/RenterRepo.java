@@ -15,9 +15,11 @@ public class RenterRepo {
     @Autowired
     JdbcTemplate template;
 
-    public void addRenter(Renter r){
+    public int addRenter(Renter r){
         String sql = "INSERT INTO renter(first_name,last_name,mobile_number,email,address_street,address_zip,address_city,DLN,driversince_date) values(?,?,?,?,?,?,?,?,?)";
         template.update(sql,r.getFirst_name(),r.getLast_name(),r.getMobile_number(),r.getEmail(),r.getAddress_street(),r.getAddress_zip(),r.getAddress_zip(),r.getDLN(),r.getDriversince_date());
+        String id = "SELECT renter_ID FROM renter WHERE first_name = ? AND last_name = ? AND mobile_number = ?";
+        return template.queryForObject(id,Integer.class,r.getFirst_name(),r.getLast_name(),r.getMobile_number());
     }
     public void updateRenter(Renter r){
         String sql = "UPDATE renter set first_name = ?, last_name = ?, mobile_number = ?, email = ?, address_street = ?, address_zip = ?, address_city = ?, DLN = ?, driversince_date = ? WHERE renter_ID = ?";

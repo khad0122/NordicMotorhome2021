@@ -46,7 +46,7 @@
                   <td th:text = "${Booking.getDropoff_location()}"></td>
                   <td th:text = "${Booking.getExtras()}"></td>
                   <td>
-                    <a class = "btn side-btn" th:href = "@{'/deleteBooking'+${Booking.booking_ID}}">Delete</a>
+                    <a class = "btn side-btn" th:href = "@{'/deleteBooking'+${Booking.booking_ID}}" onclick="return confirm('Are you sure you want to delete this Booking');">Delete</a>
                     <a class = "btn side-btn" th:href = "@{'/showInvoice/'+${Booking.booking_ID}}">Invoice</a>
                   </td>
                 </tr>

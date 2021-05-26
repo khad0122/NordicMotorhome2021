@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.tags.form.RadioButtonTag;
 
 import java.util.ArrayList;
 
@@ -205,9 +207,18 @@ public class HomeController {
     }
     @GetMapping("/addRenter")
     public String addRenterPage(){ return "home/Renter/addRenter"; }
-    @PostMapping("/add")
-    public String add(@ModelAttribute Renter r){
-        renterService.addRenter(r);
+    @PostMapping("/add/")
+    public String add(@ModelAttribute Renter r, @RequestParam(value="enableBooking") String choice, RedirectAttributes rd){
+        int id = renterService.addRenter(r);
+
+        System.out.println(r.getMobile_number());
+        if(choice.equals("yes")){
+            rd.addAttribute("renter_ID",id);
+            return "redirect:/pickRenter/{renter_ID}";
+        }
+
+
+
         return "redirect:/renter";
     }
     @GetMapping("/updateRenter/{renter_ID}")
@@ -225,6 +236,7 @@ public class HomeController {
         renterService.deleteRenter(id);
         return "redirect:/renter";
     }
+
 
     /*******************************    Motorhome     *******************************/
     @GetMapping("/motorhomes")

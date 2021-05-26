@@ -12,8 +12,8 @@ public class RenterService {
     @Autowired
     RenterRepo renterRepo;
 
-    public void addRenter(Renter r) {
-        renterRepo.addRenter(r);
+    public int addRenter(Renter r) {
+        return renterRepo.addRenter(r);
     }
 
     public void updateRenter(Renter r) {

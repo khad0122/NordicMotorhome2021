@@ -26,11 +26,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <form th:action = "@{/add/}" method = "post">
+                        <form action = "/add/" method = "post">
                             <tr>
                                 <td><input type = "text" name = "first_name" required> </td>
                                 <td><input type = "text" name = "last_name" required></td>
-                                <td><input type = "text" name = "mobil_number" required></td>
+                                <td><input type = "text" name = "mobile_number" required></td>
                                 <td><input type = "email" name = "email" required></td>
                                 <td><input type = "text" name = "address_street" required> </td>
                                 <td><input type = "text" name = "address_zip" required></td>
@@ -39,9 +39,18 @@
                                 <td><input type = "date" name = "driversince_date" required></td>
                             </tr>
                         <input class = "btn" id = "add-btn" type = "submit" value = "Add">
-                    </form>
+                            <div style = "text-align: right;padding:5px 15px;">
+                                <span style = "margin-right:50px;">Add Booking</span>
+                                <label for = "yesBooking">Yes</label>
+                                <input type = "radio" name = "enableBooking" value = "yes" id = "yesBooking" required>
+                                <label for = "noBooking">No</label>
+                                <input type = "radio" name = "enableBooking" value = "no" id = "noBooking" required>
+                            </div>
+                        </form>
                     </tbody>
+
                 </table>
+
             </div>
         </div>
 

@@ -34,7 +34,7 @@ a {text-decoration: none;color: #000000;}
     border-radius: 3px;
 }
 .btn:hover{
-    background: rgba(252, 249, 249, 0.79);
+    background: rgba(222, 221, 221, 0.79);
     cursor:pointer;
 }
 
@@ -55,7 +55,7 @@ a {text-decoration: none;color: #000000;}
 
 /*  General Layout  */
 .main{
-    width:80%;
+    width:90%;
     margin: 100px auto;
 }
 .container{
@@ -78,7 +78,7 @@ th{
 td{
     border:1px dotted #000000;
     text-align: center;
-    padding:7px 5px;
+    padding:7px 10px;
     background: rgba(252, 249, 249, 0.79);
     height:45px;
 }
@@ -91,12 +91,13 @@ td{
     height:100%;
     border:none;
     padding-left:10px;
+    margin:0;
 }
  input:focus{
     outline:none;
 }
 .update td {
-    padding:0;
+    padding:5px 10px;
 }
 
 /*    Confirm Booking  */
@@ -144,14 +145,14 @@ td{
 }
 
 .location input{
-    display: block;
     width:150%;
     height: 35px;
     font-size: 18px;
 }
+
 .location input:nth-child(2){
     width:50%;
-    margin-left:120px;
+    margin-left:50%;
 
 }
 .form label{
@@ -170,9 +171,21 @@ td{
 #confirm-footer{
     margin:25px 0;
 
-
+}
+.footer{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.footer div:nth-child(2){
+    text-align: right;
 }
 
+.footer a{
+    display: inline-block;
+    margin:0;
+    text-align: center;
+    width:60px;
+}
 
 
 /*  Owner Front page hero section   */
