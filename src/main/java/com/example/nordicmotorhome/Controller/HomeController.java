@@ -237,10 +237,10 @@ public class HomeController {
         model.addAttribute("motorhome",motorHomeService.fetchById(motorhomeID));
         return "home/MotorHome/updateMotorHome";
     }
-    @PostMapping("/updateMotorhome/")
+    @PostMapping("/updateMotorHome/")
     public String updateMotorHome(@ModelAttribute MotorHome m){
         motorHomeService.updateMotorHome(m);
-        return "redirect:/motohomes";
+        return "redirect:/motorhomes";
     }
 
     @PostMapping("/addMotorHome/")
