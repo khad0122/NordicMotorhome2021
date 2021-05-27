@@ -232,23 +232,31 @@ public class HomeController {
         model.addAttribute("MotorHomes",list);
         return "home/MotorHome/MotorHomePage";
     }
-    @GetMapping("/addMotorHome")
-    public String addMotorHomePage(){ return "home/MotorHome/addMotorHome"; }
-
-    @PostMapping("/addm")
-    public String add(@ModelAttribute MotorHome m) {
-        motorHomeService.addMotorHome(m);
-        return "redirect:/motorhomes";
+    @GetMapping("/updateMotorHome/{motorhome_ID}")
+    public String updateMotorHomePage(@PathVariable("motorhome_ID") int motorhomeID, Model model){
+        model.addAttribute("motorhome",motorHomeService.fetchById(motorhomeID));
+        return "home/MotorHome/updateMotorHome";
     }
-
-    @GetMapping("/updateMotorHome")
-    public String updateMotorHomePage(){ return "home/MotorHome/updateMotorHome"; }
-
-    @PostMapping("/updateMotorhomes/")
+    @PostMapping("/updateMotorhome/")
     public String updateMotorHome(@ModelAttribute MotorHome m){
         motorHomeService.updateMotorHome(m);
         return "redirect:/motohomes";
     }
+
+    @PostMapping("/addMotorHome/")
+    public String addMotorHome(@ModelAttribute MotorHome m) {
+        motorHomeService.addMotorHome(m);
+        return "redirect:/motorhomes";
+    }
+    @GetMapping("/addMotorHome/")
+    public String addMotorHomePage(){ return "home/MotorHome/addMotorHome"; }
+
+    @GetMapping("/deleteMotorHome/{motorhome_ID}")
+    public String deleteMotorHomePage(@PathVariable("motorhome_ID") int id){
+        motorHomeService.deleteMotorHome(id);
+        return "redirect:/motorhomes";
+    }
+
 
     /*******************************    Owner   ************************************/
 

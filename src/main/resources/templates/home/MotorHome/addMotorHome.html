@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Add Motorhome</title>
     <link rel = "stylesheet"  th:href="@{/styles.css}">
-
 </head>
 <body>
 <h1>Motorhomes</h1>
@@ -14,7 +13,6 @@
         <table>
             <thead>
             <tr>
-                <th>Motorhome ID</th>
                 <th>Brand</th>
                 <th>Model</th>
                 <th>Km</th>
@@ -23,9 +21,8 @@
             </tr>
             </thead>
             <tbody>
-            <form th:action = "@{/add/}" method = "post">
+            <form th:action = "@{/addMotorHome/}" method = "post">
                 <tr>
-                    <td><input type = "text" name = "motorhome_ID" required></td>
                     <td><input type = "text" name = "brand" required></td>
                     <td><input type = "text" name = "model" required></td>
                     <td><input type = "text" name = "km" required></td>
@@ -34,10 +31,10 @@
                 </tr>
                 <input class = "btn" id = "add-btn" type = "submit" value = "Add">
             </form>
-
             </tbody>
         </table>
     </div>
+
 </div>
 
 </body>
