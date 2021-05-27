@@ -40,4 +40,5 @@ public class MotorHomeRepo {
         String sql = "SELECT count(*) FROM motorhome";
         return template.queryForObject(sql, Integer.class);
     }
+
 }

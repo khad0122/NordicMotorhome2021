@@ -14,6 +14,7 @@
         <table>
             <thead>
             <tr>
+                <th>Motorhome ID</th>
                 <th>Brand</th>
                 <th>Model</th>
                 <th>Km</th>
@@ -22,10 +23,11 @@
             </tr>
             </thead>
             <tbody>
-            <form th:action = "@{/addm/}" method = "post">
+            <form th:action = "@{/add/}" method = "post">
                 <tr>
-                    <td><input type = "text" name = "model" required></td>
+                    <td><input type = "text" name = "motorhome_ID" required></td>
                     <td><input type = "text" name = "brand" required></td>
+                    <td><input type = "text" name = "model" required></td>
                     <td><input type = "text" name = "km" required></td>
                     <td><input type = "text" name = "type" required> </td>
                     <td><input type = "text" name = "size" required></td>
