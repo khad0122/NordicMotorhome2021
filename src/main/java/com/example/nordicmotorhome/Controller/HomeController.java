@@ -38,6 +38,7 @@ public class HomeController {
     /*******************************    Booking     *******************************/
     @GetMapping("/bookings")
     public String bookingPage(Model model){
+        bookingService.setBookingStatus();
         ArrayList<Booking> list =(ArrayList<Booking>) bookingService.fetchAll();
         model.addAttribute("bookings",list);
 
