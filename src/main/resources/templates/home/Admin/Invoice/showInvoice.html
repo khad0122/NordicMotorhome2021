@@ -19,7 +19,6 @@
           </div>
         </div>
         <div class = "container invoice">
-
             <div class ="invoice-page personal-details">
                 <div >
                     <label>Renter ID</label><span class = "invoice-info" th:text = "${renter.renter_ID}"></span>
@@ -29,8 +28,8 @@
                     <label>City</label><span class = "invoice-info" th:text = "${renter.address_city}"></span>
                     <label>Phone</label><span class = "invoice-info" th:text = "${renter.mobile_number}"></span>
                     <label>Email</label><span class = "invoice-info" th:text = "${renter.email}"></span>
-
                 </div>
+
                 <div >
                     <label>Booking ID</label><span class = "invoice-info"><span th:text = "${invoice.booking_ID}"></span></span>
                     <label>Motorhome ID</label><span class = "invoice-info"><span th:text = "${booking.motorhome_ID}"></span></span>
@@ -42,7 +41,6 @@
 
                 </div>
             </div>
-
             <div class ="invoice-page">
                 <label>Invoice ID</label><span class = "invoice-info"><span th:text = "${invoice.invoice_ID}"></span></span>
                 <label>Total Price</label><span class = "invoice-info"><span th:text = "${invoice.price}"></span>€</span>

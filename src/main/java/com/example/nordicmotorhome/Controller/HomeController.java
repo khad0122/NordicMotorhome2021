@@ -252,8 +252,28 @@ public class HomeController {
     }
     @GetMapping("/addMotorHome")
     public String addMotorHomePage(){ return "home/MotorHome/addMotorHome"; }
-    @GetMapping("/updateMotorHome")
-    public String updateMotorHomePage(){ return "home/MotorHome/updateMotorHome"; }
+    @PostMapping("/addMotorHome/")
+    public String addMotorHome(@ModelAttribute MotorHome m) {
+        motorHomeService.addMotorHome(m);
+        return "redirect:/motorhomes";
+    }
+
+    @GetMapping("/updateMotorHome/{motorhome_ID}")
+    public String updateMotorHomePage(@PathVariable("motorhome_ID") int motorhomeID, Model model){
+        model.addAttribute("motorhome",motorHomeService.fetchById(motorhomeID));
+        return "home/MotorHome/updateMotorHome";
+    }
+    @PostMapping("/updateMotorHome/")
+    public String updateMotorHome(@ModelAttribute MotorHome m){
+        motorHomeService.updateMotorHome(m);
+        return "redirect:/motorhomes";
+    }
+
+    @GetMapping("/deleteMotorHome/{motorhome_ID}")
+    public String deleteMotorHomePage(@PathVariable("motorhome_ID") int id){
+        motorHomeService.deleteMotorHome(id);
+        return "redirect:/motorhomes";
+    }
 
     /*******************************    Admin   ************************************/
 

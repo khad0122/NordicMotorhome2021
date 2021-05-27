@@ -7,38 +7,34 @@
 
 </head>
 <body>
-<h1>Motorhomes</h1>
-<div class ="main">
-    <a id="return-btn" class = "btn" href = "/motorhomes">Return</a>
-    <div class = "container update">
-        <table>
-            <thead>
-            <tr>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Km</th>
-                <th>Type</th>
-                <th>Size</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <form action = "/addMotorHome/" method = "post">
-                <tr>
-                    <td><input type = "text" name = "model" required></td>
-                    <td><input type = "text" name = "brand" required></td>
-                    <td><input type = "text" name = "km" required></td>
-                    <td><input type = "text" name = "type" required> </td>
-                    <td><input type = "text" name = "size" required></td>
-
-                </tr>
-                <input class = "btn" id = "add-btn" type = "submit" value = "Add">
-            </form>
-
-            </tbody>
-        </table>
-    </div>
-</div>
-
+        <h1>Motorhomes</h1>
+        <div class ="main">
+            <a id="return-btn" class = "btn" href = "/motorhomes">Return</a>
+            <div class = "container update">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Km</th>
+                            <th>Type</th>
+                            <th>Size</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <form action = "/addMotorHome/" method = "post">
+                            <tr>
+                                <td><input type = "text" name = "model" required></td>
+                                <td><input type = "text" name = "brand" required></td>
+                                <td><input type = "text" name = "km" required></td>
+                                <td><input type = "text" name = "type" required> </td>
+                                <td><input type = "text" name = "size" required></td>
+                            </tr>
+                                <input class = "btn" id = "add-btn" type = "submit" value = "Add">
+                        </form>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 </body>
 </html>

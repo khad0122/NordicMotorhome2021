@@ -6,9 +6,9 @@
     <link rel = "stylesheet" th:href = "@{/styles.css}">
 </head>
 <body>
-    <h1>Booking Details</h1>
+        <h1>Booking Details</h1>
         <div class = "main">
-            <a class = "btn" id = "return-btn" th:href = "@{'/pickRenter/' +${assignedRenter.renter_ID}}">return</a>
+                <a class = "btn" id = "return-btn" th:href = "@{'/pickRenter/' +${assignedRenter.renter_ID}}">return</a>
             <div class = "container">
                 <div class = "detail">
                     <div id = "personal-info">
@@ -21,45 +21,45 @@
                         <p>Driver Since Date</p><span th:text = "${assignedRenter.driversince_date}"></span>
                     </div>
                     <div id = "motor-info">
-                    <p>Motorhome ID</p><span th:text = "${assignedMotor.motorhome_ID}" ></span>
-                    <p>Brand</p><span th:text = "${assignedMotor.brand}" ></span>
-                    <p>Model</p><span th:text = "${assignedMotor.model}" ></span>
-                    <p>Type</p><span th:text = "${assignedMotor.type}" ></span>
-                    <p>Size</p><span th:text = "${assignedMotor.size}" ></span>
-                    <p>km</p><span th:text = "${assignedMotor.km}"></span>
-                </div>
-                </div>
-                    <div class = "form">
-                        <form th:action = "@{/confirmBookingDetails/{renter_ID}/{motorhome_ID} (renter_ID = ${assignedRenter.renter_ID}, motorhome_ID = ${assignedMotor.motorhome_ID}) }" method = "post">
-                            <div>
-                                <label for = "pickup_date">Pick-up Date </label>
-                                    <input type = "date" name = "pickup_date" min = "2021-05-22" id = "pickup_date" required>
-
-                                <label for = "return_date">Return Date</label>
-                                    <input type = "date" name = "return_date" min = "2021-05-22" id = "return_date" required>
-                            </div>
-                            <div>
-                                <label for = "pickup_location">Pick-up Location</label>
-                                <div class = "location">
-                                    <input type = "text" name = "pickup_location" id = pickup_location placeholder = "location" required>
-                                    <input type = "text" name = "kmToPickup" placeholder = "Km" required>
-                                </div>
-
-                                <label for = "dropff_location">Drop-off Location</label>
-                                <div class = "location">
-                                    <input type = "text" name = "dropoff_location" id = dropff_location placeholder="Location" required>
-                                    <input type = "text" name = "kmToDropoff" placeholder = "Km" required>
-                                </div>
-                            </div>
-                            <div>
-                                <label for = "extras">Extra Equipment</label>
-                                   <input type = "text" name = "extras" id = "extras" required>
-                            </div>
-                            <div id = "confirm-footer">
-                                <input id = "confirm-btn" class = "btn" type = "submit" value = "Confirm">
-                            </div>
-                        </form>
+                        <p>Motorhome ID</p><span th:text = "${assignedMotor.motorhome_ID}" ></span>
+                        <p>Brand</p><span th:text = "${assignedMotor.brand}" ></span>
+                        <p>Model</p><span th:text = "${assignedMotor.model}" ></span>
+                        <p>Type</p><span th:text = "${assignedMotor.type}" ></span>
+                        <p>Size</p><span th:text = "${assignedMotor.size}" ></span>
+                        <p>km</p><span th:text = "${assignedMotor.km}"></span>
                     </div>
+                </div>
+                <div class = "form">
+                    <form th:action = "@{/confirmBookingDetails/{renter_ID}/{motorhome_ID} (renter_ID = ${assignedRenter.renter_ID}, motorhome_ID = ${assignedMotor.motorhome_ID}) }" method = "post">
+                        <div>
+                            <label for = "pickup_date">Pick-up Date </label>
+                                <input type = "date" name = "pickup_date" min = "2021-05-22" id = "pickup_date" required>
+
+                            <label for = "return_date">Return Date</label>
+                                <input type = "date" name = "return_date" min = "2021-05-22" id = "return_date" required>
+                        </div>
+                        <div>
+                            <label for = "pickup_location">Pick-up Location</label>
+                            <div class = "location">
+                                <input type = "text" name = "pickup_location" id = pickup_location placeholder = "location" required>
+                                <input type = "text" name = "kmToPickup" placeholder = "Km" required>
+                            </div>
+
+                            <label for = "dropff_location">Drop-off Location</label>
+                            <div class = "location">
+                                <input type = "text" name = "dropoff_location" id = dropff_location placeholder="Location" required>
+                                <input type = "text" name = "kmToDropoff" placeholder = "Km" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for = "extras">Extra Equipment</label>
+                               <input type = "text" name = "extras" id = "extras" required>
+                        </div>
+                        <div id = "confirm-footer">
+                            <input id = "confirm-btn" class = "btn" type = "submit" value = "Confirm">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 </body>

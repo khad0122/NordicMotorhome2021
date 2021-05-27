@@ -7,35 +7,34 @@
 </head>
 <body>
 
-    <h1>Bookings</h1>
-    <div class = "main">
-        <a id = "return-btn" class = "btn" href = "/addBooking">Return</a>
-        <div class ="container">
-            <p>Assign Motorhome to <strong th:text = "${assignedRenter.getName()}"></strong> </p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Motorhome ID</th>
-                        <th>Brand</th>
-                        <th>Model</th>
-                        <th>Type</th>
-                        <th>Size</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each = "Motor: ${motors}" >
-                        <td th:text = "${Motor.motorhome_ID}" ></td>
-                        <td th:text = "${Motor.brand}" ></td>
-                        <td th:text = "${Motor.model}" ></td>
-                        <td th:text = "${Motor.type}" ></td>
-                        <td th:text = "${Motor.size}" ></td>
-                        <td><a class = "btn" th:href = "@{/addBookingConfirm/{renter_ID}/{motorhome_ID} (renter_ID = ${assignedRenter.renter_ID}, motorhome_ID = ${Motor.motorhome_ID})}">Pick Motorhome</a></td>
-                    </tr>
-                </tbody>
-            </table>
+        <h1>Bookings</h1>
+        <div class = "main">
+                <a id = "return-btn" class = "btn" href = "/addBooking">Return</a>
+            <div class ="container">
+                    <p>Assign Motorhome to <strong th:text = "${assignedRenter.getName()}"></strong> </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Motorhome ID</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Type</th>
+                            <th>Size</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each = "Motor: ${motors}" >
+                            <td th:text = "${Motor.motorhome_ID}" ></td>
+                            <td th:text = "${Motor.brand}" ></td>
+                            <td th:text = "${Motor.model}" ></td>
+                            <td th:text = "${Motor.type}" ></td>
+                            <td th:text = "${Motor.size}" ></td>
+                            <td><a class = "btn" th:href = "@{/addBookingConfirm/{renter_ID}/{motorhome_ID} (renter_ID = ${assignedRenter.renter_ID}, motorhome_ID = ${Motor.motorhome_ID})}">Pick Motorhome</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-    </div>
 </body>
 </html>

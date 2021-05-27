@@ -7,41 +7,41 @@
 </head>
 <body>
 
-    <h1>Nordic Motorhome</h1>
-    <h2>Invoices</h2>
+      <h1>Nordic Motorhome</h1>
+      <h2>Invoices</h2>
       <div class = "main">
-          <a class = "btn" id = "return-btn" href = "/bookings">Return</a>
-        <div class = "container">
-          <table>
-            <thead>
-              <tr>
-                <th>Invoice ID</th>
-                <th>Booking ID</th>
-                <th>Total Price</th>
-                <th>Fee</th>
-                <th>Season Percentage</th>
-                <th>Extra km</th>
-                <th>Fuel Fee</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each = "Invoice: ${invoice}">
-                <td th:text = "${Invoice.getInvoice_ID()}"></td>
-                <td th:text = "${Invoice.getBooking_ID()}"></td>
-                <td th:text = "${Invoice.getPrice()}"></td>
-                <td th:text = "${Invoice.getFee()}"></td>
-                <td th:text = "${Invoice.getSeason_percent()}"></td>
-                <td th:text = "${Invoice.getExtra_km}"></td>
-                <td th:text = "${Invoice.getFuelFee()}"></td>
-                <td>
-                  <a class = "btn side-btn" th:href = "@{'/invoice/'+${Invoice.getBooking_ID()}}">Show</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+            <a class = "btn" id = "return-btn" href = "/bookings">Return</a>
+          <div class = "container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Invoice ID</th>
+                  <th>Booking ID</th>
+                  <th>Total Price</th>
+                  <th>Fee</th>
+                  <th>Season Percentage</th>
+                  <th>Extra km</th>
+                  <th>Fuel Fee</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each = "Invoice: ${invoice}">
+                  <td th:text = "${Invoice.getInvoice_ID()}"></td>
+                  <td th:text = "${Invoice.getBooking_ID()}"></td>
+                  <td th:text = "${Invoice.getPrice()}"></td>
+                  <td th:text = "${Invoice.getFee()}"></td>
+                  <td th:text = "${Invoice.getSeason_percent()}"></td>
+                  <td th:text = "${Invoice.getExtra_km}"></td>
+                  <td th:text = "${Invoice.getFuelFee()}"></td>
+                  <td>
+                    <a class = "btn side-btn" th:href = "@{'/invoice/'+${Invoice.getBooking_ID()}}">Show</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
 
 
 

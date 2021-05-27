@@ -7,82 +7,80 @@
     <link rel = "stylesheet" th:href = "@{/adminStyle.css}">
 </head>
 <body>
-<h1>Nordic Motorhome</h1>
-    <div class ="main">
-        <div class = "menu-bar">
-            <div>
-                <a id = "return-admin" class = "menu-btn" href = "/admin">Return</a>
+        <h1>Nordic Motorhome</h1>
+        <div class ="main">
+            <div class = "menu-bar">
+                <div>
+                    <a id = "return-admin" class = "menu-btn" href = "/admin">Return</a>
+                </div>
+                <div>
+                    <a class = "menu-btn" href = "/adminBooking">Bookings</a>
+                    <a class = "menu-btn" href = "/adminInvoice">Invoices</a>
+                    <a class = "menu-btn" href = "/adminPricing" id = main-page>Pricing</a>
+                </div>
             </div>
-            <div>
-                <a class = "menu-btn" href = "/adminBooking">Bookings</a>
-                <a class = "menu-btn" href = "/adminInvoice">Invoices</a>
-                <a class = "menu-btn" href = "/adminPricing" id = main-page>Pricing</a>
+            <div class = "container">
+                <div class = "pricing ">
+                    <form th:action = "@{/savePricing}">
+                        <div><label>Base Price</label><input th:value = "${price.basePrice}" name = "basePrice"></div>
+                        <div><label>Price per Extra Item</label><input th:value = "${price.extraPrice}" name = "extraPrice"></div>
+                        <div><label>Fuel Fee</label><input th:value = "${price.fuelFee}" name = "fuelFee"></div>
+                        <div><label>Km Fee</label><input th:value = "${price.kmFee}" name = "kmFee"></div>
+                        <div><label>Collect Fee per km</label><input th:value = "${price.collectFee}" name = "collectFee"></div>
+                        <input class = "btn" type = "submit" value = "Save">
+                    </form>
+                </div>
+                <div class = "season"><br>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Season Name</th>
+                                <th>Season Period From Month</th>
+                                <th>Season Period To Month</th>
+                                <th>Seasonal Percent</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each = "Season: ${season}">
+                                <td th:text = "${Season.getSeason_name()}"></td>
+                                <td th:text = "${Season.getSeason_from()}"></td>
+                                <td th:text = "${Season.getSeason_to()}"></td>
+                                <td th:text = "${Season.getPrice_percent()}"></td>
+                                <td>
+                                    <a class ="btn"  th:href = "@{'/updateSeason'+${Season.getSeason_name()}}">Update</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class = "cancellation update">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cancellation ID</th>
+                                <th>Cancellation Fee percent</th>
+                                <th>From (days)</th>
+                                <th>Up To (days)</th>
+                                <th>Minimum</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           <tr th:each = "Cancel: ${cancellation}">
+                               <form th:action = "@{'/saveCancellation/'+${Cancel.getCancellation_ID()}}" method = "get" >
+                                   <td><input type = "text" name = "cancellation_ID" th:value = "${Cancel.getCancellation_ID()}" readonly></td>
+                                   <td><input type = "text" name = "cancellation_percent" th:value = "${Cancel.getCancellation_percent()}"></td>
+                                   <td><input type = "text" name = "fromDay" th:value = "${Cancel.getFromDay()}"></td>
+                                   <td><input type = "text" name = "toDay" th:value = "${Cancel.getToDay()}"></td>
+                                   <td><input type = "text" name = "minPrice" th:value = "${Cancel.getMinPrice()}"></td>
+                                   <td style = "padding:0;"><input type = "submit" value = "Update" class = "btn side-btn"></td>
+                               </form>
+                           </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class = "container">
-            <div class = "pricing ">
-                <form th:action = "@{/savePricing}">
-                    <div><label>Base Price</label><input th:value = "${price.basePrice}" name = "basePrice"></div>
-                    <div><label>Price per Extra Item</label><input th:value = "${price.extraPrice}" name = "extraPrice"></div>
-                    <div><label>Fuel Fee</label><input th:value = "${price.fuelFee}" name = "fuelFee"></div>
-                    <div><label>Km Fee</label><input th:value = "${price.kmFee}" name = "kmFee"></div>
-                    <div><label>Collect Fee per km</label><input th:value = "${price.collectFee}" name = "collectFee"></div>
-                    <input class = "btn" type = "submit" value = "Save">
-                </form>
-            </div>
-            <div class = "season"><br>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Season Name</th>
-                            <th>Season Period From Month</th>
-                            <th>Season Period To Month</th>
-                            <th>Seasonal Percent</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each = "Season: ${season}">
-                            <td th:text = "${Season.getSeason_name()}"></td>
-                            <td th:text = "${Season.getSeason_from()}"></td>
-                            <td th:text = "${Season.getSeason_to()}"></td>
-                            <td th:text = "${Season.getPrice_percent()}"></td>
-                            <td>
-                                <a class ="btn"  th:href = "@{'/updateSeason'+${Season.getSeason_name()}}">Update</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class = "cancellation update">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Cancellation ID</th>
-                            <th>Cancellation Fee percent</th>
-                            <th>From (days)</th>
-                            <th>Up To (days)</th>
-                            <th>Minimum</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                       <tr th:each = "Cancel: ${cancellation}">
-                           <form th:action = "@{'/saveCancellation/'+${Cancel.getCancellation_ID()}}" method = "get" >
-                               <td><input type = "text" name = "cancellation_ID" th:value = "${Cancel.getCancellation_ID()}" readonly></td>
-                               <td><input type = "text" name = "cancellation_percent" th:value = "${Cancel.getCancellation_percent()}"></td>
-                               <td><input type = "text" name = "fromDay" th:value = "${Cancel.getFromDay()}"></td>
-                               <td><input type = "text" name = "toDay" th:value = "${Cancel.getToDay()}"></td>
-                               <td><input type = "text" name = "minPrice" th:value = "${Cancel.getMinPrice()}"></td>
-                               <td style = "padding:0;"><input type = "submit" value = "Update" class = "btn side-btn"></td>
-                           </form>
-                       </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </div>
 </body>
 </html>

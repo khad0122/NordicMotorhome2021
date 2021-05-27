@@ -6,41 +6,42 @@
     <link rel = "stylesheet"  th:href="@{/styles.css}">
 </head>
 <body>
-    <h1>Nordic Motorhome</h1>
-    <h2>Motorhomes</h2>
-    <div class = "main">
-        <a id="return-btn" class = "btn" href = "/">Return</a>
-        <div class = "container">
-            <a class = "btn" href = "/add">Add MotorHome</a>
-            <table>
-                <thead>
-                <tr>
-                    <th>MotorHome ID</th>
-                    <th>Brand</th>
-                    <th>Model</th>
-                    <th>Km</th>
-                    <th>Type</th>
-                    <th>Size</th>
-                    <th>Km</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each = "MotorHome: ${MotorHomes}">
-                    <td th:text = "${MotorHome.getMotorhome_ID()}"></td>
-                    <td th:text = "${MotorHome.getBrand()}"></td>
-                    <td th:text = "${MotorHome.getModel()}"></td>
-                    <td th:text = "${MotorHome.getKm()}"></td>
-                    <td th:text = "${MotorHome.getType()}"></td>
-                    <td th:text = "${MotorHome.getSize()}"></td>
-                    <td th:text = "${MotorHome.getKm()}"></td>
-                    <td>
-                        <a class = "btn side-btn" href = "/addMotorHome">Update</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+        <h1>Nordic Motorhome</h1>
+        <h2>Motorhomes</h2>
+        <div class = "main">
+                <a id="return-btn" class = "btn" href = "/">Return</a>
+            <div class = "container">
+                    <a class = "btn" th:href = "@{/addMotorHome/}">Add MotorHome</a>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>MotorHome ID</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Km</th>
+                            <th>Type</th>
+                            <th>Size</th>
+                            <th>Km</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each = "MotorHome: ${MotorHomes}">
+                            <td th:text = "${MotorHome.getMotorhome_ID()}"></td>
+                            <td th:text = "${MotorHome.getBrand()}"></td>
+                            <td th:text = "${MotorHome.getModel()}"></td>
+                            <td th:text = "${MotorHome.getKm()}"></td>
+                            <td th:text = "${MotorHome.getType()}"></td>
+                            <td th:text = "${MotorHome.getSize()}"></td>
+                            <td th:text = "${MotorHome.getKm()}"></td>
+                            <td>
+                                <a class = "btn side-btn" th:href = "@{'/updateMotorHome/'+${MotorHome.getMotorhome_ID()}}">Update</a>
+                                <a class = "btn side-btn" th:href = "@{'/deleteMotorHome/'+${MotorHome.getMotorhome_ID()}}">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 </body>
 </html>
