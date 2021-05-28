@@ -11,8 +11,9 @@
         <div class = "main">
             <a id="return-btn" class = "btn" href = "/renter">Return</a>
             <div class = "container update">
-                <table>
-                    <thead>
+                <form action = "/add/" method = "post">
+                    <table>
+                        <thead>
                         <tr>
                             <th>First Name</th>
                             <th>Last Name</th>
@@ -25,8 +26,7 @@
                             <th>Driver Since Date</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <form action = "/add/" method = "post">
+                        <tbody>
                             <tr>
                                 <td><input type = "text" name = "first_name" required> </td>
                                 <td><input type = "text" name = "last_name" required></td>
@@ -46,11 +46,9 @@
                                 <label for = "noBooking">No</label>
                                 <input type = "radio" name = "enableBooking" value = "no" id = "noBooking" required>
                             </div>
-                        </form>
                     </tbody>
-
-                </table>
-
+                    </table>
+                </form>
             </div>
         </div>
 

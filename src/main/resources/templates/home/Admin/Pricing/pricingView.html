@@ -55,9 +55,9 @@
                     </table>
                 </div>
                 <div class = "cancellation update">
-                    <form th:action = "@{'/saveCancellation/'+${Cancel.getCancellation_ID()}}" method = "get" >
+
                         <table>
-                        <thead>
+                            <thead>
                             <tr>
                                 <th>Cancellation ID</th>
                                 <th>Cancellation Fee percent</th>
@@ -66,21 +66,22 @@
                                 <th>Minimum</th>
                                 <th></th>
                             </tr>
-                        </thead>
-                        <tbody>
-                           <tr th:each = "Cancel: ${cancellation}">
+                            </thead>
+                            <tbody>
 
-                                   <td><input type = "text" name = "cancellation_ID" th:value = "${Cancel.getCancellation_ID()}" readonly></td>
-                                   <td><input type = "text" name = "cancellation_percent" th:value = "${Cancel.getCancellation_percent()}"></td>
-                                   <td><input type = "text" name = "fromDay" th:value = "${Cancel.getFromDay()}"></td>
-                                   <td><input type = "text" name = "toDay" th:value = "${Cancel.getToDay()}"></td>
-                                   <td><input type = "text" name = "minPrice" th:value = "${Cancel.getMinPrice()}"></td>
-                                   <td style = "padding:0;"><input type = "submit" value = "Update" class = "btn side-btn"></td>
+                                    <tr th:each = "Cancel: ${cancellation}">
+                                            <form th:action = "@{/saveCancellation}" method = "get" >
+                                            <td><input type = "text" name = "cancellation_ID" th:value = "${Cancel.getCancellation_ID()}" readonly></td>
+                                            <td><input type = "text" name = "cancellation_percent" th:value = "${Cancel.getCancellation_percent()}"></td>
+                                            <td><input type = "text" name = "fromDay" th:value = "${Cancel.getFromDay()}"></td>
+                                            <td><input type = "text" name = "toDay" th:value = "${Cancel.getToDay()}"></td>
+                                            <td><input type = "text" name = "minPrice" th:value = "${Cancel.getMinPrice()}"></td>
+                                            <td style = "padding:0;"><input type = "submit" value = "Update" class = "btn side-btn"></td>
+                                        </form>
+                                    </tr>
+                            </tbody>
+                        </table>
 
-                           </tr>
-                        </tbody>
-                    </table>
-                    </form>
                 </div>
             </div>
         </div>

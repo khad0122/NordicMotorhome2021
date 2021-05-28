@@ -17,7 +17,7 @@ public class Invoice{
     private int season_percent;
 
     //Extra eq. Amount * extraPrice.
-    private int extra;
+    private double extra;
     //sum of Distance to pickup, and drop off, if not 0
     private double outsideKmFee;
 
@@ -37,7 +37,7 @@ public class Invoice{
 
 
     //constructors
-    public Invoice() {fuelCheck=false; }
+    public Invoice() {}
     public Invoice(int booking_ID) {
         this.booking_ID = booking_ID;
     }
@@ -48,7 +48,7 @@ public class Invoice{
     public int getInvoice_ID() { return invoice_ID; }
     public int getBooking_ID() { return booking_ID; }
     public int getSeason_percent() { return season_percent; }
-    public int getExtra() { return extra; }
+    public double getExtra() { return extra; }
     public double getOutsideKmFee() { return outsideKmFee; }
     public double getFee() { return fee; }
     public double getPrice() { return price; }
@@ -62,15 +62,12 @@ public class Invoice{
     public void setInvoice_ID(int invoice_ID) { this.invoice_ID = invoice_ID; }
     public void setBooking_ID(int booking_ID) { this.booking_ID = booking_ID; }
     public void setSeason_percent(int season_percent) { this.season_percent = season_percent; }
-    public void setExtra(int extra) { this.extra = extra; }
+    public void setExtra(double extra) { this.extra = extra; }
     public void setOutsideKmFee(double outsideKmFee) { this.outsideKmFee = outsideKmFee; }
     public void setFee(double fee) { this.fee = fee; }
     public void setPrice(double price) { this.price = price; }
     public void setExtra_km(int extra_km) { this.extra_km = extra_km; }
     public void setFuelFee(double fuelFee) { this.fuelFee = fuelFee; }
-
-
-    public boolean isFuelCheck() { return fuelCheck; }
     public void setFuelCheck(boolean fuelCheck) { this.fuelCheck = fuelCheck; }
 
 

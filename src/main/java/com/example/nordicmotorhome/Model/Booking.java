@@ -37,14 +37,15 @@ public class Booking {
     public int getStart_km() { return start_km; }
     public String getPickup_date() { return pickup_date; }
     public String getReturn_date() { return return_date; }
-    public String getPickup_location() { return pickup_location; }
-    public String getDropoff_location() { return dropoff_location; }
-    public int getExtras() { return extras; }
-    public int getKmToPickup() { return kmToPickup; }
-    public int getKmToDropoff() { return kmToDropoff; }
-    public int getTotalKm(){return kmToPickup+kmToDropoff;}
     public int getDaysTotal(){return daysTotal;}
+    public String getPickup_location() { return pickup_location; }
+    public int getKmToPickup() { return kmToPickup; }
+    public String getDropoff_location() { return dropoff_location; }
+    public int getKmToDropoff() { return kmToDropoff; }
+    public int getExtras() { return extras; }
+    public int getTotalKm(){return kmToPickup+kmToDropoff;}
     public String getStatus(){return status;}
+
 
     public void setBooking_ID(int booking_ID) { this.booking_ID = booking_ID; }
     public void setRenter_ID(int renter_ID) { this.renter_ID = renter_ID; }
@@ -52,12 +53,12 @@ public class Booking {
     public void setStart_km(int start_km) { this.start_km = start_km; }
     public void setPickup_date(String pickup_date) { this.pickup_date = pickup_date; }
     public void setReturn_date(String return_date) { this.return_date = return_date; }
-    public void setPickup_location(String pickup_location) { this.pickup_location = pickup_location; }
-    public void setDropoff_location(String dropoff_location) { this.dropoff_location = dropoff_location; }
-    public void setExtras(int extras) { this.extras = extras; }
-    public void setKmToPickup(int kmToPickup) { this.kmToPickup = kmToPickup; }
-    public void setKmToDropoff(int kmToDropoff) { this.kmToDropoff = kmToDropoff; }
     public void setDaysTotal(int days){daysTotal = days;}
+    public void setPickup_location(String pickup_location) { this.pickup_location = pickup_location; }
+    public void setKmToPickup(int kmToPickup) { this.kmToPickup = kmToPickup; }
+    public void setDropoff_location(String dropoff_location) { this.dropoff_location = dropoff_location; }
+    public void setKmToDropoff(int kmToDropoff) { this.kmToDropoff = kmToDropoff; }
+    public void setExtras(int extras) { this.extras = extras; }
     public void setStatus(String st){status = st;}
 
 }

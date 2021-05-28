@@ -38,11 +38,12 @@ public class PriceRepo {
         String sql = "SELECT season_name FROM season WHERE season_from < MONTH(CURDATE()) AND season_to > MONTH(CURDATE())";
         return template.queryForObject(sql,String.class);
     }
-    public Season getSeasonsByName(String name){
-        String sql = "SELECT * FROM season WHERE season_name = ?";
+    public Season getSeasonsByID(int id){
+        String sql = "SELECT * FROM season WHERE season_ID = ?";
         RowMapper<Season> list = new BeanPropertyRowMapper<>(Season.class);
-        return template.queryForObject(sql,list,name);
+        return template.queryForObject(sql,list,id);
     }
+
 
     //get season percent from specific date
     public int getPrice_percent(String from){
@@ -55,9 +56,9 @@ public class PriceRepo {
         return template.queryForObject(sql,Integer.class);
     }
 
-    public void updateSeason(Season admin){
+    public void updateSeason(Season s){
         String sql = "UPDATE season SET season_name = ?, season_from = ?, season_to = ?,price_percent = ? WHERE season_ID = ?";
-        template.update(sql,admin.getSeason_name(),admin.getSeason_from(),admin.getSeason_to(),admin.getPrice_percent(),admin.getSeason_ID());
+        template.update(sql,s.getSeason_name(),s.getSeason_from(),s.getSeason_to(),s.getPrice_percent(),s.getSeason_ID());
     }
 
 
@@ -72,12 +73,12 @@ public class PriceRepo {
         template.update(sql,a.getCancellation_percent(),a.getToDay(),a.getFromDay(),a.getMinPrice(),a.getCancellation_ID());
     }
 
-    public int getCancellationPercent(int id){
-        String sql = "SELECT IFNULL((SELECT cancellation_percent FROM booking  " +
-                "join cancellation WHERE DATEDIFF(pickup_date,CURDATE()) >= cancellation.fromDay " +
-                "AND DATEDIFF(pickup_date, CURDATE()) <= cancellation.toDay AND booking_ID = ?), 0)";
-
-        return template.queryForObject(sql,Integer.class,id);
+    public Cancellation getCancellation(int id){
+        String sql = "SELECT cancellation.* FROM nordicmotorhomedb.cancellation  " +
+                "join nordicmotorhomedb.booking WHERE DATEDIFF(pickup_date,CURDATE()) >= cancellation.fromDay " +
+                "AND DATEDIFF(pickup_date, CURDATE()) <= cancellation.toDay AND booking_ID = ?";
+            RowMapper<Cancellation> list = new BeanPropertyRowMapper<>(Cancellation.class);
+        return template.queryForObject(sql,list,id);
 
     }
 

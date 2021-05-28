@@ -142,23 +142,25 @@ public class HomeController {
 
         return "redirect:/bookings";
     }
+
     @GetMapping("/deleteBooking{booking_ID}")
     public String deleteBooking(@PathVariable("booking_ID") int bookingID){
         bookingService.deleteBooking(bookingID);
         return "redirect:/adminBooking";
     }
-
-    //Not DOne
     @GetMapping("/cancelBooking{booking_ID}")
     public String cancelBooking(@PathVariable("booking_ID") int bookingID ){
-        int cancelFee = priceService.getCancellationPercent(bookingID);
+        Cancellation cancel = priceService.getCancellation(bookingID);
         Invoice invoice = invoiceService.fetchByID(bookingID);
         double price = invoice.bookingCancel();
 
-        bookingService.cancelBooking(bookingID);
-        System.out.println(price+" - "+cancelFee+" %");
 
-        price = (price*((double)cancelFee/100));
+        bookingService.cancelBooking(bookingID);
+        price = (price*((double)cancel.getCancellation_percent()/100));
+
+        if(price < cancel.getMinPrice()){
+            price = cancel.getMinPrice();
+        }
         invoice.setPrice(price);
         invoiceService.updateInvoice(invoice);
 
@@ -167,7 +169,7 @@ public class HomeController {
 
     /*******************************    Invoice     ********************************/
     @GetMapping("/invoice/{booking_ID}")
-    public String invoice(@PathVariable("booking_ID") int bookingID, Model model){
+    public String invoicePage(@PathVariable("booking_ID") int bookingID, Model model){
         Booking booking = bookingService.fetchById(bookingID);;
         Invoice invoice = invoiceService.fetchByID(bookingID);
         model.addAttribute("booking",booking);
@@ -192,13 +194,6 @@ public class HomeController {
 
         return "home/Invoice/invoices";
     }
-    @GetMapping("/updateInvoice")
-    public String updateInvoice(@RequestParam("extra_km") String km){
-        System.out.println(km);
-
-        return "redirect:/bookings";
-    }
-
 
     /*******************************    Renter     *******************************/
     @GetMapping("/renter")
@@ -211,16 +206,13 @@ public class HomeController {
     @GetMapping("/addRenter")
     public String addRenterPage(){ return "home/Renter/addRenter"; }
     @PostMapping("/add/")
-    public String add(@ModelAttribute Renter r, @RequestParam(value="enableBooking") String choice, RedirectAttributes rd){
+    public String addRenter(@ModelAttribute Renter r, @RequestParam(value="enableBooking") String choice, RedirectAttributes rd){
         int id = renterService.addRenter(r);
 
-        System.out.println(r.getMobile_number());
         if(choice.equals("yes")){
             rd.addAttribute("renter_ID",id);
             return "redirect:/pickRenter/{renter_ID}";
         }
-
-
 
         return "redirect:/renter";
     }
@@ -243,7 +235,7 @@ public class HomeController {
 
     /*******************************    Motorhome     *******************************/
     @GetMapping("/motorhomes")
-    public String MotorHomePage(Model model){
+    public String motorHomePage(Model model){
         ArrayList<MotorHome> list =(ArrayList<MotorHome>) motorHomeService.fetchAll();
         model.addAttribute("MotorHomes",list);
         return "home/MotorHome/MotorHomePage";
@@ -287,13 +279,7 @@ public class HomeController {
 
         return "home/Admin/ownerPage";
     }
-    @GetMapping("/adminRenter")
-    public String adminRenter(Model model){
-        ArrayList<Renter> list = (ArrayList<Renter>) renterService.fetchAll();
-        model.addAttribute("renters",list);
 
-        return "home/Admin/rentersView";
-    }
     @GetMapping("/adminBooking")
     public String adminBooking(Model model){
         ArrayList<Booking> list = (ArrayList<Booking>) bookingService.fetchAll();
@@ -314,7 +300,12 @@ public class HomeController {
 
         Booking booking = bookingService.fetchById(bookingID);;
         Invoice invoice = invoiceService.fetchByID(bookingID);
+        Price price = priceService.fetchPrice();
 
+        if(!booking.getStatus().equals("canceled")) {
+            int seasonP = priceService.getPrice_percent(booking.getPickup_date());
+            invoice.updateInvoice(seasonP, price, booking);
+        }
         model.addAttribute("invoice",invoice);
         model.addAttribute("renter",renterService.fetchById(booking.getRenter_ID()));
         model.addAttribute("booking",booking);
@@ -350,8 +341,8 @@ public class HomeController {
 
     //Seasons
     @GetMapping("/updateSeason{season_name}")
-    public String updateSeason(@PathVariable("season_name") String season_name, Model model){
-            model.addAttribute("season", priceService.getSeasonsByName(season_name));
+    public String updateSeason(@PathVariable("season_ID") int seasonID, Model model){
+            model.addAttribute("season", priceService.getSeasonsByID(seasonID));
         return "home/Admin/Pricing/updateSeason";
     }
     @GetMapping("/saveSeason")
@@ -361,8 +352,8 @@ public class HomeController {
     }
 
     //cancellation
-    @GetMapping("/saveCancellation/{cancellation_ID}")
-    public String saveCancellation(@PathVariable("cancellation_ID") int id, @ModelAttribute Cancellation cancel){
+    @GetMapping("/saveCancellation")
+    public String saveCancellation(@ModelAttribute Cancellation cancel){
         priceService.updateCancellation(cancel);
         return  "redirect:/adminPricing";
     }

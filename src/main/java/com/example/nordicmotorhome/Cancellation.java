@@ -9,8 +9,6 @@ public class Cancellation {
     private int minPrice;
     private int cancellation_ID;
 
-    //Repo
-    private PriceRepo priceRepo;
 
     public int getCancellation_percent() { return cancellation_percent; }
     public void setCancellation_percent(int cancellation_percent) { this.cancellation_percent = cancellation_percent; }

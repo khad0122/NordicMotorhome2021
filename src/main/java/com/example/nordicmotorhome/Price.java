@@ -11,9 +11,6 @@ public class Price {
     private double kmFee;
     private double collectFee;
 
-    //Repo
-    private PriceRepo priceRepo;
-
 
     //Getters & Setters
     public double getBasePrice() { return basePrice; }

@@ -20,7 +20,7 @@ public class PriceService {
     //Season
     public List<Season> fetchSeasons(){return priceRepo.fetchSeasons();}
 
-    public Season getSeasonsByName(String name){ return priceRepo.getSeasonsByName(name); }
+    public Season getSeasonsByID(int id ){ return priceRepo.getSeasonsByID(id); }
     public void updateSeason(Season season){ priceRepo.updateSeason(season);}
 
     public String getSeasonName(){return priceRepo.getSeasonName();}
@@ -33,6 +33,6 @@ public class PriceService {
     //Cancellation
     public List<Cancellation> fetchCancellation(){return priceRepo.fetchCancellation();}
     public void updateCancellation(Cancellation c){ priceRepo.updateCancellation(c);}
-    public int getCancellationPercent(int id){return priceRepo.getCancellationPercent(id);}
+    public Cancellation getCancellation(int id){return priceRepo.getCancellation(id);}
 
 }

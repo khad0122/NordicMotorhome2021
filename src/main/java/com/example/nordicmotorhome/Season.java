@@ -1,6 +1,5 @@
 package com.example.nordicmotorhome;
 
-import com.example.nordicmotorhome.Repository.PriceRepo;
 
 public class Season {
     private int price_percent;
@@ -8,9 +7,6 @@ public class Season {
     private String season_from;
     private String season_to;
     private int season_ID;
-
-    //Repo
-    private PriceRepo priceRepo;
 
     public int getPrice_percent() { return price_percent; }
     public void setPrice_percent(int price_percent) { this.price_percent = price_percent; }
