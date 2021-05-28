@@ -1,10 +1,9 @@
 package com.example.nordicmotorhome.Model;
 
 
-import com.example.nordicmotorhome.Admin;
+import com.example.nordicmotorhome.Price;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 
 public class Invoice{
@@ -17,7 +16,7 @@ public class Invoice{
     //the seasonal percent for the booking
     private int season_percent;
 
-    //Amount * extraPrice. is set outside class
+    //Extra eq. Amount * extraPrice.
     private int extra;
     //sum of Distance to pickup, and drop off, if not 0
     private double outsideKmFee;
@@ -37,23 +36,10 @@ public class Invoice{
     private double  fuelFee;
 
 
-    //Status check, approval by bookkeeper
-    private boolean checkStatus;
-    private String status  = checkStatus ? "Approved" : "Not Approved";
-
     //constructors
     public Invoice() {fuelCheck=false; }
-    public Invoice(int booking_ID, int season, double price,int extra, double fee) {
+    public Invoice(int booking_ID) {
         this.booking_ID = booking_ID;
-        this.season_percent = season;
-        this.price = price;
-        this.extra = extra;
-        this.fee = fee;
-
-
-        //wil always start as 0 and false
-        extra_km = 0;
-        fuelCheck = false;
     }
 
     //Getters & Setters
@@ -68,8 +54,9 @@ public class Invoice{
     public double getPrice() { return price; }
     public int getExtra_km() { return extra_km; }
     public double getFuelFee() { return fuelFee; }
-    public boolean isCheckStatus() { return checkStatus; }
-    public String getStatus() { return status; }
+    public boolean getFuelCheck(){return fuelCheck;}
+
+
 
 
     public void setInvoice_ID(int invoice_ID) { this.invoice_ID = invoice_ID; }
@@ -81,8 +68,7 @@ public class Invoice{
     public void setPrice(double price) { this.price = price; }
     public void setExtra_km(int extra_km) { this.extra_km = extra_km; }
     public void setFuelFee(double fuelFee) { this.fuelFee = fuelFee; }
-    public void setCheckStatus(boolean checkStatus) { this.checkStatus = checkStatus; }
-    public void setStatus(String status) { this.status = status; }
+
 
     public boolean isFuelCheck() { return fuelCheck; }
     public void setFuelCheck(boolean fuelCheck) { this.fuelCheck = fuelCheck; }
@@ -90,58 +76,42 @@ public class Invoice{
 
 
     //methods Calculator
-    public void updateInvoice(int seasonP,Admin admin, Booking booking){
+    public void updateInvoice(int seasonP, Price price, Booking booking){
         DecimalFormat deci = new DecimalFormat("##.##");
         fee = 0;
-        price = admin.getBasePrice();
+
+        this.price = price.getBasePrice();
 
         season_percent = seasonP;
 
         //Setting the seasonal percentage
         if(season_percent != 0) {
-            price = price + (price * ((double) season_percent / 100));
+            this.price = this.price + (this.price * ((double) season_percent / 100));
         }
 
         /*          Fee         */
         //multiplying number of days with price per day
-        price = (price * booking.getDaysTotal());
+        this.price = (this.price * booking.getDaysTotal());
 
         if(booking.getExtras() != 0) {
-            extra = booking.getExtras() * admin.getExtraPrice();
+            extra = booking.getExtras() * price.getExtraPrice();
             fee = extra;
         }
 
         //OutsideKMFee
         if(booking.getTotalKm() != 0) {
-            outsideKmFee = booking.getTotalKm() * admin.getCollectFee();
+            outsideKmFee = booking.getTotalKm() * price.getCollectFee();
             outsideKmFee = Double.parseDouble(deci.format(outsideKmFee).replace(",","."));
             fee += outsideKmFee;
         }
 
+/*          Check-out       */
         //FuelCheck And Extra KM
+                if(fuelCheck) { fuelFee = price.getFuelFee(); fee += fuelFee; }
+                if(extra_km != 0){ fee += extra_km * price.getKmFee(); }
+            this.price += fee;
 
-            if(fee == 0){
-                if(fuelCheck) {
-                    fuelFee = admin.getFuelFee();
-                    fee += fuelFee;
-                }
-                if(extra_km != 0){
-                    fee += extra_km * admin.getKmFee();
-                }
-            }
-            else {
-                if(fuelCheck) {
-                    fuelFee = admin.getFuelFee();
-                    fee += fuelFee;
-                }
-                if(extra_km != 0) {
-                    fee += (extra_km * admin.getKmFee());
-                }
-            }
-
-            price += fee;
-
-        price = Double.parseDouble(deci.format(price).replace(",","."));
+        this.price = Double.parseDouble(deci.format(this.price).replace(",","."));
     }
 
     public double bookingCancel(){

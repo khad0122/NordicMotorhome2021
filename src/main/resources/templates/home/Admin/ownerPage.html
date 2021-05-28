@@ -21,10 +21,8 @@
                         <div><p>Active Bookings</p> <strong th:text = "${bookingCount}"></strong></div>
                         <div><p>Total Motorhomes</p><strong th:text = "${motorCount}"></strong> </div>
                         <div><p>Available Motorhomes </p><strong th:text = "${motorCount}-${bookingCount}" ></strong></div>
-                        <div><p>Employed Staff</p><strong th:text = "${staffCount}" ></strong> </div>
                     </div>
                     <div class = "info">
-                        <div><p>Rentals in total for the year</p></div>
                         <div><p>Current season</p><strong th:text = "${seasonName}"></strong></div>
                         <div><p>Season Percent</p><strong th:text = "${pricePercent}"></strong></div>
                         <div><p>Base Price</p><strong th:text = "${price.basePrice}"></strong></div>

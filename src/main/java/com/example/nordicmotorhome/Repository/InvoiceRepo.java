@@ -6,8 +6,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Repository
@@ -29,24 +27,27 @@ public class InvoiceRepo {
         }return null;
     }
 
+    public void addInvoice(Invoice invoice){
+        String sql = "INSERT INTO invoice(booking_ID,season_percent,extra_km,fee,price) VALUES(?,?,?,?,?)";
+        template.update(sql,invoice.getBooking_ID(),invoice.getSeason_percent(),invoice.getExtra_km(),invoice.getFee(),invoice.getPrice());
+    }
+    public void updateInvoice(Invoice i) {
+        String sql = "UPDATE invoice SET season_percent = ?, extra_km = ?, fee = ?, price = ?, fuelCheck = ? WHERE invoice_ID = ?";
+        template.update(sql,i.getSeason_percent(),i.getExtra_km(),i.getFee(),i.getPrice(),i.getFuelCheck(), i.getInvoice_ID());
+    }
+    public void deleteInvoice(int id){
+        String sql = "DELETE FROM invoice WHERE invoice_ID = ?";
+        template.update(sql,id);
+    }
+
+    //slettes hvis ikke bruges
     public int getCount(int id){
         String sql = "SELECT count(*) FROM invoice WHERE booking_id = ?";
         return template.queryForObject(sql,Integer.class,id);
     }
 
 
-    public void addInvoice(Invoice invoice){
-        String sql = "INSERT INTO invoice(booking_ID,season_percent,extra_km,fee,price) VALUES(?,?,?,?,?)";
-        template.update(sql,invoice.getBooking_ID(),invoice.getSeason_percent(),invoice.getExtra_km(),invoice.getFee(),invoice.getPrice());
-    }
-    public void updateInvoice(Invoice i) {
-        String sql = "UPDATE invoice SET season_percent = ?, extra_km = ?, fee = ?, price = ? WHERE invoice_ID = ?";
-        template.update(sql,i.getSeason_percent(),i.getExtra_km(),i.getFee(),i.getPrice(),i.getInvoice_ID());
-    }
-    public void deleteInvoice(int id){
-        String sql = "DELETE FROM invoice WHERE invoice_ID = ?";
-        template.update(sql,id);
-    }
+
 }
 
 

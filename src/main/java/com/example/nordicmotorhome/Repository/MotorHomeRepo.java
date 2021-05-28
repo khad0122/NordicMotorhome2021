@@ -13,6 +13,16 @@ import java.util.List;
 public class MotorHomeRepo {
     @Autowired
     JdbcTemplate template;
+    public List<MotorHome> fetchAll(){
+        String sql = "SELECT * FROM motorhome";
+        RowMapper<MotorHome> list = new BeanPropertyRowMapper<>(MotorHome.class);
+        return template.query(sql,list);
+    }
+    public MotorHome fetchById(int id){
+        String sql = "SELECT * FROM motorhome WHERE motorhome_ID = ?";
+        RowMapper<MotorHome> list = new BeanPropertyRowMapper<>(MotorHome.class);
+        return template.queryForObject(sql,list,id);
+    }
 
     public void addMotorHome(MotorHome m){
         String sql = "INSERT INTO motorhome(model,brand,km,type,size) values(?,?,?,?,?)";
@@ -26,16 +36,9 @@ public class MotorHomeRepo {
         String sql = "DELETE FROM motorhome WHERE motorhome_ID = ?";
         template.update(sql,id);
     }
-    public List<MotorHome> fetchAll(){
-        String sql = "SELECT * FROM motorhome";
-        RowMapper<MotorHome> list = new BeanPropertyRowMapper<>(MotorHome.class);
-        return template.query(sql,list);
-    }
-    public MotorHome fetchById(int id){
-        String sql = "SELECT * FROM motorhome WHERE motorhome_ID = ?";
-        RowMapper<MotorHome> list = new BeanPropertyRowMapper<>(MotorHome.class);
-        return template.queryForObject(sql,list,id);
-    }
+
+
+    //slettes hvis ikke bruges
     public int motorhomeCount(){
         String sql = "SELECT count(*) FROM motorhome";
         return template.queryForObject(sql, Integer.class);

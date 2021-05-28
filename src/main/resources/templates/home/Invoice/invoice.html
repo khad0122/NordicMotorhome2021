@@ -43,8 +43,9 @@
 
                         <label>Extra Equipment (<span th:text = "${booking.getExtras()}"></span>)</label><span class = "invoice-info"><span th:text = "${invoice.getExtra()}"></span>€</span>
                         <label>Collect km </label><span class = "invoice-info"><span th:text = "${invoice.outsideKmFee}"></span>€</span>
+                        <label id = "empty"></label><span></span>
                         <label>Extra Km</label><span class = "invoice-info"><span th:text = "${invoice.getExtra_km()}"></span></span>
-                        <label>Fuel Check</label><span class = "invoice-info"><span th:text = "${invoice.isFuelCheck()}"></span></span>
+                        <label>Fuel Check Fee</label><span class = "invoice-info"><span th:text = "${invoice.getFuelFee()}"></span>€</span>
                     </div>
             </div>
         </div>

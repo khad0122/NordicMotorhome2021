@@ -85,7 +85,7 @@ td{
 
 /*  Update  Input Fields    */
 
-.update td input{
+.update td input, .update td select{
     display: block;
     width:100%;
     height:100%;
@@ -93,12 +93,14 @@ td{
     padding-left:10px;
     margin:0;
 }
- input:focus{
+ input:focus, select:focus{
     outline:none;
 }
 .update td {
     padding:5px 10px;
 }
+
+
 
 /*    Confirm Booking  */
 .detail{

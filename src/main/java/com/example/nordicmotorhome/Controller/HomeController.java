@@ -1,17 +1,19 @@
 package com.example.nordicmotorhome.Controller;
 
-import com.example.nordicmotorhome.Admin;
+import com.example.nordicmotorhome.Price;
+import com.example.nordicmotorhome.Cancellation;
 import com.example.nordicmotorhome.Model.Booking;
 import com.example.nordicmotorhome.Model.Invoice;
 import com.example.nordicmotorhome.Model.MotorHome;
 import com.example.nordicmotorhome.Model.Renter;
+import com.example.nordicmotorhome.Season;
 import com.example.nordicmotorhome.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.tags.form.RadioButtonTag;
 
 import java.util.ArrayList;
 
@@ -25,7 +27,7 @@ public class HomeController {
     @Autowired
     MotorHomeService motorHomeService;
     @Autowired
-    AdminService adminService;
+    PriceService priceService;
     @Autowired
     InvoiceService invoiceService;
 
@@ -89,7 +91,7 @@ public class HomeController {
                                         @ModelAttribute Booking booking, Model model){
 
 
-        Admin admin = adminService.fetchPrice();
+        Price price = priceService.fetchPrice();
         //defines startKM an stores in booking object
         booking.setStart_km(motorHomeService.fetchById(motorID).getKm());
 
@@ -98,49 +100,43 @@ public class HomeController {
 
         //Booking instance is added to DB
         bookingService.addBooking(booking);
+
+        //sets status, pending : active
         bookingService.setBookingStatus();
 
         //booking Object is updated with a bookingID
         booking = bookingService.fetchByRenterID(renterID);
 
+        int season_percent = priceService.getPrice_percent(booking.getPickup_date());
 
-        //Invoice Section
 
-        //General Fields that always needs to be done before invoice,to make sure all prices are updated
-        //Extra Equipments, Price pr equimpent is stored in Admin Object * amount of extra items in booking
-        int extra = admin.getExtraPrice()*booking.getExtras();
-
-        //Set BasePrice from Admin Object
-        double price = admin.getBasePrice();
-
-        //For outside pickup & dropoff, a fee for each km to distination
-        double outsideKmFee = booking.getTotalKm()*admin.getCollectFee();
-
-        //seasonal percentage is defined with pickup_date
-        int season_percent = adminService.getPrice_percent(booking.getPickup_date());
-
-        Invoice invoice = new Invoice(booking.getBooking_ID(),season_percent,price,extra,outsideKmFee);
-        invoice.updateInvoice(season_percent,admin,booking);
+        Invoice invoice = new Invoice(booking.getBooking_ID());
+        invoice.updateInvoice(season_percent,price,booking);
         invoiceService.addInvoice(invoice);
         return "redirect:/bookings";
     }
     @GetMapping("/updateBooking/{booking_ID}")
     public String updateBookingPage(@PathVariable("booking_ID") int bookingID,Model model){
         model.addAttribute("booking",bookingService.fetchById(bookingID));
+        Invoice invoice = invoiceService.fetchByID(bookingID);
+        model.addAttribute("invoice",invoiceService.fetchByID(bookingID));
         return "home/Booking/updateBooking";
     }
     @PostMapping("/saveUpdate")
-    public String saveUpdate(@ModelAttribute Booking booking){
-        Admin admin = adminService.fetchPrice();
+    public String saveUpdate(@ModelAttribute Booking booking, @RequestParam("extra_km") int extraKm, @RequestParam("fuelCheck") boolean check){
+        Price price = priceService.fetchPrice();
 
         //updating daysTotal incase pickup and drop are changed
         booking.setDaysTotal(bookingService.getTotalDays(booking.getPickup_date(),booking.getReturn_date()));
 
         //fetching the associated invoice via booking ID
         Invoice invoice = invoiceService.fetchByID(booking.getBooking_ID());
+        invoice.setFuelCheck(check);
+        invoice.setExtra_km(extraKm);
+
 
         //Invoice fields are updated with method updateInvoice()
-        invoice.updateInvoice(adminService.getPrice_percent(booking.getPickup_date()), admin, booking);
+        invoice.updateInvoice(priceService.getPrice_percent(booking.getPickup_date()), price, booking);
         invoiceService.updateInvoice(invoice);
         bookingService.updateBooking(booking);
 
@@ -155,7 +151,7 @@ public class HomeController {
     //Not DOne
     @GetMapping("/cancelBooking{booking_ID}")
     public String cancelBooking(@PathVariable("booking_ID") int bookingID ){
-        int cancelFee = adminService.getCancellationPercent(bookingID);
+        int cancelFee = priceService.getCancellationPercent(bookingID);
         Invoice invoice = invoiceService.fetchByID(bookingID);
         double price = invoice.bookingCancel();
 
@@ -177,8 +173,9 @@ public class HomeController {
         model.addAttribute("booking",booking);
 
         if(!booking.getStatus().equals("canceled")) {
-            invoice.updateInvoice(adminService.getPrice_percent(booking.getPickup_date()), adminService.fetchPrice(), booking);
+            invoice.updateInvoice(priceService.getPrice_percent(booking.getPickup_date()), priceService.fetchPrice(), booking);
             invoiceService.updateInvoice(invoice);
+            System.out.println(invoice.getFuelFee());
         }
 
         model.addAttribute("renter",renterService.fetchById(booking.getRenter_ID()));
@@ -283,10 +280,9 @@ public class HomeController {
         model.addAttribute("renterCount",renterService.renterCount());
         model.addAttribute("motorCount",motorHomeService.motorhomeCount());
         model.addAttribute("bookingCount",bookingService.bookingCount());
-        model.addAttribute("staffCount",adminService.staffCount());
-        model.addAttribute("seasonName", adminService.getSeasonName());
-        model.addAttribute("price",adminService.fetchPrice());
-        String percent = adminService.getCurrentPricePercent()+" %";
+        model.addAttribute("seasonName", priceService.getSeasonName());
+        model.addAttribute("price", priceService.fetchPrice());
+        String percent = priceService.getCurrentPricePercent()+" %";
         model.addAttribute("pricePercent",percent);
 
         return "home/Admin/ownerPage";
@@ -335,18 +331,18 @@ public class HomeController {
     //Pricing
     @GetMapping("/adminPricing")
     public String adminPricing(Model model){
-        ArrayList<Admin> seasonList = (ArrayList<Admin>) adminService.fetchSeasons();
-        ArrayList<Admin> cancelList = (ArrayList<Admin>) adminService.fetchCancellation();
+        ArrayList<Season> seasonList = (ArrayList<Season>) priceService.fetchSeasons();
+        ArrayList<Cancellation> cancelList = (ArrayList<Cancellation>) priceService.fetchCancellation();
 
         model.addAttribute("cancellation",cancelList);
-        model.addAttribute("price",adminService.fetchPrice());
+        model.addAttribute("price", priceService.fetchPrice());
         model.addAttribute("season",seasonList);
 
         return "home/Admin/Pricing/pricingView";
     }
     @GetMapping("/savePricing")
-    public String savePricing(@ModelAttribute Admin admin){
-            adminService.updatePrice(admin);
+    public String savePricing(@ModelAttribute Price price){
+            priceService.updatePrice(price);
 
         //update DB
         return "redirect:/adminPricing";
@@ -355,20 +351,19 @@ public class HomeController {
     //Seasons
     @GetMapping("/updateSeason{season_name}")
     public String updateSeason(@PathVariable("season_name") String season_name, Model model){
-            model.addAttribute("season",adminService.getSeasonsByName(season_name));
+            model.addAttribute("season", priceService.getSeasonsByName(season_name));
         return "home/Admin/Pricing/updateSeason";
     }
     @GetMapping("/saveSeason")
-    public String saveSeason(@ModelAttribute Admin admin){
-        adminService.updateSeason(admin);
+    public String saveSeason(@ModelAttribute Season season){
+        priceService.updateSeason(season);
         return "redirect:/adminPricing";
     }
 
     //cancellation
     @GetMapping("/saveCancellation/{cancellation_ID}")
-    public String saveCancellation(@PathVariable("cancellation_ID") int id, @ModelAttribute Admin admin){
-        System.out.println(admin.getCancellation_ID()+"\n"+admin.getMinPrice());
-        adminService.updateCancellation(admin);
+    public String saveCancellation(@PathVariable("cancellation_ID") int id, @ModelAttribute Cancellation cancel){
+        priceService.updateCancellation(cancel);
         return  "redirect:/adminPricing";
     }
 }

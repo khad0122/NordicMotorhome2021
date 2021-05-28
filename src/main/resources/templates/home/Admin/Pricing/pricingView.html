@@ -11,7 +11,7 @@
         <div class ="main">
             <div class = "menu-bar">
                 <div>
-                    <a id = "return-admin" class = "menu-btn" href = "/admin">Return</a>
+                    <a id = "return-price" class = "menu-btn" href = "/admin">Return</a>
                 </div>
                 <div>
                     <a class = "menu-btn" href = "/adminBooking">Bookings</a>
@@ -55,7 +55,8 @@
                     </table>
                 </div>
                 <div class = "cancellation update">
-                    <table>
+                    <form th:action = "@{'/saveCancellation/'+${Cancel.getCancellation_ID()}}" method = "get" >
+                        <table>
                         <thead>
                             <tr>
                                 <th>Cancellation ID</th>
@@ -68,17 +69,18 @@
                         </thead>
                         <tbody>
                            <tr th:each = "Cancel: ${cancellation}">
-                               <form th:action = "@{'/saveCancellation/'+${Cancel.getCancellation_ID()}}" method = "get" >
+
                                    <td><input type = "text" name = "cancellation_ID" th:value = "${Cancel.getCancellation_ID()}" readonly></td>
                                    <td><input type = "text" name = "cancellation_percent" th:value = "${Cancel.getCancellation_percent()}"></td>
                                    <td><input type = "text" name = "fromDay" th:value = "${Cancel.getFromDay()}"></td>
                                    <td><input type = "text" name = "toDay" th:value = "${Cancel.getToDay()}"></td>
                                    <td><input type = "text" name = "minPrice" th:value = "${Cancel.getMinPrice()}"></td>
                                    <td style = "padding:0;"><input type = "submit" value = "Update" class = "btn side-btn"></td>
-                               </form>
+
                            </tr>
                         </tbody>
                     </table>
+                    </form>
                 </div>
             </div>
         </div>

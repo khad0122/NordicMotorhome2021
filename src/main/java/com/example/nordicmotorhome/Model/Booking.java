@@ -29,25 +29,6 @@ public class Booking {
 
     private String status;
 
-
-    //constructors
-
-    public Booking() {
-
-    }
-
-    public Booking( int renter_ID, int motorhome_ID, int start_km, String pickup_date, String return_date, String pickup_location, String dropoff_location, int extras, int daysTotal) {
-
-        this.renter_ID = renter_ID;
-        this.motorhome_ID = motorhome_ID;
-        this.start_km = start_km;
-        this.pickup_date = pickup_date;
-        this.return_date = return_date;
-        this.pickup_location = pickup_location;
-        this.dropoff_location = dropoff_location;
-        this.extras = extras;
-        this.daysTotal = daysTotal;
-    }
     //Getters & Setters
 
     public int getBooking_ID() { return booking_ID; }
@@ -79,8 +60,4 @@ public class Booking {
     public void setDaysTotal(int days){daysTotal = days;}
     public void setStatus(String st){status = st;}
 
-
-    public String toString(){
-        return "BookingID "+booking_ID+" - RenterID "+renter_ID+" - MotorhomeID "+motorhome_ID+" - startKm "+start_km+" - Pickup-date "+pickup_date+" - return-date "+return_date+" - pickup-location "+pickup_location+" - KmTOPickup "+kmToPickup+" - dropoff-location "+dropoff_location+"kmToDropoff "+kmToDropoff+" - extra "+extras;
-    }
 }

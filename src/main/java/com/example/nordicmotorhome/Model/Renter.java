@@ -16,23 +16,8 @@ public class Renter {
     private String address_city;
     private int DLN;
     private String driversince_date;
-    private boolean booked;
-    private String status = booked ? "Booked" : "Not Booked";
 
-    //constructors
-    public Renter(){}
-    public Renter(int renter_ID, String first_name, String last_name, int mobile_number, String email, String address_street, int address_zip, String address_city, int DLN, String driversince_date) {
-        this.renter_ID = renter_ID;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.mobile_number = mobile_number;
-        this.email = email;
-        this.address_street = address_street;
-        this.address_zip = address_zip;
-        this.address_city = address_city;
-        this.DLN = DLN;
-        this.driversince_date = driversince_date;
-    }
+
 
     //Getters & Setters
     public int getRenter_ID() { return renter_ID; }
@@ -67,9 +52,4 @@ public class Renter {
     public String getDriversince_date() { return driversince_date; }
     public void setDriversince_date(String driversince_date) { this.driversince_date = driversince_date; }
 
-    public void setBookStatus(boolean bol){booked = bol;}
-
-    public String toString(){
-        return "firstName "+first_name+" - DriverSince "+driversince_date;
-    }
 }
