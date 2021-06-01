@@ -43,7 +43,6 @@
               <td th:text = "${Invoice.getFuelFee()}"></td>
               <td>
                 <a class = "btn" th:href = "@{'/showInvoice/'+${Invoice.getBooking_ID()}}">Show</a>
-                <a class = "btn" th:href = "@{'/deleteInvoice/'+${Invoice.getInvoice_ID()}}" onclick = "return confirm('Are you sure yout want to delete This Invoice?');">Delete</a>
               </td>
             </tr>
           </tbody>

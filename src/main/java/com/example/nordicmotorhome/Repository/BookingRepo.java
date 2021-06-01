@@ -15,13 +15,8 @@ public class BookingRepo {
     JdbcTemplate template;
 
     public List<Booking> fetchAll(){
-        String sql = "SELECT     season_ID, booking.* from booking\n" +
-                "left join renter on booking.renter_ID = renter.renter_ID\n" +
-                "left join motorhome on booking.motorhome_ID = motorhome.motorhome_ID\n" +
-                "left join season on MONTH(booking.pickup_date) <= season.season_to and MONTH(booking.pickup_date) >= season.season_from \n" +
-                ";";//May be set as joined select booking - invoice
+        String sql = "SELECT  * from booking";
         RowMapper<Booking> list = new BeanPropertyRowMapper<>(Booking.class);
-
         return template.query(sql,list);
     }
     public Booking fetchById(int id){

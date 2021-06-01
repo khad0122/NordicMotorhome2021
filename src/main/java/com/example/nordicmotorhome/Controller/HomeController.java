@@ -312,12 +312,6 @@ public class HomeController {
 
         return "home/Admin/Invoice/showInvoice";
     }
-    @GetMapping("/deleteInvoice/{invoice_ID}")
-    public String deleteInvoice(@PathVariable("invoice_ID") int invoiceID){
-        invoiceService.deleteInvoice(invoiceID);
-
-        return "redirect:/adminInvoice";
-    }
 
     //Pricing
     @GetMapping("/adminPricing")
