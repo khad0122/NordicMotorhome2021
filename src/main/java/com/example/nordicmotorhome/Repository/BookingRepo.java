@@ -31,7 +31,6 @@ public class BookingRepo {
         RowMapper<Booking> list = new BeanPropertyRowMapper<>(Booking.class);
         return template.queryForObject(sql,list,id);
     }
-
     //Insert,Update and Delete
     public void addBooking(Booking booking){
         String sql = "INSERT INTO booking (renter_ID,motorhome_ID,start_kM,pickup_date,return_date,pickup_location,kmToPickup,dropoff_location,kmToDropoff,extras,daysTotal) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
@@ -45,20 +44,22 @@ public class BookingRepo {
         String sql = "DELETE FROM booking WHERE booking_ID = ?";
         template.update(sql,id);
     }
-    public void cancelBooking(int id){
-        String sql = "UPDATE booking SET pickup_location = 0, dropoff_location = 0, kmToPickup = 0, kmToDropoff = 0, extras = 0, status = 'canceled'  WHERE booking_ID = ?";
-        template.update(sql,id);
+    public int getDaysTotal(String from, String to){
+        String sql = "SELECT DATEDIFF(?,?)";
+        return template.queryForObject(sql,Integer.class,to,from);
     }
     public void setBookingStatus(){
         String sql = "update booking set status = if(status = 'canceled', 'canceled',(if(pickup_date > CURDATE(),'Pending','Active')))";
         template.update(sql);
     }
+    public void cancelBooking(int id){
+        String sql = "UPDATE booking SET pickup_location = 0, dropoff_location = 0, kmToPickup = 0, kmToDropoff = 0, extras = 0, status = 'canceled'  WHERE booking_ID = ?";
+        template.update(sql,id);
+    }
+
 
     //special
-    public int getDaysTotal(String from, String to){
-        String sql = "SELECT DATEDIFF(?,?)";
-        return template.queryForObject(sql,Integer.class,to,from);
-    }
+
     public int bookingCount(){
         String sql = "SELECT count(*) FROM booking";
         return template.queryForObject(sql,Integer.class);

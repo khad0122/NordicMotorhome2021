@@ -68,6 +68,10 @@ public class Invoice{
 
 
 
+
+
+
+
     //methods Calculator
     public void updateInvoice(int seasonP, Price price, Booking booking){
         DecimalFormat deci = new DecimalFormat("##.##");
