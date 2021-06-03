@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Pricing</title>
     <link rel = "stylesheet" th:href = "@{/styles.css}">
+    <link rel = "stylesheet" th:href = "@{/adminStyle.css}">
 </head>
 <body>
         <h1>Nordic Motorhome</h1>
@@ -47,7 +48,7 @@
                                 <td th:text = "${Season.getSeason_to()}"></td>
                                 <td th:text = "${Season.getPrice_percent()}"></td>
                                 <td>
-                                    <a class ="btn"  th:href = "@{'/updateSeason'+${Season.getSeason_name()}}">Update</a>
+                                    <a class ="btn"  th:href = "@{'/updateSeason'+${Season.getSeason_ID()}}">Update</a>
                                 </td>
                             </tr>
                         </tbody>

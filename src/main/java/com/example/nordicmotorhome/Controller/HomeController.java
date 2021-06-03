@@ -349,7 +349,7 @@ public class HomeController {
     }
 
     //Seasons
-    @GetMapping("/updateSeason{season_name}")
+    @GetMapping("/updateSeason{season_ID}")
     public String updateSeason(@PathVariable("season_ID") int seasonID, Model model){
             model.addAttribute("season", priceService.getSeasonsByID(seasonID));
         return "home/Admin/Pricing/updateSeason";
