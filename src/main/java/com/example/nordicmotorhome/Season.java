@@ -1,6 +1,5 @@
 package com.example.nordicmotorhome;
 
-
 public class Season {
     private int price_percent;
     private String season_name;

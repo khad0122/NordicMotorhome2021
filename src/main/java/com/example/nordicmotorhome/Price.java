@@ -1,5 +1,4 @@
 package com.example.nordicmotorhome;
-import com.example.nordicmotorhome.Repository.PriceRepo;
 
 public class Price {
 

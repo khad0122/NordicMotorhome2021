@@ -13,6 +13,7 @@ import java.util.List;
 public class RenterRepo {
     @Autowired
     JdbcTemplate template;
+
     public List<Renter> fetchAll(){
         String sql = "SELECT * FROM renter";
         RowMapper<Renter> list = new BeanPropertyRowMapper<>(Renter.class);

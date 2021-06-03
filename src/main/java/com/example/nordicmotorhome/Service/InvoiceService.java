@@ -19,7 +19,6 @@ public class InvoiceService {
 
     public int getCount(int id){ return invoiceRepo.getCount(id); }
 
-
     public void addInvoice(Invoice invoice){ invoiceRepo.addInvoice(invoice);}
     public void updateInvoice(Invoice i) { invoiceRepo.updateInvoice(i); }
 

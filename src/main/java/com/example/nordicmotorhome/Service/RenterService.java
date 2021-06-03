@@ -11,25 +11,20 @@ import java.util.List;
 public class RenterService {
     @Autowired
     RenterRepo renterRepo;
+    public List<Renter> fetchAll() {
+        return renterRepo.fetchAll();
+    }
+    public Renter fetchById(int id) { return renterRepo.fetchById(id); }
 
     public int addRenter(Renter r) {
         return renterRepo.addRenter(r);
     }
-
     public void updateRenter(Renter r) {
         renterRepo.updateRenter(r);
     }
-
     public void deleteRenter(int id) {
         renterRepo.deleteRenter(id);
     }
 
-    public List<Renter> fetchAll() {
-        return renterRepo.fetchAll();
-    }
-
-    public Renter fetchById(int id) {
-        return renterRepo.fetchById(id);
-    }
     public int renterCount(){return renterRepo.renterCount();}
 }

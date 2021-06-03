@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Pricing</title>
     <link rel = "stylesheet" th:href = "@{/styles.css}">
-    <link rel = "stylesheet" th:href = "@{/adminStyle.css}">
 </head>
 <body>
         <h1>Nordic Motorhome</h1>
@@ -70,7 +69,7 @@
                             <tbody>
 
                                     <tr th:each = "Cancel: ${cancellation}">
-                                            <form th:action = "@{/saveCancellation}" method = "get" >
+                                        <form th:action = "@{/saveCancellation}" method = "get" >
                                             <td><input type = "text" name = "cancellation_ID" th:value = "${Cancel.getCancellation_ID()}" readonly></td>
                                             <td><input type = "text" name = "cancellation_percent" th:value = "${Cancel.getCancellation_percent()}"></td>
                                             <td><input type = "text" name = "fromDay" th:value = "${Cancel.getFromDay()}"></td>

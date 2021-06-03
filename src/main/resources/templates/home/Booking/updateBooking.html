@@ -38,10 +38,10 @@
                                     <td><input type = "text" th:value = "${booking.extras}" name = "extras" ></td>
                                     <td><input type = "text" th:value = "${invoice.extra_km}" name = "extra_km" ></td>
                                     <td>
-                                            <select name = "fuelCheck" th:value = "${invoice.fuelCheck}">
-                                                    <option th:text = "${invoice.isFuelCheck()}"  hidden></option>
-                                                    <option>true</option>
-                                                    <option>false</option>
+                                        <select name = "fuelCheck" th:value = "${invoice.fuelCheck}">
+                                            <option th:text = "${invoice.getFuelCheck()}"  hidden></option>
+                                            <option>true</option>
+                                            <option>false</option>
                                         </select>
                                     </td>
                                 </tr>

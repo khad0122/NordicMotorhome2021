@@ -40,6 +40,8 @@ public class HomeController {
     /*******************************    Booking     *******************************/
     @GetMapping("/bookings")
     public String bookingPage(Model model){
+
+        //Hver gang Booking siden anmodes, opdateres status for alle bookinger i databasen
         bookingService.setBookingStatus();
         ArrayList<Booking> list =(ArrayList<Booking>) bookingService.fetchAll();
         model.addAttribute("bookings",list);
@@ -90,8 +92,9 @@ public class HomeController {
                                         @PathVariable("motorhome_ID") int motorID,
                                         @ModelAttribute Booking booking, Model model){
 
-
+        //base prices retrieves from DB
         Price price = priceService.fetchPrice();
+
         //defines startKM an stores in booking object
         booking.setStart_km(motorHomeService.fetchById(motorID).getKm());
 
@@ -107,11 +110,16 @@ public class HomeController {
         //booking Object is updated with a bookingID
         booking = bookingService.fetchByRenterID(renterID);
 
+        //season percent is set based on, booking pickup date
         int season_percent = priceService.getPrice_percent(booking.getPickup_date());
 
-
+        //invoice object initialized with booking_ID
         Invoice invoice = new Invoice(booking.getBooking_ID());
+
+        //invoice updateInvoice metode is called, to set price
         invoice.updateInvoice(season_percent,price,booking);
+
+        //invoice is added to db
         invoiceService.addInvoice(invoice);
         return "redirect:/bookings";
     }
@@ -137,6 +145,7 @@ public class HomeController {
 
         //Invoice fields are updated with method updateInvoice()
         invoice.updateInvoice(priceService.getPrice_percent(booking.getPickup_date()), price, booking);
+        //both invoice and booking are updated
         invoiceService.updateInvoice(invoice);
         bookingService.updateBooking(booking);
 
@@ -152,12 +161,17 @@ public class HomeController {
     public String cancelBooking(@PathVariable("booking_ID") int bookingID ){
         Cancellation cancel = priceService.getCancellation(bookingID);
         Invoice invoice = invoiceService.fetchByID(bookingID);
+
+        //cals a methode from invoice, returns price without fees
         double price = invoice.bookingCancel();
 
 
         bookingService.cancelBooking(bookingID);
+
+        //depending on when the booking is canceled, the cancellation percent will differ
         price = (price*((double)cancel.getCancellation_percent()/100));
 
+        //if price is lower then minimum cancellation price
         if(price < cancel.getMinPrice()){
             price = cancel.getMinPrice();
         }
@@ -174,15 +188,15 @@ public class HomeController {
         Invoice invoice = invoiceService.fetchByID(bookingID);
         model.addAttribute("booking",booking);
 
+        //as long as status is not canceled, invoiceUpdate method should not be called if status is cancelled
+        //Every time invoice is requested, prices are updated.
         if(!booking.getStatus().equals("canceled")) {
             invoice.updateInvoice(priceService.getPrice_percent(booking.getPickup_date()), priceService.fetchPrice(), booking);
             invoiceService.updateInvoice(invoice);
-            System.out.println(invoice.getFuelFee());
         }
 
         model.addAttribute("renter",renterService.fetchById(booking.getRenter_ID()));
         model.addAttribute("invoice",invoice);
-
 
         return "home/Invoice/invoice";
     }
@@ -209,7 +223,10 @@ public class HomeController {
     public String addRenter(@ModelAttribute Renter r, @RequestParam(value="enableBooking") String choice, RedirectAttributes rd){
         int id = renterService.addRenter(r);
 
+        //an option to add booking, to a newly created Renter.
+        //if choice is yes
         if(choice.equals("yes")){
+            //RedirectAttributes allow to redirect with parameter
             rd.addAttribute("renter_ID",id);
             return "redirect:/pickRenter/{renter_ID}";
         }
@@ -328,8 +345,6 @@ public class HomeController {
     @GetMapping("/savePricing")
     public String savePricing(@ModelAttribute Price price){
             priceService.updatePrice(price);
-
-        //update DB
         return "redirect:/adminPricing";
     }
 

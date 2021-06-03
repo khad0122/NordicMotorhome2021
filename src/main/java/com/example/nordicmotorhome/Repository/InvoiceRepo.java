@@ -13,7 +13,7 @@ public class InvoiceRepo {
     @Autowired
     JdbcTemplate template;
 
-
+    //fetch
     public List<Invoice> fetchAll(){
         String sql = "SELECT * FROM invoice";
         RowMapper<Invoice> list = new BeanPropertyRowMapper<>(Invoice.class);
@@ -36,7 +36,7 @@ public class InvoiceRepo {
         template.update(sql,i.getSeason_percent(),i.getExtra_km(),i.getFee(),i.getPrice(),i.getFuelCheck(), i.getInvoice_ID());
     }
 
-    //slettes hvis ikke bruges
+
     public int getCount(int id){
         String sql = "SELECT count(*) FROM invoice WHERE booking_id = ?";
         return template.queryForObject(sql,Integer.class,id);

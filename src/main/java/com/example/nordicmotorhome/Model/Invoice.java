@@ -43,8 +43,6 @@ public class Invoice{
     }
 
     //Getters & Setters
-
-
     public int getInvoice_ID() { return invoice_ID; }
     public int getBooking_ID() { return booking_ID; }
     public int getSeason_percent() { return season_percent; }
@@ -55,8 +53,6 @@ public class Invoice{
     public int getExtra_km() { return extra_km; }
     public double getFuelFee() { return fuelFee; }
     public boolean getFuelCheck(){return fuelCheck;}
-
-
 
 
     public void setInvoice_ID(int invoice_ID) { this.invoice_ID = invoice_ID; }
@@ -116,6 +112,7 @@ public class Invoice{
         fee = 0;
         outsideKmFee = 0;
         extra = 0;
+        extra_km = 0;
         return price;
     }
 

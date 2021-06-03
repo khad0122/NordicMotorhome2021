@@ -13,6 +13,7 @@ import java.util.List;
 public class MotorHomeRepo {
     @Autowired
     JdbcTemplate template;
+    //fetch
     public List<MotorHome> fetchAll(){
         String sql = "SELECT * FROM motorhome";
         RowMapper<MotorHome> list = new BeanPropertyRowMapper<>(MotorHome.class);
@@ -24,6 +25,7 @@ public class MotorHomeRepo {
         return template.queryForObject(sql,list,id);
     }
 
+    //Insert,Update and Delete
     public void addMotorHome(MotorHome m){
         String sql = "INSERT INTO motorhome(model,brand,km,type,size) values(?,?,?,?,?)";
         template.update(sql,m.getModel(),m.getBrand(),m.getKm(),m.getType(),m.getSize());
@@ -38,7 +40,7 @@ public class MotorHomeRepo {
     }
 
 
-    //slettes hvis ikke bruges
+    //Special
     public int motorhomeCount(){
         String sql = "SELECT count(*) FROM motorhome";
         return template.queryForObject(sql, Integer.class);

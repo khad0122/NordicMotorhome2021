@@ -1,7 +1,5 @@
 package com.example.nordicmotorhome;
 
-import com.example.nordicmotorhome.Repository.PriceRepo;
-
 public class Cancellation {
     private int cancellation_percent;
     private int toDay;

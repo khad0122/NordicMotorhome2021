@@ -11,25 +11,22 @@ import java.util.List;
 public class MotorHomeService {
     @Autowired
     MotorHomeRepo motorHomeRepo;
+    public List<MotorHome> fetchAll() {
+        return motorHomeRepo.fetchAll();
+    }
+    public MotorHome fetchById(int id) {
+        return motorHomeRepo.fetchById(id);
+    }
 
     public void addMotorHome(MotorHome m) {
         motorHomeRepo.addMotorHome(m);
     }
-
     public void updateMotorHome(MotorHome m) {
         motorHomeRepo.updateMotorHome(m);
     }
-
     public void deleteMotorHome(int id) {
         motorHomeRepo.deleteMotorHome(id);
     }
 
-    public List<MotorHome> fetchAll() {
-        return motorHomeRepo.fetchAll();
-    }
-
-    public MotorHome fetchById(int id) {
-        return motorHomeRepo.fetchById(id);
-    }
     public int motorhomeCount(){return motorHomeRepo.motorhomeCount();}
 }

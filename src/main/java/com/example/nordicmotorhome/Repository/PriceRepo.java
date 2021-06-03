@@ -14,6 +14,7 @@ import java.util.List;
 public class PriceRepo {
     @Autowired
     JdbcTemplate template;
+
     //Pricing
     public Price fetchPrice(){
         String sql = "SELECT * FROM price";
@@ -26,17 +27,12 @@ public class PriceRepo {
     }
 
 
-    /*  Season  */
-    //get All season, for update and delete
+    // Season
+    //get All season, for update
     public List<Season> fetchSeasons(){
         String sql = "SELECT * FROM season";
         RowMapper<Season> list = new BeanPropertyRowMapper<>(Season.class);
         return template.query(sql,list);
-    }
-
-    public String getSeasonName(){
-        String sql = "SELECT season_name FROM season WHERE season_from < MONTH(CURDATE()) AND season_to > MONTH(CURDATE())";
-        return template.queryForObject(sql,String.class);
     }
     public Season getSeasonsByID(int id){
         String sql = "SELECT * FROM season WHERE season_ID = ?";
@@ -44,6 +40,10 @@ public class PriceRepo {
         return template.queryForObject(sql,list,id);
     }
 
+    public String getSeasonName(){
+        String sql = "SELECT season_name FROM season WHERE season_from < MONTH(CURDATE()) AND season_to > MONTH(CURDATE())";
+        return template.queryForObject(sql,String.class);
+    }
 
     //get season percent from specific date
     public int getPrice_percent(String from){
@@ -81,10 +81,5 @@ public class PriceRepo {
         return template.queryForObject(sql,list,id);
 
     }
-
-
-
-
-
 
 }
