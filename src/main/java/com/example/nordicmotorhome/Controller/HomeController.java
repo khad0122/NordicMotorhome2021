@@ -36,16 +36,13 @@ public class HomeController {
     public String index(){
         return "home/index";
     }
-
     /*******************************    Booking     *******************************/
     @GetMapping("/bookings")
     public String bookingPage(Model model){
-
         //Hver gang Booking siden anmodes, opdateres status for alle bookinger i databasen
         bookingService.setBookingStatus();
         ArrayList<Booking> list =(ArrayList<Booking>) bookingService.fetchAll();
         model.addAttribute("bookings",list);
-
         return "home/Booking/bookingsPage";
     }
     @GetMapping("/addBooking")
@@ -66,6 +63,7 @@ public class HomeController {
         return "home/Booking/addBooking";
 
     }
+
     @GetMapping("/pickRenter/{renter_ID}")
     public String pickRenter(@PathVariable("renter_ID") int renterID, Model model){
         ArrayList<MotorHome> motorList = (ArrayList<MotorHome>) motorHomeService.fetchAll();
@@ -91,19 +89,14 @@ public class HomeController {
     public String confirmBookingDetails(@PathVariable("renter_ID") int renterID,
                                         @PathVariable("motorhome_ID") int motorID,
                                         @ModelAttribute Booking booking, Model model){
-
         //base prices retrieves from DB
         Price price = priceService.fetchPrice();
-
         //defines startKM an stores in booking object
         booking.setStart_km(motorHomeService.fetchById(motorID).getKm());
-
         //Sets total Of Days
         booking.setDaysTotal(bookingService.getTotalDays(booking.getPickup_date(),booking.getReturn_date()));
-
         //Booking instance is added to DB
         bookingService.addBooking(booking);
-
         //sets status, pending : active
         bookingService.setBookingStatus();
 
@@ -118,7 +111,6 @@ public class HomeController {
 
         //invoice updateInvoice metode is called, to set price
         invoice.updateInvoice(season_percent,price,booking);
-
         //invoice is added to db
         invoiceService.addInvoice(invoice);
         return "redirect:/bookings";
@@ -142,7 +134,6 @@ public class HomeController {
         invoice.setFuelCheck(check);
         invoice.setExtra_km(extraKm);
 
-
         //Invoice fields are updated with method updateInvoice()
         invoice.updateInvoice(priceService.getPrice_percent(booking.getPickup_date()), price, booking);
         //both invoice and booking are updated
@@ -164,8 +155,6 @@ public class HomeController {
 
         //cals a methode from invoice, returns price without fees
         double price = invoice.bookingCancel();
-
-
         bookingService.cancelBooking(bookingID);
 
         //depending on when the booking is canceled, the cancellation percent will differ
@@ -194,7 +183,6 @@ public class HomeController {
             invoice.updateInvoice(priceService.getPrice_percent(booking.getPickup_date()), priceService.fetchPrice(), booking);
             invoiceService.updateInvoice(invoice);
         }
-
         model.addAttribute("renter",renterService.fetchById(booking.getRenter_ID()));
         model.addAttribute("invoice",invoice);
 
@@ -202,10 +190,8 @@ public class HomeController {
     }
     @GetMapping("/allInvoices")
     public String allInvoices(Model model){
-
         ArrayList<Invoice> list = (ArrayList<Invoice>) invoiceService.fetchAll();
         model.addAttribute("invoice",list);
-
         return "home/Invoice/invoices";
     }
 
@@ -214,7 +200,6 @@ public class HomeController {
     public String renterPage(Model model){
         ArrayList<Renter> list =(ArrayList<Renter>) renterService.fetchAll();
         model.addAttribute("renters",list);
-
         return "home/Renter/rentersPage";
     }
     @GetMapping("/addRenter")
@@ -222,7 +207,6 @@ public class HomeController {
     @PostMapping("/add/")
     public String addRenter(@ModelAttribute Renter r, @RequestParam(value="enableBooking") String choice, RedirectAttributes rd){
         int id = renterService.addRenter(r);
-
         //an option to add booking, to a newly created Renter.
         //if choice is yes
         if(choice.equals("yes")){
@@ -230,7 +214,6 @@ public class HomeController {
             rd.addAttribute("renter_ID",id);
             return "redirect:/pickRenter/{renter_ID}";
         }
-
         return "redirect:/renter";
     }
     @GetMapping("/updateRenter/{renter_ID}")
@@ -238,16 +221,17 @@ public class HomeController {
         model.addAttribute("renter",renterService.fetchById(renterID));
         return "home/Renter/updateRenter";
     }
-    @PostMapping("/updateRenter/")
-    public String updateRenter(@ModelAttribute Renter r){
-        renterService.updateRenter(r);
-        return "redirect:/renter";
-    }
     @GetMapping("/deleteRenter/{renter_ID}")
     public String deleteRenterPage(@PathVariable("renter_ID") int id){
         renterService.deleteRenter(id);
         return "redirect:/renter";
     }
+    @PostMapping("/updateRenter/")
+    public String updateRenter(@ModelAttribute Renter r){
+        renterService.updateRenter(r);
+        return "redirect:/renter";
+    }
+
 
 
     /*******************************    Motorhome     *******************************/
