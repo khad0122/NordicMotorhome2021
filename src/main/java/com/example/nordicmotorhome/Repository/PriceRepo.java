@@ -79,7 +79,6 @@ public class PriceRepo {
                 "AND DATEDIFF(pickup_date, CURDATE()) <= cancellation.toDay AND booking_ID = ?";
             RowMapper<Cancellation> list = new BeanPropertyRowMapper<>(Cancellation.class);
         return template.queryForObject(sql,list,id);
-
     }
 
 }

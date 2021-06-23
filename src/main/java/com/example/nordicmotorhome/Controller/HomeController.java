@@ -155,6 +155,8 @@ public class HomeController {
 
         //cals a methode from invoice, returns price without fees
         double price = invoice.bookingCancel();
+
+        //setting status for current booking
         bookingService.cancelBooking(bookingID);
 
         //depending on when the booking is canceled, the cancellation percent will differ
@@ -177,7 +179,7 @@ public class HomeController {
         Invoice invoice = invoiceService.fetchByID(bookingID);
         model.addAttribute("booking",booking);
 
-        //as long as status is not canceled, invoiceUpdate method should not be called if status is cancelled
+        //as long as status is not canceled, invoiceUpdate method will not be called if status is cancelled
         //Every time invoice is requested, prices are updated.
         if(!booking.getStatus().equals("canceled")) {
             invoice.updateInvoice(priceService.getPrice_percent(booking.getPickup_date()), priceService.fetchPrice(), booking);

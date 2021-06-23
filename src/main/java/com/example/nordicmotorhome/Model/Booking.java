@@ -28,6 +28,14 @@ public class Booking {
     private int extras; //Amount of Extras ie. 1 item, 2 items, ...
 
     private String status;
+    public Booking(){}
+    public Booking(int extras, int kmToPickup, int kmToDropoff, int daysTotal){
+        this.extras = extras;
+        this.kmToPickup = kmToPickup;
+        this.kmToDropoff = kmToDropoff;
+        this.daysTotal = daysTotal;
+    }
+
 
     //Getters & Setters
 

@@ -10,6 +10,14 @@ public class Price {
     private double kmFee;
     private double collectFee;
 
+    public Price(){}
+    public Price(double basePrice, int extraPrice, double fuelFee, double kmFee, double collectFee){
+        this.basePrice = basePrice;
+        this.extraPrice = extraPrice;
+        this.fuelFee = fuelFee;
+        this.kmFee = kmFee;
+        this.collectFee = collectFee;
+    }
 
     //Getters & Setters
     public double getBasePrice() { return basePrice; }

@@ -2,7 +2,6 @@ package com.example.nordicmotorhome.Model;
 
 
 import com.example.nordicmotorhome.Price;
-
 import java.text.DecimalFormat;
 
 
@@ -65,11 +64,6 @@ public class Invoice{
     public void setExtra_km(int extra_km) { this.extra_km = extra_km; }
     public void setFuelFee(double fuelFee) { this.fuelFee = fuelFee; }
     public void setFuelCheck(boolean fuelCheck) { this.fuelCheck = fuelCheck; }
-
-
-
-
-
 
 
     //methods Calculator
