@@ -22,12 +22,12 @@
                         <label>Email</label><span class = "invoice-info" th:text = "${renter.email}"></span>
                     </div>
                     <div >
-                        <label>Booking ID</label><span class = "invoice-info"><span th:text = "${invoice.booking_ID}"></span></span>
-                        <label>Motorhome ID</label><span class = "invoice-info"><span th:text = "${booking.motorhome_ID}"></span></span>
-                        <label>Pick-up Date</label><span class = "invoice-info"><span th:text = "${booking.pickup_date}"></span></span>
-                        <label>Return Date</label><span class = "invoice-info"><span th:text = "${booking.return_date}"></span></span>
-                        <label>Extra Equipment</label><span class = "invoice-info"><span th:text = "${booking.extras}"></span></span>
-                        <label>Collect km</label><span class = "invoice-info"><span th:text = "${booking.getTotalKm()}"></span></span>
+                        <label>Booking ID</label><span class = "invoice-info"th:text = "${invoice.booking_ID}"></span>
+                        <label>Motorhome ID</label><span class = "invoice-info" th:text = "${booking.motorhome_ID}"></span>
+                        <label>Pick-up Date</label><span class = "invoice-info" th:text = "${booking.pickup_date}"></span>
+                        <label>Return Date</label><span class = "invoice-info" th:text = "${booking.return_date}"></span>
+                        <label>Extra Equipment</label><span class = "invoice-info" th:text = "${booking.extras}"></span>
+                        <label>Collect km</label><span class = "invoice-info" th:text = "${booking.getTotalKm()}"></span>
                         <label>Days Renting</label><span class = "invoice-info" th:text = "${booking.getDaysTotal()}"></span>
                     </div>
                 </div>
