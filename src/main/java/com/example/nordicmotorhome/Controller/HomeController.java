@@ -153,7 +153,7 @@ public class HomeController {
         Cancellation cancel = priceService.getCancellation(bookingID);
         Invoice invoice = invoiceService.fetchByID(bookingID);
 
-        //cals a methode from invoice, returns price without fees
+        //calls a method from invoice, returns price without fees
         double price = invoice.bookingCancel();
 
         //setting status for current booking

@@ -58,17 +58,16 @@
 
                         <table>
                             <thead>
-                            <tr>
-                                <th>Cancellation ID</th>
-                                <th>Cancellation Fee percent</th>
-                                <th>From (days)</th>
-                                <th>Up To (days)</th>
-                                <th>Minimum</th>
-                                <th></th>
-                            </tr>
+                                <tr>
+                                    <th>Cancellation ID</th>
+                                    <th>Cancellation Fee percent</th>
+                                    <th>From (days)</th>
+                                    <th>Up To (days)</th>
+                                    <th>Minimum</th>
+                                    <th></th>
+                                </tr>
                             </thead>
                             <tbody>
-
                                     <tr th:each = "Cancel: ${cancellation}">
                                         <form th:action = "@{/saveCancellation}" method = "get" >
                                             <td><input type = "text" name = "cancellation_ID" th:value = "${Cancel.getCancellation_ID()}" readonly></td>

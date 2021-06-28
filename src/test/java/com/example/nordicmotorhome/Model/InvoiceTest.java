@@ -29,6 +29,7 @@ class InvoiceTest {
         assertEquals(118, invoice.getFee());
         assertEquals(18, invoice.getOutsideKmFee());
         assertEquals(100,invoice.getExtra());
+
     }
 }
 

@@ -2,6 +2,7 @@ package com.example.nordicmotorhome;
 
 public class Price {
 
+
     //      Static Price
     private double basePrice;
     private int extraPrice;
